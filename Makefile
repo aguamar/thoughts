@@ -1,6 +1,9 @@
 # builds thoughts
 # (well, not quite like that)
 
+.PHONY: default clean
+
+
 default:
 	repo2html \
 		-t "Mike Gerwitz's Thoughts and Ramblings" \
@@ -10,3 +13,6 @@ default:
 		-R40 \
 		'http://mikegerwitz.com/thoughts/' \
 		> index.html
+
+clean:
+	rm -rf [0-9]*/
