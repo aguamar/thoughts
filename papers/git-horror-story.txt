@@ -1,0 +1,1321 @@
+A Git Horror Story: Repository Integrity With Signed Commits
+============================================================
+Mike Gerwitz <mike@mikegerwitz.com>
+
+
+It's 2:00 AM. The house is quiet, the kid is in bed and your significant other
+has long since fallen asleep on the couch waiting for you, the light of the TV
+flashing out of the corner of your eye. Your mind and body are exhausted.
+Satisfied with your progress for the night, you commit the code you've been
+hacking for hours: +``[master 2e4fd96] Fixed security vulnerability CVE-123''+.
+You push your changes to your host so that others can view and comment on your
+progress before tomorrow's critical release, suspend your PC and struggle to
+wake your significant other to get him/her in bed. You turn off the lights, trip
+over a toy on your way to the bedroom and sigh as you realize you're going to
+have to make a bottle for the child who just heard his/her favorite toy jingle.
+
+Fast forward four sleep-deprived hours. You are woken to the sound of your phone
+vibrating incessantly. You smack it a few times, thinking it's your alarm clock,
+then fumble half-blind as you try to to dig it out from under the bed after you
+knock it off the nightstand. (Oops, you just woke the kid up again.) You pick up
+the phone and are greeted by a frantic colleague. ``I merged in our changes. We
+need to tag and get this fix out there.'' Ah, damnit. You wake up your
+significant other, asking him/her to deal with the crying child (yeah, that went
+well) and stumble off to your PC, failing your first attempt to enter your
+password. You rub your eyes and pull the changes.
+
+Still squinting, you glance at the flood of changes presented to you. Your
+child is screaming in the background, not amused by your partner's feeble
+attempts to console him/her. `git log --pretty=short`...everything looks good
+--- just a bunch of commits from you and your colleague that were merged in. You
+run the test suite --- everything passes. Looks like you're ready to go. `git
+tag -s 1.2.3 -m 'Various bugfixes, including critical CVE-123' && git push
+--tags`. After struggling to enter the password to your private key, slowly
+standing up from your chair as you type, you run off to help with the baby
+(damnit, where do they keep the source code for these things).  Your CI system
+will handle the rest.
+
+Fast forward two months.
+
+CVE-123 has long been fixed and successfully deployed. However, you receive an
+angry call from your colleague. It seems that one of your most prominent users
+has had a massive security breach. After researching the problem, your colleague
+found that, according to the history, _the breach exploited a back door that you
+created!_ What? You would never do such a thing. To make matters worse, +1.2.3+
+was signed off by you, using your GPG key --- you affirmed that this tag was
+good and ready to go. ``3-b-c-4-2-b, asshole'', scorns your colleague. ``Thanks
+a lot.''
+
+No --- that doesn't make sense. You quickly check the history. `git log --patch
+3bc42b`. ``Added missing docblocks for X, Y and Z.'' You form a puzzled
+expression, raising your hands from the keyboard slightly before tapping the
+space bar a few times with few expectations. Sure enough, in with a few minor
+docblock changes, there was one very inconspicuous line change that added the
+back door to the authentication system. The commit message is fairly clear and
+does not raise any red flags --- why would you check it?  Furthermore, the
+author of the commit _was indeed you!_
+
+Thoughts race through your mind. How could this have happened? That commit has
+your name, but you do not recall ever having made those changes. Furthermore,
+you would have never made that line change; it simply does not make sense. Did
+your colleague frame you by committing as you? Was your colleague's system
+compromised? Was your _host_ compromised? It couldn't have been your local
+repository; that commit was clearly part of the merge and did not exist in your
+local repository until your pull on that morning two months ago.
+
+Regardless of what happened, one thing is horrifically clear: right now, you are
+the one being blamed.
+
+[[trust]]
+Who Do You Trust?
+-----------------
+Theorize all you want --- it's possible that you may never fully understand what
+resulted in the compromise of your repository. The above story is purely
+hypothetical, but entirely within the realm of possibility. How can you rest
+assured that your repository is safe for not only those who would reference or
+clone it, but also those who may download, for example, tarballs that are
+created from it?
+
+Git is a https://en.wikipedia.org/wiki/Distributed_revision_control[distributed
+revision control system]. In short, this means that anyone can have a copy of
+your repository to work on offline, in private. They may commit to their own
+repository and users may push/pull from each other. A central repository is
+unnecessary for distributed revision control systems, but
+http://lwn.net/Articles/246381/[may be used to provide an ``official'' hub that
+others can work on and clone from]. Consequently, this also means that a
+repository floating around for project X may contain malicious code; just
+because someone else hands you a repository for your project doesn't mean that
+you should actually use it.
+
+The question is not ``Who _can_ you trust?''; the question is ``Who _do_ you
+trust?'', or rather --- who _are_ you trusting with your repository, right now,
+even if you do not realize it? For most projects, including the story above,
+there are a number of individuals or organizations that you may have
+inadvertently placed your trust in without fully considering the ramifications
+of such a decision:
+
+[[trust-host]] Git Host::
+    Git hosting providers are probably the most easily overlooked trustees ---
+    providers like Gitorious, GitHub, Bitbucket, SourceForge, Google Code, etc.
+    Each provides hosting for your repository and ``secures'' it by allowing only
+    you, or other authorized users, to push to it, often with the use of SSH
+    keys tied to an account. By using a host as the primary holder of your
+    repository --- the repository from which most clone and push to --- you are
+    entrusting them with the entirety of your project; you are stating, ``Yes, I
+    trust that my source code is safe with you and will not be tampered with''.
+    This is a dangerous assumption. Do you trust that your host properly secures
+    your account information? Furthermore, bugs exist in all but the most
+    trivial pieces of software, so what is to say that there is not a
+    vulnerability just waiting to be exploited in your host's system, completely
+    compromising your repository? +
+    +
+    It was not too long ago (March 4th, 2012) that
+    https://github.com/blog/1068-public-key-security-vulnerability-and-mitigation[
+    a public key security vulnerability at GitHub] was
+    https://gist.github.com/1978249[exploited] by a Russian man named
+    http://homakov.blogspot.com/2012/03/im-disappoint-github.html[Egor Homakov],
+    allowing him to successfully
+    https://github.com/rails/rails/commit/b83965785db1eec019edf1fc272b1aa393e6dc57[
+    commit to the master branch of the Ruby on Rails framework] repository
+    hosted on GitHub. Oops.
+
+Friends and Coworkers/Colleagues::
+    There may be certain groups or individuals that you trust enough to (a) pull
+    or accept patches from or (b) allow them to push to you or a
+    central/``official'' repository. Operating under the assumption that each
+    individual is truly trustworthy (and let us hope that is the case), that
+    does not immediately imply that their _repository_ can be trusted.  What are
+    their security policies? Do they leave their PC unlocked and unattended? Do
+    they make a habit of downloading virus-laden pornography on an unsecured,
+    non-free operating system? Or perhaps, through no fault of their own, they
+    are running a piece of software that is vulnerable to a 0-day exploit. Given
+    that, _how can you be sure that their commits are actually their own_?
+    Furthermore, how can you be sure that any commits they approve (or sign off
+    on using `git commit -s`) were actually approved by them? +
+    +
+    That is, of course, assuming that they have no ill intent. For example, what
+    of the pissed off employee looking to get the arrogant, obnoxious co-worker
+    fired by committing under the coworker's name/email? What if you were the
+    manager or project lead? Whose word would you take? How would you even know
+    whom to suspect?
+
+Your Own Repository::
+    Linus Torvalds (original author of Git and the kernel Linux)
+    http://www.youtube.com/watch?v=4XpnKHJAok8[keeps a secured repository on his
+    personal computer, inaccessible by any external means] to ensure that he has
+    a repository he can fully trust. Most developers simply keep a local copy on
+    whatever PC they happen to be hacking on and pay no mind to security ---
+    their repository is likely hosted elsewhere as well, after all; Git is
+    distributed. This is, however, a very serious matter. +
+    +
+    You likely use your PC for more than just hacking. Most notably, you likely
+    use your PC to browse the Internet and download software. Software is buggy.
+    Buggy software has exploits and exploits tend to get, well, exploited. Not
+    every developer has a strong understanding of the best security practices
+    for their operating system (if you do, great!). And no --- simply using
+    GNU/Linux or any other *NIX variant does not make you immune from every
+    potential threat.
+
+To dive into each of these a bit more deeply, let us consider one of the world's
+largest free software projects --- the kernel Linux --- and how its original
+creator Linus Torvalds handles issues of trust. During
+http://www.youtube.com/watch?v=4XpnKHJAok8[a talk he presented at Google in
+2007], he describes a network of trust he created between himself and a number
+of others (which he refers to as his ``lieutenants''). Linus himself cannot
+possibly manage the mass amount of code that is sent to him, so he has others
+handle portions of the kernel. Those ``lieutenants'' handle most of the
+requests, then submit them to Linus, who handles merging into his own branch. In
+doing so, he has trusted that these lieutenants know what they are doing, are
+carefully looking over each patch and that the patches Linus receives from them
+are actually from them.
+
+I am not aware of how patches are communicated from the lieutenants to Linus.
+Certainly, one way to state with a fairly high level of certainty that the patch
+is coming from one of his ``lieutenants'' is to e-mail the patches, signed with
+their respective GPG/PGP keys. At that point, the web of trust is enforced by
+the signature. Linus is then sure that his private repository (which he does his
+best to secure, as aforementioned) contains only data that _he personally
+trusts_. His repository is safe, so far as he knows, and he can use it
+confidently.
+
+At this point, assuming Linus' web of trust is properly verified, how can he
+confidently convey these trusted changes to others? He certainly knows his own
+commits, but how should others know that this ``Linus Torvalds'' guy who has
+been committing and signing off of on commits is _actually_ Linus Torvalds? As
+demonstrated in the hypothetical scenario at the beginning of this article,
+anyone could claim to be Linus. If an attacker were to gain access to any clone
+of the repository and commit as Linus, nobody would know the difference.
+Fortunately, one can get around this by signing a tag with his/her private key
+using GPG (`git tag -s`). A tag points to a particular commit and that commit
+xref:commit-history[depends on the entire history leading up to that commit].
+This means that signing the SHA1 hash of that commit, assuming no security
+vulnerabilities within SHA1, will forever state that the entire history of the
+given commit, as pointed to by the given tag, is trusted.
+
+Well, that is helpful, but that doesn't help to verify any commits made _after_
+the tag (until the next tag comes around that includes that commit as an
+ancestor of the new tag). Nor does it necessarily guarantee the integrity of all
+past commits --- it only states that, _to the best of Linus' knowledge_, this
+tree is trusted. Notice how the hypothetical you in our hypothetical story also
+signed the tag with his/her private key. Unfortunately, he/she fell prey to
+something that is all too common --- human error. He/she trusted that his/her
+``trusted'' colleague could actually be fully trusted. Wouldn't it be nice if we
+could remove some of that human error from the equation?
+
+
+[[trust-ensure]]
+Ensuring Trust
+--------------
+What if we had a way to ensure that a commit by someone named "Mike Gerwitz"
+with my e-mail address is _actually_ a commit from myself, much like we
+can assert that a tag signed with my private key was actually tagged by myself?
+Well, who are we trying to prove this to? If you are only proving your identity
+to a project author/maintainer, then you can identify yourself in any reasonable
+manner. For example, if you work within the same internal network, perhaps you
+can trust that pushes from the internal IP are secure. If sending via e-mail,
+you can sign the patch using your GPG key. Unfortunately, _these only extend
+this level of trust to the author/maintainer, not other users!_ If I were to
+clone your repository and look at the history, how do I know that a commit from
+``Foo Bar'' is truly a commit from Foo Bar, especially if the repository
+frequently accepts patches and merge requests from many users?
+
+Previously, only tags could be signed using GPG. Fortunately,
+http://git.kernel.org/?p=git/git.git;a=blob_plain;f=Documentation/RelNotes/1.7.9.txt;hb=HEAD[
+Git v1.7.9 introduced the ability to GPG-sign individual commits] --- a feature
+I have been long awaiting. Consider what may have happened to the story at the
+beginning of this article if you signed each of your commits like so:
+
+[source,shell]
+----
+$ git commit -S -m 'Fixed security vulnerability CVE-123'
+#             ^ GPG-sign commit
+----
+
+Notice the `-S` flag above, instructing Git to sign the commit using your
+GPG key (please note the difference between `-s` and `-S`). If you followed this
+practice for each of your commits --- with no exceptions --- then you (or anyone
+else, for that matter) could say with relative certainty that the commit was
+indeed authored by yourself. In the case of our story, you could then defend
+yourself, stating that if the backdoor commit truly were yours, it would have
+been signed. (Of course, one could argue that you simply did not sign that
+commit in order to use that excuse. We'll get into addressing such an issue in a
+bit.)
+
+In order to set up your signing key, you first need to get your key id using
+`gpg --list-secret-keys`:
+
+[source,shell]
+----
+$ gpg --list-secret-keys | grep ^sec
+sec   4096R/8EE30EAB 2011-06-16 [expires: 2014-04-18]
+#           ^^^^^^^^
+----
+
+You are interested in the hexadecimal value immediately following the forward
+slash in the above output (your output may vary drastically; do not worry if
+your key does not contain +4096R+ as above). If you have multiple secret
+keys, select the one you wish to use for signing your commits. This value will
+be assigned to the Git configuration value +user.signingkey+:
+
+[source,shell]
+----
+# remove --global to use this key only on the current repository
+$ git config --global user.signingkey 8EE30EAB
+#                                        ^ replace with your key id
+----
+
+Given the above, let's give commit signing a shot. To do so, we will create a
+test repository and work through that for the remainder of this article.
+
+[source,shell]
+----
+$ mkdir tmp && cd tmp
+$ git init .
+$ echo foo > foo
+$ git add foo
+$ git commit -S -m 'Test commit of foo'
+
+You need a passphrase to unlock the secret key for
+user: "Mike Gerwitz (Free Software Developer) <mike@mikegerwitz.com>"
+4096-bit RSA key, ID 8EE30EAB, created 2011-06-16
+
+[master (root-commit) cf43808] Test commit of foo
+ 1 file changed, 1 insertion(+)
+ create mode 100644 foo
+----
+
+The only thing that has been done differently between this commit and an
+unsigned commit is the addition of the `-S` flag, indicating that we want
+to GPG-sign the commit. If everything has been set up properly, you should be
+prompted for the password to your secret key (unless you have `gpg-agent`
+running), after which the commit will continue as you would expect, resulting in
+something similar to the above output (your GPG details and SHA-1 hash will
+differ).
+
+By default (at least in Git v1.7.9), `git log` will not list or validate
+signatures. In order to display the signature for our commit, we may use the
+`--show-signature` option, as shown below:
+
+[source,shell]
+----
+$ git log --show-signature
+commit cf43808e85399467885c444d2a37e609b7d9e99d
+gpg: Signature made Fri 20 Apr 2012 11:59:01 PM EDT using RSA key ID 8EE30EAB
+gpg: Good signature from "Mike Gerwitz (Free Software Developer) <mike@mikegerwitz.com>"
+Author: Mike Gerwitz <mike@mikegerwitz.com>
+Date:   Fri Apr 20 23:59:01 2012 -0400
+
+    Test commit of foo
+----
+
+There is an important distinction to be made here --- the commit author and the
+signature attached to the commit _may represent two different people_. In other
+words: the commit signature is similar in concept to the `-s` option, which adds
+a +Signed-off+ line to the commit --- it verifies that you have signed off on
+the commit, but does not necessarily imply that you authored it. To demonstrate
+this, consider that we have received a patch from ``John Doe'' that we wish to
+apply. The policy for our repository is that every commit must be signed by a
+trusted individual; all other commits will be rejected by the project
+maintainers. To demonstrate without going through the hassle of applying an
+actual patch, we will simply do the following:
+
+[source,shell]
+----
+$ echo patch from John Doe >> foo
+$ git commit -S --author="John Doe <john@doe.name>" -am 'Added feature X'
+
+You need a passphrase to unlock the secret key for
+user: "Mike Gerwitz (Free Software Developer) <mike@mikegerwitz.com>"
+4096-bit RSA key, ID 8EE30EAB, created 2011-06-16
+
+[master 16ddd46] Added feature X
+ Author: John Doe <john@doe.name>
+ 1 file changed, 1 insertion(+)
+$ git log --show-signature
+commit 16ddd46b0c191b0e130d0d7d34c7fc7af03f2d3e
+gpg: Signature made Sat 21 Apr 2012 12:14:38 AM EDT using RSA key ID 8EE30EAB
+gpg: Good signature from "Mike Gerwitz (Free Software Developer) <mike@mikegerwitz.com>"
+Author: John Doe <john@doe.name>
+Date:   Sat Apr 21 00:14:38 2012 -0400
+
+    Added feature X
+# [...]
+----
+
+This then begs the questions --- what is to be done about those who decide to
+sign their commit with their own GPG key? There are a couple options here.
+First, consider the issue from a maintainer's perspective --- do we necessary
+care about the identity of a 3rd party contributor, so long as the provided code
+is acceptable? That depends. From a legal standpoint, we may, but not every user
+has a GPG key. Given that, someone creating a key for the sole purpose of
+signing a few commits without some means of identity verification, only to
+discard the key later (or forget that it exists) does little to verify one's
+identity. (Indeed, the whole concept behind PGP is to create a web of trust by
+being able to verify that the person who signed using their key is actually who
+they say they are, so such a scenario defeats the purpose.) Therefore, adopting
+a strict signing policy for everyone who contributes a patch is likely to be
+unsuccessful. Linux and Git satisfy this legal requirement with a
++``Signed-off-by''+ line in the commit, signifying that the author agrees to the
+http://git.kernel.org/?p=git/git.git;a=blob;f=Documentation/SubmittingPatches;h=0dbf2c9843dd3eed014d788892c8719036287308;hb=HEAD[
+Developer's Certificate of Origin]; this essentially states that the author has
+the legal rights to the code contained within the commit. When accepting patches
+from 3rd parties who are outside of your web of trust to begin with, this is the
+next best thing.
+
+To adopt this policy for patches, require that authors do the following and
+request that they do not GPG-sign their commits:
+
+[source,shell]
+----
+$ git commit -asm 'Signed off'
+#              ^ -s flag adds Signed-off-by line
+$ git log
+commit ca05f0c2e79c5cd712050df6a343a5b707e764a9
+Author: Mike Gerwitz <mike@mikegerwitz.com>
+Date:   Sat Apr 21 15:46:05 2012 -0400
+
+    Signed off
+
+    Signed-off-by: Mike Gerwitz <mike@mikegerwitz.com>
+# [...]
+----
+
+Then, when you receive the patch, you can apply it with the `-S` (capital, not
+lowercase) to GPG-sign the commit; this will preserve the Signed-off-by line as
+well. In the case of a pull request, you can sign the commit by amending it
+(`git commit -S --amend`). Note, however, that the SHA-1 hash of the commit will
+change when you do so.
+
+What if you want to preserve the signature of whomever sent the pull request?
+You cannot amend the commit, as that would alter the commit and invalidate their
+signature, so dual-signing it is not an option (if Git were to even support that
+option). Instead, you may consider signing the merge commit, which will be
+discussed in the following section.
+
+
+Managing Large Merges
+---------------------
+Up to this point, our discussion consisted of apply patches or merging single
+commits. What shall we do, then, if we receive a pull request for a certain
+feature or bugfix with, say, 300 commits (which I assure you is not unusual)? In
+such a case, we have a few options:
+
+. [[merge-1]] *Request that the user squash all the commits into a single commit*,
+  thereby avoiding the problem entirely by applying the previously discussed
+  methods. I personally dislike this option for a few reasons:
+** We can no longer follow the history of that feature/bugfix in order to learn
+   how it was developed or see alternative solutions that were attempted but
+   later replaced.
+** It renders `git bisect` useless. If we find a bug in the software that was
+   introduced by a single patch consisting of 300 squashed commits, we are left
+   to dig through the code and debug ourselves, rather than having Git possibly
+   figure out the problem for us.
+
+. [[merge-2]] *Adopt a security policy that requires signing only the merge
+  commit* (forcing a merge commit to be created with `--no-ff` if needed).
+** This is certainly the quickest solution, allowing a reviewer to sign the
+   merge after having reviewed the diff in its entirety.
+** However, it leaves individual commits open to exploitation. For example, one
+   commit may introduce a payload that a future commit removes, thereby hiding
+   it from the overall diff, but introducing terrible effect should the commit
+   be checked out individually (e.g. by `git bisect`). Squashing all commits
+   (xref:merge-1[option #1]), signing each commit individually
+   (xref:merge-3[option #3]), or simply reviewing each commit individually
+   before performing the merge (without signing each individual commit) would
+   prevent this problem.
+** This also does not fully prevent the situation mentioned in the hypothetical
+   story at the beginning of this article --- others can still commit with you
+   as the author, but the commit would not have been signed.
+** Preserves the SHA-1 hashes of each individual commit.
+
+. [[merge-3]] *Sign each commit to be introduced by the merge.*
+** The tedium of this chore can be greatly reduced by using
+   http://www.gnupg.org/documentation/manuals/gnupg/Invoking-GPG_002dAGENT.html[
+   `gpg-agent`].
+** Be sure to carefully review _each commit_ rather than the entire diff to
+   ensure that no malicious commits sneak into the history (see bullets for
+   xref:merge-2[option #2]). If you instead decide to script the sign of each
+   commit without reviewing each individual diff, you may as well go with
+   xref:merge-2[option #2].
+** Also useful if one needs to cherry-pick individual commits, since that would
+   result in all commits having been signed.
+** One may argue that this option is unnecessarily redundant, considering that
+   one can simply review the individual commits without signing them, then
+   simply sign the merge commit to signify that all commits have been reviewed
+   (xref:merge-2[option #2]). The important point to note here is that this
+   option offers _proof_ that each commit was reviewed (unless it is automated).
+** This will create a new for each (the SHA-1 hash is not preserved).
+
+Which of the three options you choose depends on what factors are important and
+feasible for your particular project. Specifically:
+
+* If history is not important to you, then you can avoid a lot of trouble by
+  simply requiring the the commits be squashed (xref:merge-1[option #1]).
+* If history _is_ important to you, but you do not have the time to review
+  individual commits:
+** Use xref:merge-2[option #2] if you understand its risks.
+** Otherwise, use xref:merge-3[option #3], but _do not_ automate the signing
+   process to avoid having to look at individual commits. If you wish to keep
+   the history, do so responsibly.
+
+Option #1 in the list above can easily be applied to the discussion in the
+previous section.
+
+
+(Option #2)
+~~~~~~~~~~~
+xref:merge-2[Option #2] is as simple as passing the `-S` argument to `git
+merge`. If the merge is a fast-forward (that is, all commits can simply be
+applied atop of +HEAD+ without any need for merging), then you would need to use
+the `--no-ff` option to force a merge commit.
+
+[source,shell]
+----
+# set up another branch to merge
+$ git checkout -b bar
+$ echo bar > bar
+$ git add bar
+$ git commit -m 'Added bar'
+$ echo bar2 >> bar
+$ git commit -am 'Modified bar'
+$ git checkout master
+
+# perform the actual merge (will be a fast-forward, so --no-ff is needed)
+$ git merge -S --no-ff bar
+#            ^ GPG-sign merge commit
+
+You need a passphrase to unlock the secret key for
+user: "Mike Gerwitz (Free Software Developer) <mike@mikegerwitz.com>"
+4096-bit RSA key, ID 8EE30EAB, created 2011-06-16
+
+Merge made by the 'recursive' strategy.
+ bar |    2 ++
+ 1 file changed, 2 insertions(+)
+ create mode 100644 bar
+----
+
+Inspecting the log, we will see the following:
+
+[source,shell]
+----
+$ git log --show-signature
+commit ebadba134bde7ae3d39b173bf8947a69be089cf6
+gpg: Signature made Sun 22 Apr 2012 11:36:17 AM EDT using RSA key ID 8EE30EAB
+gpg: Good signature from "Mike Gerwitz (Free Software Developer) <mike@mikegerwitz.com>"
+Merge: 652f9ae 031f6ee
+Author: Mike Gerwitz <mike@mikegerwitz.com>
+Date:   Sun Apr 22 11:36:15 2012 -0400
+
+    Merge branch 'bar'
+
+commit 031f6ee20c1fe601d2e808bfb265787d56732974
+Author: Mike Gerwitz <mike@mikegerwitz.com>
+Date:   Sat Apr 21 17:35:27 2012 -0400
+
+    Modified bar
+
+commit ce77088d85dee3d687f1b87d21c7dce29ec2cff1
+Author: Mike Gerwitz <mike@mikegerwitz.com>
+Date:   Sat Apr 21 17:35:20 2012 -0400
+
+    Added bar
+# [...]
+----
+
+Notice how the merge commit contains the signature, but the two commits involved
+in the merge (`031f6ee` and `ce77088`) do not. Herein lies the problem --- what
+if commit `031f6ee` contained the backdoor mentioned in the story at the
+beginning of the article? This commit is supposedly authored by you, but because
+it lacks a signature, it could actually be authored by anyone.  Furthermore, if
+`ce77088` contained malicious code that was removed in `031f6ee`, then it would
+not show up in the diff between the two branches. That, however, is an issue
+that needs to be addressed by your security policy. Should you be reviewing
+individual commits? If so, a review would catch any potential problems with the
+commits and wouldn't require signing each commit individually. The merge itself
+could be representative of ``Yes, I have reviewed each commit individually and I
+see no problems with these changes.''
+
+If the commitment to reviewing each individual commit is too large, consider
+xref:merge-1[Option #1].
+
+(Option #3)
+~~~~~~~~~~~
+xref:merge-3[Option #3] in the above list makes the review of each commit
+explicit and obvious; with xref:merge-2[option #2], one could simply lazily
+glance through the commits or not glance through them at all. That said, one
+could do the same with xref:merge-3[option #3] by automating the signing of each
+commit, so it could be argued that this option is completely unnecessary. Use
+your best judgment.
+
+The only way to make this option remotely feasible, especially for a large
+number of commits, is to perform the audit in such a way that we do not have to
+re-enter our secret key passphrases for each and every commit. For this, we can
+use
+http://www.gnupg.org/documentation/manuals/gnupg/Invoking-GPG_002dAGENT.html[
+`gpg-agent`], which will safely store the passphrase in memory for the next time
+that it is requested. Using `gpg-agent`,
+http://stackoverflow.com/questions/9713781/how-to-use-gpg-agent-to-bulk-sign-git-tags/10263139[
+we will only be prompted for the password a single time]. Depending on how you
+start `gpg-agent`, _be sure to kill it after you are done!_
+
+The process of signing each commit can be done in a variety of ways. Ultimately,
+since signing the commit will result in an entirely new commit, the method you
+choose is of little importance. For example, if you so desired, you could
+cherry-pick individual commits and then `-S --amend` them, but that would
+not be recognized as a merge and would be terribly confusing when looking
+through the history for a given branch (unless the merge would have been a
+fast-forward). Therefore, we will settle on a method that will still produce a
+merge commit (again, unless it is a fast-forward). One such way to do this is to
+interactively rebase each commit, allowing you to easily view the diff, sign it,
+and continue onto the next commit.
+
+[source,shell]
+----
+# create a new audit branch off of bar
+$ git checkout -b bar-audit bar
+$ git rebase -i master
+#             |    ^ the branch that we will be merging into
+#             ^ interactive rebase (alternatively: long option --interactive)
+----
+
+First, we create a new branch off of +bar+ --- +bar-audit+ --- to perform the
+rebase on (see +bar+ branch created in demonstration of xref:merge-2[option
+#2]). Then, in order to step through each commit that would be merged into
++master+, we perform a rebase using +master+ as the upstream branch. This will
+present every commit that is in +bar-audit+ (and consequently +bar+) that is not
+in +master+, opening them in your preferred editor:
+
+----
+e ce77088 Added bar
+e 031f6ee Modified bar
+
+# Rebase 652f9ae..031f6ee onto 652f9ae
+#
+# Commands:
+#  p, pick = use commit
+#  r, reword = use commit, but edit the commit message
+#  e, edit = use commit, but stop for amending
+#  s, squash = use commit, but meld into previous commit
+#  f, fixup = like "squash", but discard this commit's log message
+#  x, exec = run command (the rest of the line) using shell
+#
+# If you remove a line here THAT COMMIT WILL BE LOST.
+# However, if you remove everything, the rebase will be aborted.
+#
+----
+
+To modify the commits, replace each +pick+ with +e+ (or +edit+), as shown above.
+(In vim you can also do the following `ex` command: +:%s/^pick/e/+;
+adjust regex flavor for other editors). Save and close. You will then be
+presented with the first (oldest) commit:
+
+[source,shell]
+----
+Stopped at ce77088... Added bar
+You can amend the commit now, with
+
+        git commit --amend
+
+Once you are satisfied with your changes, run
+
+        git rebase --continue
+
+# first, review the diff (alternatively, use tig/gitk)
+$ git diff HEAD^
+# if everything looks good, sign it
+$ git commit -S --amend
+#    GPG-sign ^      ^ amend commit, preserving author, etc
+
+You need a passphrase to unlock the secret key for
+user: "Mike Gerwitz (Free Software Developer) <mike@mikegerwitz.com>"
+4096-bit RSA key, ID 8EE30EAB, created 2011-06-16
+
+[detached HEAD 5cd2d91] Added bar
+ 1 file changed, 1 insertion(+)
+ create mode 100644 bar
+
+# continue with next commit
+$ git rebase --continue
+
+# repeat.
+$ ...
+Successfully rebased and updated refs/heads/bar-audit.
+----
+
+Looking through the log, we can see that the commits have been rewritten to
+include the signatures (consequently, the SHA-1 hashes do not match):
+
+[source,shell]
+----
+$ git log --show-signature HEAD~2..
+commit afb1e7373ae5e7dae3caab2c64cbb18db3d96fba
+gpg: Signature made Sun 22 Apr 2012 01:37:26 PM EDT using RSA key ID 8EE30EAB
+gpg: Good signature from "Mike Gerwitz (Free Software Developer) <mike@mikegerwitz.com>"
+Author: Mike Gerwitz <mike@mikegerwitz.com>
+Date:   Sat Apr 21 17:35:27 2012 -0400
+
+    Modified bar
+
+commit f227c90b116cc1d6770988a6ca359a8c92a83ce2
+gpg: Signature made Sun 22 Apr 2012 01:36:44 PM EDT using RSA key ID 8EE30EAB
+gpg: Good signature from "Mike Gerwitz (Free Software Developer) <mike@mikegerwitz.com>"
+Author: Mike Gerwitz <mike@mikegerwitz.com>
+Date:   Sat Apr 21 17:35:20 2012 -0400
+
+    Added bar
+----
+
+We can then continue to merge into +master+ as we normally would. The next
+consideration is whether or not to sign the merge commit as we would with
+xref:merge-2[option #2]. In the case of our example, the merge is a
+fast-forward, so the merge commit is unnecessary (since the commits being merged
+are already signed, we have no need to create a merge commit using `--no-ff`
+purely for the purpose of signing it). However, consider that you may perform
+the audit yourself and leave the actual merge process to someone else; perhaps
+the project has a system in place where project maintainers must review the code
+and sign off on it, and then other developers are responsible for merging and
+managing conflicts. In that case, you may want a clear record of who merged the
+changes in.
+
+
+Enforcing Trust
+---------------
+Now that you have determined a security policy appropriate for your particular
+project/repository (well, hypothetically at least), some way is needed to
+enforce your signing policies. While manual enforcement is possible, it is
+subject to human error, peer scrutiny (``just let it through!'') and is
+unnecessarily time-consuming.  Fortunately, this is one of those things that you
+can script, sit back and enjoy.
+
+Let us first focus on the simpler of automation tasks --- checking to ensure
+that _every_ commit is both signed and trusted (within our web of trust).  Such
+an implementation would also satisfy xref:merge-3[option #3] in regards to
+merging. Well, perhaps not every commit will be considered. Chances are, you
+have an existing repository with a decent number of commits. If you were to go
+back and sign all those commits, you would completely alter the history of the
+entire repository, potentially creating headaches for other users. Instead, you
+may consider beginning your checks _after_ a certain commit.
+
+[[commit-history]]
+Commit History In a Nutshell
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+The SHA-1 hashes of each commit in Git are created using the delta _and_ header
+information for each commit. This header information includes the commit's
+_parent_, whose header contains its parent --- so on and so fourth. In addition,
+Git depends on the entire history of the repository leading up to a given commit
+to construct the requested revision. Consequently, this means that the history
+cannot be altered without someone noticing (well, this is not entirely true;
+we'll discuss that in a moment). For example, consider the following branch:
+
+----
+Pre-attack:
+
+---o---o---A---B---o---o---H
+    a1b2c3d^
+----
+
+Above, +H+ represents the current +HEAD+ and commit identified by +A+ is the
+parent of commit +B+. For the sake of discussion, let's say that commit +A+ is
+identified by the SHA-1 fragment +a1b2c3d+.  Let us say that an attacker decides
+to replace commit +A+ with another commit. In doing so, the SHA-1 hash of the
+commit must change to match the new delta and contents of the header. This new
+commit is identified as +X+:
+
+----
+Post-attack:
+
+---o---o---X---B---o---o---H
+    d4e5f6a^   ^!expects parent a1b2c3d
+----
+
+We now have a problem; when Git encounters commit +B+ (remember, Git must build
++H+ using the entire history leading up to it), it will check its SHA-1 hash and
+notice that it no longer matches the hash of its parent. The attacker is unable
+to change the expected hash in commit +B+, because the header is used to
+generate the SHA-1 hash for the commit, meaning +B+ would then have a different
+SHA-1 hash (technically speaking, it would not longer be +B+ --- it would be an
+entirely different commit; we retain the identifier here only for demonstration
+purposes). That would then invalidate any children of +B+, so on and so fourth.
+Therefore, in order to rewrite the history for a single commit, _the entire
+history after that commit must also be rewritten_ (as is done by `git rebase`).
+Should that be done, the SHA-1 hash of +H+ would also need to change. Otherwise,
++H+'s history would be invalid and Git would immediately throw an error upon
+attempting a checkout.
+
+This has a very important consequence --- given any commit, we can rest
+assured that, if it exists in the repository, Git will _always_ reconstruct that
+commit exactly as it was created (including all the history leading up to that
+commit _when_ it was created), or it will not do so at all. Indeed, as Linus
+mentions in a presentation at Google,
+http://www.youtube.com/watch?v=4XpnKHJAok8[he need only remember the SHA-1 hash
+of a single commit] to rest assured that, given any other repository, in the
+event of a loss of his own, that commit will represent exactly the same commit
+that it did in his own repository. What does that mean for us? Importantly, it
+means that *we do not have to rewrite history to sign each commit*, because the
+history of our _next_ signed commit is guaranteed. The only downside is, of
+course, that the history itself could have already been exploited in a manner
+similar to our initial story, but an automated mass-signing of all past commits
+for a given author wouldn't catch such a thing anyway.
+
+That said, it is important to understand that the integrity of your repository
+guaranteed only if a https://en.wikipedia.org/wiki/Hash_collision[hash
+collision] cannot be created --- that is, if an attacker were able to create the
+same SHA-1 hash with _different_ data, then the child commit(s) would still be
+valid and the repository would have been successfully compromised.
+http://www.schneier.com/blog/archives/2005/02/cryptanalysis_o.html[Vulnerabilities
+have been known in SHA-1] since 2005 that allow hashes to be computed
+http://www.schneier.com/blog/archives/2005/02/sha1_broken.html[faster than brute
+force], although they are not cheap to exploit. Given that, while your
+repository may be safe for now, there will come some point in the future where
+SHA-1 will be considered as crippled as MD5 is today. At that point in time,
+however, maybe Git will offer a secure migration solution to
+http://kerneltrap.org/mailarchive/git/2006/8/27/211001[an algorithm like
+SHA-256] or better. Indeed,
+http://kerneltrap.org/mailarchive/git/2006/8/27/211020[SHA-1 hashes were never
+intended to make Git cryptographically secure].
+
+Given that, the average person is likely to be fine with leaving his/her history
+the way it is. We will operate under that assumption for our implementation,
+offering the ability to ignore all commits prior to a certain commit. If one
+wishes to validate all commits, the reference commit can simply be omitted.
+
+[[automate]]
+Automating Signature Checks
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+The idea behind verifying that certain commits are trusted is fairly simple:
+
+=========================================================================
+Given reference commit +r+ (optionally empty), let
++C+ be the set of all commits such that +C+ = +r..HEAD+
+(http://book.git-scm.com/4_git_treeishes.html[range spec]) and let
++K+ be the set of all public keys in a given GPG keyring. We must assert
+that, for each commit +c+ in +C+, there must exist a key
++k+ in keyring +K+ such that +k+ is
+https://en.wikipedia.org/wiki/Web_of_trust[trusted] and can be used to
+verify the signature of +c+. This assertion is denoted by the function `\(g\)`
+(GPG) in the following expression: `\(\forall{c}{\in}\mathbf{C}\, g(c)\)`.
+=========================================================================
+
+Fortunately, as we have already seen in previous sections with the
+`--show-signature` option to `git log`, Git handles the signature verification
+for us; this reduces our implementation to a simple shell script. However, the
+output we've been dealing with is not the most convenient to parse. It would be
+nice if we could get commit and signature information on a single line per
+commit. This can be accomplished with `--pretty`, but we have an additional
+problem --- at the time of writing (in Git v1.7.10), the GPG `--pretty` options
+are undocumented.
+
+A quick look at
+https://github.com/gitster/git/blob/f9d995d5dd39c942c06829e45f195eeaa99936e1/pretty.c#L1038[
++format_commit_one()+ in +pretty.c+] yields a +'G'+ placeholder that has three
+different formats:
+
+- *+%GG+* --- GPG output (what we see in `git log --show-signature`)
+- *+%G?+* --- Outputs "G" for a good
+  signature and "B" for a bad signature; otherwise, an empty string
+  (https://github.com/gitster/git/blob/f9d995d5dd39c942c06829e45f195eeaa99936e1/pretty.c#L808[see
+  mapping in +signature_check+ struct])
+- *+%GS+* --- The name of the signer
+
+We are interested in using the most concise and minimal representation ---
++%G?+. Because this placeholder simply matches text on the GPG output, and the
+string +``gpg: Can't check signature: public key not found''+ is not mapped in
++signature_check+, unknown signatures will output an empty string, not ``B''.
+This is not explicit behavior, so I'm unsure if this will change in future
+releases. Fortunately, we are only interested in ``G'', so this detail will not
+matter for our implementation.
+
+With this in mind, we can come up with some useful one-line output per commit.
+The below is based on the output resulting from the demonstration of
+xref:merge-3[merge option #3] above:
+
+[source,shell]
+----
+$ git log --pretty="format:%H %aN  %s  %G?"
+afb1e7373ae5e7dae3caab2c64cbb18db3d96fba Mike Gerwitz  Modified bar  G
+f227c90b116cc1d6770988a6ca359a8c92a83ce2 Mike Gerwitz  Added bar  G
+652f9aed906a646650c1e24914c94043ae99a407 John Doe  Signed off  G
+16ddd46b0c191b0e130d0d7d34c7fc7af03f2d3e John Doe  Added feature X  G
+cf43808e85399467885c444d2a37e609b7d9e99d Mike Gerwitz  Test commit of foo  G
+----
+
+Notice the ``G'' suffix for each of these lines, indicating that the signature
+is valid (which makes sense, since the signature is our own). Adding an
+additional commit, we can see what happens when a commit is unsigned:
+
+[source,shell]
+----
+$ echo foo >> foo
+$ git commit -am 'Yet another foo'
+$ git log --pretty="format:%H %aN  %s  %G?" HEAD^..
+f72924356896ab95a542c495b796555d016cbddd Mike Gerwitz  Yet another foo
+----
+
+Note that, as aforementioned, the string replacement of +%G?+ is empty when the
+commit is unsigned. However, what about commits that are signed but untrusted
+(not within our web of trust)?
+
+----
+$ gpg --edit-key 8EE30EAB
+[...]
+gpg> trust
+[...]
+Please decide how far you trust this user to correctly verify other users' keys
+(by looking at passports, checking fingerprints from different sources, etc.)
+
+  1 = I don't know or won't say
+  2 = I do NOT trust
+  3 = I trust marginally
+  4 = I trust fully
+  5 = I trust ultimately
+  m = back to the main menu
+
+Your decision? 2
+[...]
+
+gpg> save
+Key not changed so no update needed.
+$ git log --pretty="format:%H %aN  %s  %G?" HEAD~2..
+f72924356896ab95a542c495b796555d016cbddd Mike Gerwitz  Yet another foo
+afb1e7373ae5e7dae3caab2c64cbb18db3d96fba Mike Gerwitz  Modified bar  G
+----
+
+Uh oh. It seems that Git does not seem to check whether or not a signature is
+trusted. Let's take a look at the full GPG output:
+
+[[gpg-sig-untrusted]]
+[source,shell]
+----
+$ git log --show-signature HEAD~2..HEAD^
+commit afb1e7373ae5e7dae3caab2c64cbb18db3d96fba
+gpg: Signature made Sun 22 Apr 2012 01:37:26 PM EDT using RSA key ID 8EE30EAB
+gpg: Good signature from "Mike Gerwitz (Free Software Developer) <mike@mikegerwitz.com>"
+gpg: WARNING: This key is not certified with a trusted signature!
+gpg:          There is no indication that the signature belongs to the owner.
+Primary key fingerprint: 2217 5B02 E626 BC98 D7C0  C2E5 F22B B815 8EE3 0EAB
+Author: Mike Gerwitz <mike@mikegerwitz.com>
+Date:   Sat Apr 21 17:35:27 2012 -0400
+
+    Modified bar
+----
+
+As you can see, GPG provides a clear warning. Unfortunately,
+https://github.com/gitster/git/blob/f9d995d5dd39c942c06829e45f195eeaa99936e1/pretty.c#L808[
++parse_signature_lines()+ in +pretty.c+], which references a simple mapping in
++struct signature_check+, will blissfully ignore the warning and match only
++``Good signature from''+, yielding ``G''. A patch to provide a separate token
+for untrusted keys is simple, but for the time being, we will explore two
+separate implementations --- one that will parse the simple one-line output that
+is ignorant of trust and a mention of a less elegant implementation that parses
+the GPG output.  footnote:[Should the patch be accepted, this article will be updated to
+use the new token.]
+
+
+[[script-notrust]]
+Signature Check Script, Disregarding Trust
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+As mentioned above, due to limitations of the current +%G?+ implementation, we
+cannot determine from the single-line output whether or not the given signature
+is actually trusted.  This isn't necessarily a problem. Consider what will
+likely be a common use case for this script --- to be run by a continuous
+integration (CI) system.  In order to let the CI system know what signatures
+should be trusted, you will likely provide it with a set of keys for known
+committers, which eliminates the need for a web of trust (the act of placing the
+public key on the server indicates that you trust the key).  Therefore, if the
+signature is recognized and is good, the commit can be trusted.
+
+One additional consideration is the need to ignore all ancestors of a given
+commit, which is necessary on older repositories where older commits will not be
+signed (see xref:commit-history[Commit History In a Nutshell] for information on
+why it is unnecessary, and probably a bad idea, to sign old commits).  As such,
+our script will accept a ref and will only consider its children in the check.
+
+This script *assumes that each commit will be signed* and will output the SHA-1
+hash of each unsigned/bad commit, in addition to some additional, useful
+information, delimited by tabs.
+
+[source,shell]
+----
+#!/bin/sh
+#
+# Validate signatures on each and every commit within the given range
+##
+
+# if a ref is provided, append range spec to include all children
+chkafter="${1+$1..}"
+
+# note: bash users may instead use $'\t'; the echo statement below is a more
+# portable option
+t=$( echo '\t' )
+
+# Check every commit after chkafter (or all commits if chkafter was not
+# provided) for a trusted signature, listing invalid commits. %G? will output
+# "G" if the signature is trusted.
+git log --pretty="format:%H$t%aN$t%s$t%G?" "${chkafter:-HEAD}" \
+  | grep -v "${t}G$"
+
+# grep will exit with a non-zero status if no matches are found, which we
+# consider a success, so invert it
+[ $? -gt 0 ]
+----
+
+That's it; Git does most of the work for us! If a ref is provided, it will be
+converted into a http://book.git-scm.com/4_git_treeishes.html[range spec] by
+appending +``..''+ (e.g. +a1b2c+ becomes +a1b2c..+), which will cause `git log`
+to return all of its children (_not_ including the ref itself).  If no ref is
+provided, we end up using +HEAD+ without a range spec, which will simply list
+every commit (using an empty string will cause Git to throw an error, and we
+must quote the string in case the user decides to do something like +``master@{5
+days ago}''+).  Using the `--pretty` option to `git log`, we output the GPG
+signature result with +%G?+, in addition to some useful information we will want
+to see about any commits that do not pass the test.  We can then filter out all
+commits that have been signed with a known key by removing all lines that end in
+``G'' --- the output from +%G?+ indicating a good signature.
+
+Let's see it in action (assuming the script has been saved as `signchk`):
+
+[source,shell]
+----
+$ chmod +x signchk
+$ ./signchk
+f72924356896ab95a542c495b796555d016cbddd        Mike Gerwitz    Yet another foo
+$ echo $?
+1
+----
+
+With no arguments, the script checks every commit in our repository, finding a
+single commit that has not been signed.  At this point, we can either check the
+output itself or check the exit status of the script, which indicates a failure.
+If this script were run by a CI system, the best option would be to abort the
+build and immediately notify the maintainers of a potential security breach (or,
+more likely, someone simply forgot to sign their commit).
+
+If we check commits after that failure, assuming that each of the children have
+been signed, we will see the following:
+
+[source,shell]
+----
+$ ./signchk f7292
+$ echo $?
+0
+----
+
+Be careful when running this script directly from the repository, especially
+with CI systems --- you must either place a copy of the script outside of the
+repository or run the script from a trusted point in history.  For example, if
+your CI system were to simply pull from the repository and then run the script,
+an attacker need only modify the script to circumvent this check entirely.
+
+
+[[script-trust]]
+Signature Check Script With Web Of Trust
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+The web of trust would come in handy for large groups of contributors; in such a
+case, your CI system could attempt to download the public key from a
+preconfigured keyserver when the key is encountered (updating the key if
+necessary to get trust signatures).  Based on the web of trust established from
+the public keys directly trusted by the CI system, you could then automatically
+determine whether or not a commit can be trusted even if the key was not
+explicitly placed on the server.
+
+To accomplish this task, we will split the script up into two distinct portions
+--- retrieving/updating all keys within the given range, followed by the actual
+signature verification.  Let's start with the key gathering portion, which is
+actually a trivial task:
+
+[source,shell]
+----
+$ git log --show-signature \
+  | grep 'key ID' \
+  | grep -o '[A-Z0-9]\+$' \
+  | sort \
+  | uniq \
+  | xargs gpg --keyserver key.server.org --recv-keys $keys
+----
+
+The above string of commands simply uses `grep` to pull the key ids out of `git
+log` output (using `--show-signature` to produce GPG output), and then requests
+only the unique keys from the given keyserver. In the case of the repository
+we've been using throughout this article, there is only a single signature ---
+my own.  In a larger repository, all unique keys will be listed.  Note that the
+above example does not specify any range of commits; you are free to integrate
+it into the +signchk+ script to use the same range, but it isn't strictly
+necessary (it may provide a slight performance benefit, depending on the number
+of commits that would have been ignored).
+
+Armed with our updated keys, we can now verify the commits based on our web of
+trust.  Whether or not a specific key will be trusted is
+http://www.gnupg.org/gph/en/manual.html#AEN533[dependent on your personal
+settings].  The idea here is that you can trust a set of users (e.g. Linus'
+``lieutenants'') that in turn will trust other users which, depending on your
+configuration, may automatically be within your web of trust even if you do not
+personally trust them.  This same concept can be applied to your CI server by
+placing its keyring in place of you own (or perhaps you will omit the CI server
+and run the script yourself).
+
+Unfortunately, with Git's current +%G?+ implementation, xref:automate[we are
+unable to check basic one-line output]. Instead, we must parse the output of
+`--show-signature` (xref:gpg-sig-untrusted[as shown above]) for each relevant
+commit. Combining our output with xref:script-notrust[the original script that
+disregards trust], we can arrive at the following, which is the output that we
+must parse:
+
+[source,shell]
+----
+$ git log --pretty="format:%H$t%aN$t%s$t%G?" --show-signature
+f72924356896ab95a542c495b796555d016cbddd       Mike Gerwitz    Yet another foo
+gpg: Signature made Sun 22 Apr 2012 01:37:26 PM EDT using RSA key ID 8EE30EAB
+gpg: Good signature from "Mike Gerwitz (Free Software Developer) <mike@mikegerwitz.com>"
+gpg: WARNING: This key is not certified with a trusted signature!
+gpg:          There is no indication that the signature belongs to the owner.
+Primary key fingerprint: 2217 5B02 E626 BC98 D7C0  C2E5 F22B B815 8EE3 0EAB
+afb1e7373ae5e7dae3caab2c64cbb18db3d96fba       Mike Gerwitz    Modified bar    G
+[...]
+----
+
+In the above snippet, it should be noted that the first commit (+f7292+) is
+_not_ signed, whereas the second (+afb1e+) is. Therefore, the GPG output
+_preceeds_ the commit line itself. Let's consider our objective:
+
+. List all unsigned commits, or commits with unknown or invalid signatures.
+. List all signed commits that are signed with known signatures, but are
+  otherwise untrusted.
+
+Our xref:script-notrust[previous script] performs #1 just fine, so we need only
+augment it to support #2. In essence --- we wish to convert lines ending in
+``G'' to something else if the GPG output _preceeding_ that line indicates that
+the signature is untrusted.
+
+There are many ways to go about doing this, but we will settle for a fairly
+clear set of commands that can be used to augment the previous script.  To
+prevent the lines ending with ``G'' from being filtered from the output (should
+they be untrusted), we will suffix untrusted lines with ``U''.  Consider the
+output of the following:
+
+[source,shell]
+----
+$ git log --pretty="format:^%H$t%aN$t%s$t%G?" --show-signature \
+> | grep '^\^\|gpg: .*not certified' \
+> | awk '
+>   /^gpg:/ {
+>     getline;
+>     printf "%s U\n", $0;
+>     next;
+>   }
+>   { print; }
+> ' \
+> | sed 's/^\^//'
+f72924356896ab95a542c495b796555d016cbddd        Mike Gerwitz    Yet another foo
+afb1e7373ae5e7dae3caab2c64cbb18db3d96fba        Mike Gerwitz    Modified bar    G U
+f227c90b116cc1d6770988a6ca359a8c92a83ce2        Mike Gerwitz    Added bar       G U
+652f9aed906a646650c1e24914c94043ae99a407        John Doe        Signed off      G U
+16ddd46b0c191b0e130d0d7d34c7fc7af03f2d3e        John Doe        Added feature X G U
+cf43808e85399467885c444d2a37e609b7d9e99d        Mike Gerwitz    Test commit of foo      G U
+----
+
+Here, we find that if we filter out those lines ending in ``G'' as we did
+before, we would be left with the untrusted commits in addition to the commits
+that are bad (``B'') or unsigned (blank), as indicated by +%G?+. To accomplish
+this, we first add the GPG output to the log with the `--show-signature` option
+and, to make filtering easier, prefix all commit lines with a carrot (^) which
+we will later strip. We then filter all lines but those beginning with a carrot,
+or lines that contain the string ``not certified'', which is part of the GPG
+output. This results in lines of commits with a single +``gpg:''+ line before
+them if they are untrusted. We can then pipe this to awk, which will remove all
++``gpg:''+-prefixed lines and append +``U''+ to the next line (the commit line).
+Finally, we strip off the leading carrot that was added during the beginning of
+this process to produce the final output.
+
+Please keep in mind that there is a huge difference between the conventional use
+of trust with PGP/GPG (``I assert that I know this person is who they claim they
+are'') vs trusting someone to commit to your repository.  As such, it may be in
+your best interest to maintain an entirely separate web of trust for your CI
+server or whatever user is being used to perform the signature checks.
+
+
+[[script-merge]]
+Automating Merge Signature Checks
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+The aforementioned scripts are excellent if you wish to check the validity of
+each individual commit, but not everyone will wish to put fourth that amount of
+effort.  Instead, maintainers may opt for a workflow that requires the signing
+of only the merge commit (xref:merge-2[option #2 above]), rather than each
+commit that is introduced by the merge.  Let us consider the appropach we would
+have to take for such an implementation:
+
+=========================================================================
+Given reference commit +r+ (optionally empty), let
++C'+ be the set of all _first-parent_ commits such that +C'+ = +r..HEAD+
+(http://book.git-scm.com/4_git_treeishes.html[range spec]) and let
++K+ be the set of all public keys in a given GPG keyring. We must assert
+that, for each commit +c+ in +C'+, there must exist a key
++k+ in keyring +K+ such that +k+ is
+https://en.wikipedia.org/wiki/Web_of_trust[trusted] and can be used to
+verify the signature of +c+. This assertion is denoted by the function `\(g\)`
+(GPG) in the following expression: `\(\forall{c}{\in}\mathbf{C'}\, g(c)\)`.
+=========================================================================
+
+The only difference between this script and the script that checks for a
+signature on each individual commit is that *this script will only check for
+commits on a particular branch* (e.g. +master+).  This is important --- if we
+commit directly onto master, we want to ensure that the commit is signed (since
+there will be no merge).  If we merge _into_ master, a merge commit will be
+created, which we may sign and ignore all commits introduced by the merge.  If
+the merge is a fast-forward, a merge commit can be forcefully created with the
+`--no-ff` option to avoid the need to amend each commit with a signature.
+
+To demonstrate a script that can valdiate commits for this type of workflow,
+let's first create some changes that would result in a merge:
+
+[source,shell]
+----
+$ git checkout -b diverge
+$ echo foo > diverged
+$ git add diverged
+$ git commit -m 'Added content to diverged'
+[diverge cfe7389] Added content to diverged
+ 1 file changed, 1 insertion(+)
+ create mode 100644 diverged
+$ echo foo2 >> diverged
+$ git commit -am 'Added additional content to diverged'
+[diverge 996cf32] Added additional content to diverged
+ 1 file changed, 1 insertion(+)
+$ git checkout master
+Switched to branch 'master'
+$ echo foo >> foo
+$ git commit -S -am 'Added data to master'
+
+You need a passphrase to unlock the secret key for
+user: "Mike Gerwitz (Free Software Developer) <mike@mikegerwitz.com>"
+4096-bit RSA key, ID 8EE30EAB, created 2011-06-16
+
+[master 3cbc6d2] Added data to master
+ 1 file changed, 1 insertion(+)
+$ git merge -S diverge
+
+You need a passphrase to unlock the secret key for
+user: "Mike Gerwitz (Free Software Developer) <mike@mikegerwitz.com>"
+4096-bit RSA key, ID 8EE30EAB, created 2011-06-16
+
+Merge made by the 'recursive' strategy.
+ diverged |    2 ++
+ 1 file changed, 2 insertions(+)
+ create mode 100644 diverged
+----
+
+Above, committed in both +master+ and a new +diverge+ branch in order to ensure
+that the merge would not be a fast-forward (alternatively, we could have used
+the `--no-ff` option of `git merge`). This results in the following (your hashes
+will vary):
+
+----
+$ git log --oneline --graph
+*   9307dc5 Merge branch 'diverge'
+|\
+| * 996cf32 Added additional content to diverged
+| * cfe7389 Added content to diverged
+* | 3cbc6d2 Added data to master
+|/
+* f729243 Yet another foo
+* afb1e73 Modified bar
+* f227c90 Added bar
+* 652f9ae Signed off
+* 16ddd46 Added feature X
+* cf43808 Test commit of foo
+----
+
+From the above graph, we can see that we are interested in signatures on only
+two of the commits: +3cbc6d2+, which was created directly on +master+, and
++9307dc5+ --- the merge commit.  The other two commits (+996cf32+ and +cfe7389+)
+need not be signed because the signing of the merge commit asserts their
+validity (assuming that the author of the merge was vigilant).  But how do we
+ignore those commits?
+
+----
+$ git log --oneline --graph --first-parent
+* 9307dc5 Merge branch 'diverge'
+* 3cbc6d2 Added data to master
+* f729243 Yet another foo
+* afb1e73 Modified bar
+* f227c90 Added bar
+* 652f9ae Signed off
+* 16ddd46 Added feature X
+* cf43808 Test commit of foo
+----
+
+The above example simply added the `--first-parent` option to `git log`, which
+will display only the first parent commit when encountering a merge commit.
+Importantly, this means that we are left with _only the commits on_ +master+ (or
+whatever branch you decide to reference). These are the commits we wish to
+validate.
+
+Performing the validation is therefore only a slight modification to the
+original script:
+
+[source,shell]
+----
+#!/bin/sh
+#
+# Validate signatures on only direct commits and merge commits for a particular
+# branch (current branch)
+##
+
+# if a ref is provided, append range spec to include all children
+chkafter="${1+$1..}"
+
+# note: bash users may instead use $'\t'; the echo statement below is a more
+# portable option (-e is unsupported with /bin/sh)
+t=$( echo '\t' )
+
+# Check every commit after chkafter (or all commits if chkafter was not
+# provided) for a trusted signature, listing invalid commits. %G? will output
+# "G" if the signature is trusted.
+git log --pretty="format:%H$t%aN$t%s$t%G?" "${chkafter:-HEAD}" --first-parent \
+  | grep -v "${t}G$"
+
+# grep will exit with a non-zero status if no matches are found, which we
+# consider a success, so invert it
+[ $? -gt 0 ]
+----
+
+If you run the above script using the branch setup provided above, then you will
+find that neither of the commits made in the +diverge+ branch are listed in the
+output.  Since the merge commit itself is signed, it is also omitted from the
+output (leaving us with only the unsigned commit mentioned in the previous
+sections).  To demonstrate what will happen if the merge commit is _not_ signed,
+we can amend it as follows (omitting the `-S` option):
+
+[source,shell]
+----
+$ git commit --amend
+[master 9ee66e9] Merge branch 'diverge'
+$ ./signchk
+9ee66e900265d82f5389e403a894e8d06830e463        Mike Gerwitz    Merge branch 'diverge'
+f72924356896ab95a542c495b796555d016cbddd        Mike Gerwitz    Yet another foo
+$ echo $?
+1
+----
+
+The merge commit is then listed, requiring a valid signature.  footnote:[If you wish to
+ensure that this signature is trusted as well, see xref:script-trust[the section
+on verifying commits within a web of trust].]
+
+
+Summary
+-------
+* xref:trust[Be careful of who you trust.] Is your repository safe from
+  harm/exploitation on your PC? What about the PCs of those whom you trust?
+** xref:trust-host[Your host is not necessarily secure.] Be wary of using
+   remotely hosted repositories as your primary hub.
+* xref:trust-ensure[Using GPG to sign your commits] can help to assert your
+  identity, helping to protect your reputation from impostors.
+* For large merges, you must develop a security practice that works best for
+  your particular project. Specifically, you may choose to xref:merge-3[sign
+  each individual commit] introduced by the merge, xref:merge-2[sign only the
+  merge commit], or xref:merge-1[squash all commits] and sign the resulting
+  commit.
+* If you have an existing repository, there is xref:commit-history[little need
+  to go rewriting history to mass-sign commits].
+* Once you have determined the security policy best for your project, you may
+  xref:automate[automate signature verification] to ensure that no unauthorized
+  commits sneak into your repository.

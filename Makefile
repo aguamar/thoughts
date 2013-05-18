@@ -16,10 +16,15 @@
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ##
 
-.PHONY: default clean
+# list of articles to compile
+articles := $(patsubst %.txt, %.html, $(wildcard papers/*.txt))
+
+.PHONY: default clean thoughts
 
 
-default:
+default: www-root
+
+thoughts:
 	repo2html \
 		-t "Mike Gerwitz's Thoughts and Ramblings" \
 		-d 'The miscellaneous thoughts and ramblings of a free software hacker' \
@@ -28,6 +33,22 @@ default:
 		-R40 \
 		'http://mikegerwitz.com/thoughts/' \
 		> index.html
+
+# all .txt articles will be compiled with asciidoc, then post-processed with the
+# mgify script
+%.html: %.txt
+	asciidoc -fasciidoc.conf -v \
+		-a stylesdir=$(PWD)/asciidoc-themes/ \
+		-a themedir=$(PWD)/asciidoc-themes/ \
+		$<
+	./tools/mgify "$@"
+
+www-root: $(articles) thoughts
+	mkdir -p www-root/papers \
+		&& cp papers/*.html www-root/papers/ \
+		&& cp -r [0-9]* www-root/ \
+		&& cp -r images/ www-root/ \
+		&& ln -sf ../images www-root/papers/images
 
 clean:
 	rm -rf [0-9]*/
