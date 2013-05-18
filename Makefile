@@ -45,6 +45,7 @@ thoughts:
 
 www-root: $(articles) thoughts
 	mkdir -p www-root/papers \
+		&& cp index.html www-root/ \
 		&& cp papers/*.html www-root/papers/ \
 		&& cp -r [0-9]* www-root/ \
 		&& cp -r images/ www-root/ \
