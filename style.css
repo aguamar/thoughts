@@ -1,0 +1,46 @@
+body {
+  margin: 1em 5em;
+  text-align: justify;
+}
+
+/* hanging */
+header, footer {
+  margin: 0em -3em;
+}
+
+h1, h2, h3 {
+  font-family: 'URW Gothic L', 'Avant Garde', sans-serif;
+}
+
+h1 { font-size: 1.6em; }
+h2 { font-size: 1.3em; }
+
+h2.date {
+  margin-top: -0.5em;
+}
+
+p#ref-0 {
+  margin-top: 2em;
+}
+p.ref {
+  font-size: 0.9em;
+}
+
+#gnuinside {
+  position: absolute;
+  display:  block;
+
+  top:    0px;
+  right:  0px;
+  width:  50px;
+  height: 50px;
+}
+
+footer {
+  font-size: 0.9em;
+  margin-top: 2em;
+}
+
+footer .commit-id {
+  font-family: monospace;
+}

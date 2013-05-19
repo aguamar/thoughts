@@ -30,6 +30,8 @@ thoughts:
 		-d 'The miscellaneous thoughts and ramblings of a free software hacker' \
 		-c 'Mike Gerwitz' \
 		-l 'Verbatim redistribution of this document in its entirety is permitted so long as this copyright notice is preserved.' \
+		-C '/style.css' \
+		-T "$(PWD)/tpl" \
 		-R40 \
 		'http://mikegerwitz.com/thoughts/' \
 		> index.html
@@ -44,12 +46,13 @@ thoughts:
 	./tools/mgify "$@"
 
 www-root: $(articles) thoughts
-	mkdir -p www-root/papers \
-		&& cp index.html www-root/ \
-		&& cp papers/*.html www-root/papers/ \
-		&& cp -r [0-9]* www-root/ \
-		&& cp -r images/ www-root/ \
-		&& ln -sf ../images www-root/papers/images
+	mkdir -p www-root/papers
+	cp index.html www-root/
+	cp papers/*.html www-root/papers/
+	cp -r [0-9]* www-root/
+	cp -r images/ www-root/
+	cp style.css www-root/
+	ln -sf ../images www-root/papers/images
 
 clean:
 	rm -rf [0-9]*/
