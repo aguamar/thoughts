@@ -66,6 +66,14 @@ footer .commit-id {
   font-family: monospace;
 }
 
+#selflinks {
+  position: absolute;
+  top: 60px;
+  right: 0px;
+  width: 42px;
+  padding: 6px;
+}
+
 .bimgs {
   float: right;
   margin-left: 1em;
