@@ -64,3 +64,15 @@ footer {
 footer .commit-id {
   font-family: monospace;
 }
+
+.bimgs {
+  float: right;
+  margin-left: 1em;
+}
+
+.bimgs img {
+  margin-left: 0.1em;
+}
+.bimgs img:first-child {
+  margin-left: 0em;
+}
