@@ -4,6 +4,9 @@ body {
   font-family: 'Liberation Sans', sans-serif;
 }
 
+a { color: #0066cc; }
+a:visited { color: #6666cc; }
+
 /* hanging */
 header, footer {
   margin: 0em -3em;
