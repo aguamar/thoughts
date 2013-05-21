@@ -32,6 +32,7 @@ thoughts:
 		-l 'Verbatim redistribution of this document in its entirety is permitted so long as this copyright notice is preserved.' \
 		-C '/style.css' \
 		-T "$(PWD)/tpl" \
+		-E \
 		-R40 \
 		'http://mikegerwitz.com/thoughts/' \
 		> index.html
