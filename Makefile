@@ -18,6 +18,7 @@
 
 # list of articles to compile
 articles := $(patsubst %.txt, %.html, $(wildcard papers/*.txt))
+www_root := www-root/
 
 .PHONY: default clean thoughts
 
@@ -25,6 +26,7 @@ articles := $(patsubst %.txt, %.html, $(wildcard papers/*.txt))
 default: www-root
 
 thoughts:
+	mkdir -p "$(www_root)"
 	repo2html \
 		-t "Mike Gerwitz's Thoughts and Ramblings" \
 		-d 'The miscellaneous thoughts and ramblings of a free software hacker' \
@@ -33,9 +35,10 @@ thoughts:
 		-C '/style.css' \
 		-T "$(PWD)/tpl" \
 		-E \
-		-R40 \
+		-R 40 \
+		-o "$(www_root)" \
 		'http://mikegerwitz.com/thoughts/' \
-		> index.html
+		> "$(www_root)/index.html"
 
 # all .txt articles will be compiled with asciidoc, then post-processed with the
 # mgify script
@@ -48,12 +51,10 @@ thoughts:
 
 www-root: $(articles) thoughts
 	mkdir -p www-root/papers
-	cp index.html www-root/
 	cp papers/*.html www-root/papers/
-	cp -r [0-9]* www-root/
 	cp -r images/ www-root/
 	cp style.css www-root/
 	ln -sf ../images www-root/papers/images
 
 clean:
-	rm -rf [0-9]*/
+	rm -rf [0-9]*/ www-root/
