@@ -17,11 +17,11 @@
 ##
 
 # list of articles to compile
-articles := $(patsubst %.txt, %.html, $(wildcard papers/*.txt))
+articles := $(patsubst %.txt, %.html, \
+	$(shell find docs/ -name '*.txt'))
 www_root := www-root/
 
-.PHONY: default clean thoughts
-
+.PHONY: default clean articles thoughts
 
 default: www-root
 
@@ -49,9 +49,10 @@ thoughts:
 		$<
 	./tools/mgify "$@"
 
-www-root: $(articles) thoughts
+articles: $(articles)
+www-root: articles thoughts
 	mkdir -p www-root/papers
-	cp papers/*.html www-root/papers/
+	( cd docs/ && find . -name '*.html' -exec cp {} ../www-root/{} \; )
 	cp -r images/ www-root/
 	cp style.css www-root/
 	ln -sf ../images www-root/papers/images
