@@ -3,9 +3,8 @@
 </a>
 
 <div id="copyright">
-  Copyright &copy; 2012 <a href="http://mikegerwitz.com">Mike Gerwitz</a>
-  <br />
-  Verbatim distribution of this document in its entirety is permitted, provided
+  Copyright &copy; 2012 <a href="/">Mike Gerwitz</a>.
+  Verbatim distribution of this document in its entirety is permitted provided
   that this copyright notice is preserved.
 </div>
 

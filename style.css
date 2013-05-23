@@ -7,9 +7,11 @@ body {
 a { color: #0066cc; }
 a:visited { color: #6666cc; }
 
-/* hanging */
-header, footer {
+/* hanging; ids for asciidoc styling */
+header, footer,
+#header, #footer, .article #copyright {
   margin: 0em -3em;
+  text-align: left;
 }
 
 h1, h2, h3 {
@@ -28,10 +30,13 @@ h2.date {
   margin-bottom: 1.5em;
 }
 
-h1.title {
+/* latter for asciidoc-generated output */
+h1.title,
+#header h1 {
   font-size: 2em;
   margin-bottom: 0.1em;
 }
+
 h2.desc {
   font-size: 0.8em;
   text-transform: uppercase;
@@ -50,6 +55,29 @@ p.ref {
   font-size: 0.9em;
 }
 
+dt {
+  letter-spacing: 0.1em;
+}
+
+tt {
+  background-color: #eeeeec;
+  color: #000055;
+}
+
+.listingblock {
+  background-color: #eeeeec;
+  background-image: url('images/cross_scratches.png');
+  padding: 0.5em;
+  border: 1px solid #babdb6;
+  border-radius: 0.25em
+}
+
+.exampleblock {
+  margin-left: 2em;
+  padding-left: 1em;
+  border-left: 5px solid #eeeeec;
+}
+
 #gnuinside {
   position: absolute;
   display:  block;
@@ -60,7 +88,7 @@ p.ref {
   height: 50px;
 }
 
-footer {
+footer, #footer, .article #copyright {
   font-size: 0.9em;
   margin-top: 2em;
 }
@@ -87,4 +115,33 @@ footer .commit-id {
 }
 .bimgs img:first-child {
   margin-left: 0em;
+}
+
+
+/** exclusively asciidoc-generated content styling **/
+body.article h2 {
+  position: relative;
+
+  border-bottom: 2px solid #babdb6;
+  left: -2em;
+
+  margin-right: -2em;
+}
+
+body.article h3 {
+  border-bottom: 1px solid #babdb6;
+}
+
+#author {
+  font-size: 1.1em;
+  letter-spacing: 0.1em;
+}
+
+#footer {
+  border-top: 2px solid #babdb6;
+  padding-top: 0.5em;
+}
+
+.article #copyright {
+  margin-top: 0;
 }

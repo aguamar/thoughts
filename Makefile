@@ -31,7 +31,7 @@ thoughts:
 		-t "Mike Gerwitz's Thoughts and Ramblings" \
 		-d 'The miscellaneous thoughts and ramblings of a free software hacker' \
 		-c 'Mike Gerwitz' \
-		-l 'Verbatim redistribution of this document in its entirety is permitted so long as this copyright notice is preserved.' \
+		-l 'Verbatim redistribution of this document in its entirety is permitted provided that this copyright notice is preserved.' \
 		-C '/style.css' \
 		-T "$(PWD)/tpl" \
 		-E \
@@ -44,8 +44,8 @@ thoughts:
 # mgify script
 %.html: %.txt
 	asciidoc -fasciidoc.conf -v \
-		-a stylesdir=$(PWD)/asciidoc-themes/ \
-		-a themedir=$(PWD)/asciidoc-themes/ \
+		-a stylesdir= \
+		-a themedir=$(PWD)/ \
 		$<
 	./tools/mgify "$@"
 
