@@ -1,4 +1,0 @@
-#!/bin/bash
-
-# invoke the default template
-resume-default commit
