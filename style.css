@@ -76,6 +76,22 @@ h2.desc {
   border-left: none;
 }
 
+#headline {
+  text-align: center;
+  float: right;
+}
+#headline a {
+  display: block;
+  margin-top: 2em;
+  clear: left;
+}
+#headline a:first-child {
+  margin-top: 0;
+}
+#headline img {
+  margin-left: 2em;
+}
+
 p#ref-0 {
   margin-top: 2em;
 }
