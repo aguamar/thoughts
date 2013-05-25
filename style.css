@@ -53,15 +53,17 @@ h2.desc {
   color: #666f63;
 
   margin-top: 0px;
-  margin-bottom: 3em;
+  margin-bottom: 2em;
 }
 
 #menu {
   text-align: center;
+  padding: 0;
+  margin: 0px 0px 4em 0px;
 }
 #menu li {
   display: inline;
-  font-size: 1.4em;
+  font-size: 1.3em;
   letter-spacing: 0.05em;
 }
 #menu li a {
