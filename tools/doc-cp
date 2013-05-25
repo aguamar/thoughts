@@ -1,0 +1,44 @@
+#!/bin/bash
+#
+# Copies a html file without its sorting prefix and extension, placing it in its
+# own directory and naming it as an index file if necessary
+#
+#  Copyright (C) 2013  Mike Gerwitz
+#
+#  This program is free software: you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation, either version 3 of the License, or
+#  (at your option) any later version.
+#
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+##
+
+sstrip()
+{
+  base="$( basename "$1" )"
+  a="${base#??-}"
+  echo "${1%/*}/${a%.*}"
+}
+
+[ -n "$2" ] || {
+  echo "Usage: $0 src dest" >&2
+  exit 64
+}
+
+dest="$( sstrip "$2" )"
+
+# if there is a src directory matching the stripped src name, then we shall
+# place the destination file in a subdirectory of that name; this both solves
+# the problem of naming conflicts and maintains the illusion of url rewriting
+# using only the filesystem
+[ -d "$( sstrip "$1" )" ] \
+  && ( test -d "$dest" || mkdir -p "$dest" ) \
+  && dest="$dest/index.html"
+
+cp "$1" "$dest"
