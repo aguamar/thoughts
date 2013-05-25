@@ -28,8 +28,8 @@ default: www-root
 thoughts:
 	mkdir -p "$(www_root)"
 	repo2html \
-		-t "Mike Gerwitz's Thoughts and Ramblings" \
-		-d 'The miscellaneous thoughts and ramblings of a free software hacker' \
+		-t 'Mike Gerwitz' \
+		-d 'Free Software Hacker' \
 		-c 'Mike Gerwitz' \
 		-l 'Verbatim redistribution of this document in its entirety is permitted provided that this copyright notice is preserved.' \
 		-C '/style.css' \
