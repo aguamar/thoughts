@@ -52,7 +52,7 @@ thoughts:
 articles: $(articles)
 www-root: articles thoughts
 	mkdir -p www-root/papers
-	( cd docs/ && find . -name '*.html' -exec cp {} ../www-root/{} \; )
+	( cd docs/ && find . -name '*.html' -exec ../tools/doc-cp {} ../www-root/{} \; )
 	cp -r images/ www-root/
 	cp style.css www-root/
 	ln -sf ../images www-root/papers/images

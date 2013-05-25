@@ -14,7 +14,7 @@ header, footer,
   text-align: left;
 }
 
-h1, h2, h3 {
+h1, h2, h3, #menu {
   font-family: 'URW Gothic L', 'Avant Garde', sans-serif;
   font-weight: normal;
 }
@@ -46,6 +46,24 @@ h2.desc {
 
   margin-top: 0px;
   margin-bottom: 3em;
+}
+
+#menu {
+  text-align: center;
+}
+#menu li {
+  display: inline;
+  font-size: 1.4em;
+  letter-spacing: 0.05em;
+}
+#menu li a {
+  color: #666f63;
+  text-decoration: none;
+  border-left: 1px solid #868f83;
+  padding: 0.15em 1em;
+}
+#menu li:first-child a {
+  border-left: none;
 }
 
 p#ref-0 {
