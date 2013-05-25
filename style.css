@@ -4,6 +4,10 @@ body {
   font-family: 'Liberation Sans', sans-serif;
 }
 
+body.index {
+  margin: 2em 10em 1em 10em;
+}
+
 a { color: #0066cc; }
 a:visited { color: #6666cc; }
 
@@ -12,6 +16,10 @@ header, footer,
 #header, #footer, .article #copyright {
   margin: 0em -3em;
   text-align: left;
+}
+
+body.index footer {
+  margin: 0em -10em;
 }
 
 h1, h2, h3, #menu {
