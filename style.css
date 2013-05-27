@@ -39,6 +39,11 @@ h2.date {
   margin-bottom: 1.5em;
 }
 
+h1 a, h1 a:visited {
+  text-decoration: none;
+  color: inherit;
+}
+
 /* latter for asciidoc-generated output */
 h1.title,
 #header h1 {
