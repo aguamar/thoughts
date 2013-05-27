@@ -122,6 +122,13 @@ p#ref-0 {
 }
 p.ref {
   font-size: 0.9em;
+  margin: 0.25em 0em;
+}
+sup {
+  font-size: 0.6em;
+}
+p.ref:target {
+  background-color: #fce94f;
 }
 
 dt {
