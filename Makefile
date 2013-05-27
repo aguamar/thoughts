@@ -54,7 +54,7 @@ thoughts:
 	./tools/mgify "$@"
 
 %.html: %.pg
-	$(repo2html) -i index < $< > $@
+	$(repo2html) -i content < $< > $@
 
 pages: $(pages)
 articles: $(articles)
