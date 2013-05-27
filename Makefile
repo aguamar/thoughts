@@ -16,25 +16,29 @@
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ##
 
-# list of articles to compile
+pages := $(patsubst %.pg, %.html, \
+	$(shell find docs/ -name '*.pg'))
 articles := $(patsubst %.txt, %.html, \
 	$(shell find docs/ -name '*.txt'))
 www_root := www-root/
 
-.PHONY: default clean articles thoughts
-
-default: www-root
-
-thoughts:
-	mkdir -p "$(www_root)"
-	repo2html \
+# configured repo2html command
+repo2html := repo2html \
 		-t 'Mike Gerwitz' \
 		-d 'Free Software Hacker' \
 		-c 'Mike Gerwitz' \
 		-l 'Verbatim redistribution of this document in its entirety is permitted provided that this copyright notice is preserved.' \
 		-C '/style.css' \
 		-T "$(PWD)/tpl" \
-		-E \
+		-E
+
+.PHONY: default clean pages articles thoughts
+
+default: www-root
+
+thoughts:
+	mkdir -p "$(www_root)"
+	$(repo2html) \
 		-R 40 \
 		-o "$(www_root)" \
 		'http://mikegerwitz.com/thoughts/' \
@@ -49,8 +53,13 @@ thoughts:
 		$<
 	./tools/mgify "$@"
 
+%.html: %.pg
+	$(repo2html) -i index < $< > $@
+
+pages: $(pages)
 articles: $(articles)
-www-root: articles thoughts
+docs: pages articles
+www-root: docs thoughts
 	mkdir -p www-root/papers
 	( cd docs/ && find . -name '*.html' -exec ../tools/doc-cp {} ../www-root/{} \; )
 	cp -r images/ www-root/
