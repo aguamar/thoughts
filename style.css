@@ -83,6 +83,8 @@ h2.desc {
 }
 
 #headline {
+  background-color: white; /* prevent styled block elements from overlapping */
+  z-index: 999;
   text-align: center;
   float: right;
 }
