@@ -41,7 +41,7 @@ thoughts:
 	$(repo2html) \
 		-R 40 \
 		-o "$(www_root)" \
-		'http://mikegerwitz.com/thoughts/' \
+		'http://mikegerwitz.com/' \
 		> "$(www_root)/index.html"
 
 # all .txt articles will be compiled with asciidoc, then post-processed with the
