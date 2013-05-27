@@ -153,6 +153,7 @@ tt {
 footer, #footer, .article #copyright {
   font-size: 0.9em;
   margin-top: 2em;
+  clear: both;
 }
 
 footer .commit-id {
