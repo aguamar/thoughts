@@ -6,6 +6,7 @@ body {
 
 body.index {
   margin: 2em 10em 1em 10em;
+  padding-right: 300px;
 }
 
 a { color: #0066cc; }
@@ -65,7 +66,7 @@ h2.desc {
 #menu {
   text-align: center;
   padding: 0;
-  margin: 0px 0px 4em 0px;
+  margin: 0px -300px 4em 0px;
 }
 #menu li {
   display: inline;
@@ -83,10 +84,9 @@ h2.desc {
 }
 
 #headline {
-  background-color: white; /* prevent styled block elements from overlapping */
-  z-index: 999;
+  position: absolute;
   text-align: center;
-  float: right;
+  right: 10em;
 }
 #headline a {
   display: block;
@@ -98,6 +98,13 @@ h2.desc {
 }
 #headline img {
   margin-left: 2em;
+}
+
+body.index .content {
+  /* this is not ideal, but works since the sidebar content is (currently) all
+     images */
+  min-height: 750px;
+  padding-right: 1.5em;
 }
 
 body.index h3.index {
@@ -131,6 +138,10 @@ p.ref:target {
   background-color: #fce94f;
 }
 
+pre {
+  white-space: pre-wrap;
+}
+
 dt {
   letter-spacing: 0.1em;
 }
@@ -138,6 +149,10 @@ dt {
 tt {
   background-color: #eeeeec;
   color: #000055;
+}
+
+.inline-img {
+  text-align: center;
 }
 
 .listingblock {
@@ -172,6 +187,12 @@ footer, #footer, .article #copyright {
 
 footer .commit-id {
   font-family: monospace;
+}
+
+/* to account for headline (sidebar) */
+body.index footer .bimgs,
+body.index footer hr {
+  margin-right: -300px;
 }
 
 #selflinks {
