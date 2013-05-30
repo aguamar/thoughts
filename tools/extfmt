@@ -1,0 +1,45 @@
+#!/bin/bash
+#
+# Augments default repo2html message formatter
+#
+#  Copyright (C) 2013  Mike Gerwitz
+#
+#  This program is free software: you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation, either version 3 of the License, or
+#  (at your option) any later version.
+#
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+##
+
+# adds inline image and source code include support to default formatter (which
+# does not necessarily make sense in repo2html, since it styles commit
+# messages...if you try to inline an image in a commit message using this
+# format, then you should probably pretend the brackets are staples and lodge
+# them into your skull)
+"$msgfmt_default" "$@" \
+  | awk -vpath_root="$path_root" '
+    match($0, /\[img:([^:]+?)(:(.*?))?\]/, g) {
+      print "<div class=\"inline-img\">"
+      print "  <img src=\"/images/" g[1] "\" alt=\"" g[3] "\" title=\"" g[3] "\" />"
+      print "</div>"
+
+      next
+    }
+
+    match($0, /\[src:(.*?):(.*?)\]/, g) {
+      c = "source-highlight -s" g[2] " -i" path_root "/" g[1]
+
+      print "<div class=\"listingblock\">"
+      while ( c | getline ) print
+      print "</div>"
+    }
+
+    { print }
+  '
