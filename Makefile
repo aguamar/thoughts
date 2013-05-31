@@ -59,7 +59,7 @@ thoughts:
 	./tools/mgify "$@"
 
 %.html: %.pg
-	$(repo2html) -i content < $< > $@
+	$(repo2html) -icontent -ftools/extfmt < $< > $@
 
 pages: $(pages)
 articles: $(articles)
