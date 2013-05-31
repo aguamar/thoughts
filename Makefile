@@ -21,6 +21,9 @@ pages := $(patsubst %.pg, %.html, \
 articles := $(patsubst %.txt, %.html, \
 	$(shell find docs/ -name '*.txt'))
 www_root := www-root/
+url_root := http://mikegerwitz.com/
+repo_url := https://gitorious.org/mtg-personal/thoughts
+repo_commit_url := '$(repo_url)/commit/%s'
 
 # configured repo2html command
 repo2html := repo2html \
@@ -29,7 +32,9 @@ repo2html := repo2html \
 		-c 'Mike Gerwitz' \
 		-l 'Verbatim redistribution of this document in its entirety is permitted provided that this copyright notice is preserved.' \
 		-C '/style.css' \
-		-T "$(PWD)/tpl" \
+		-T '$(PWD)/tpl' \
+		-u '$(repo_url)' \
+		-U '$(repo_commit_url)' \
 		-E
 
 .PHONY: default clean pages articles thoughts
@@ -41,7 +46,7 @@ thoughts:
 	$(repo2html) \
 		-R 40 \
 		-o "$(www_root)" \
-		'http://mikegerwitz.com/' \
+		'$(url_root)' \
 		> "$(www_root)/index.html"
 
 # all .txt articles will be compiled with asciidoc, then post-processed with the
