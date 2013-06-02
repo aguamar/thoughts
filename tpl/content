@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# for the time being, content pages are simply styled with the index page
+export html_body_class='index content'
+resume-default index

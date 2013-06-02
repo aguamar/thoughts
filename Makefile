@@ -58,8 +58,11 @@ thoughts:
 		$<
 	./tools/mgify "$@"
 
-%.html: %.pg
-	$(repo2html) -icontent -ftools/extfmt < $< > $@
+%.html: %.pg docs/papers/.list
+	$(repo2html) -icontent -ftools/extfmt <$< >$@
+
+docs/papers/.list: $(articles)
+	echo "$(articles)" | tr ' ' '\n' | tools/doclist >$@
 
 pages: $(pages)
 articles: $(articles)

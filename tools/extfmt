@@ -23,22 +23,32 @@
 # messages...if you try to inline an image in a commit message using this
 # format, then you should probably pretend the brackets are staples and lodge
 # them into your skull)
+#
+# XXX: These do little to prevent against malicious code execution since, well,
+# they are used for my own personal content...you've been warned (they are also
+# strongly bias toward allowing only Unix-like paths)
 "$msgfmt_default" "$@" \
   | awk -vpath_root="$path_root" '
-    match($0, /\[img:([^:]+?)(:(.*?))?\]/, g) {
+    match($0, /\[img:([a-z/.-]+?)(:(.*?))?\]/, g) {
       print "<div class=\"inline-img\">"
       print "  <img src=\"/images/" g[1] "\" alt=\"" g[3] "\" title=\"" g[3] "\" />"
       print "</div>"
-
       next
     }
 
-    match($0, /\[src:(.*?):(.*?)\]/, g) {
+    match($0, /\[src:([a-z/.-]+?):(.*?)\]/, g) {
       c = "source-highlight -s" g[2] " -i" path_root "/" g[1]
 
       print "<div class=\"listingblock\">"
       while ( c | getline ) print
       print "</div>"
+      next
+    }
+
+    match($0, /\[cat:([a-z/.-]+?)\]/, g) {
+      c = "cat -- " path_root "/" g[1]
+      while ( c | getline ) print
+      next
     }
 
     { print }
