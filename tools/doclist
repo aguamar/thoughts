@@ -37,3 +37,17 @@ while read f; do
 done
 
 echo '</ol>'
+
+# finally, include highlighted thoughts
+echo '<h3>Thoughts</h3>'
+echo '<ol class="docs">'
+
+# TODO: use hashcache abstraction via repo2html...file format could change
+# TODO: would be useful to sort on subject
+for c in docs/papers/thoughts/*; do
+  grep "^${c##*/}" .hashcache \
+    | head -n1 \
+    | { read h u t && printf '<li><a href="/%s">%s</a></li>\n' "$u" "$t"; }
+done
+
+echo '</ol>'
