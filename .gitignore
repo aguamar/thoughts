@@ -1,3 +1,9 @@
 *.html
 www-root
 docs/papers/.list
+
+# repo2html
+.clist
+.cref-bad
+.cref-errlog
+.hashcache
