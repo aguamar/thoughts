@@ -61,7 +61,7 @@ thoughts:
 %.html: %.pg docs/papers/.list
 	$(repo2html) -icontent -ftools/extfmt <$< >$@
 
-docs/papers/.list: $(articles)
+docs/papers/.list: thoughts $(articles)
 	echo "$(articles)" | tr ' ' '\n' | tools/doclist >$@
 
 pages: $(pages)
