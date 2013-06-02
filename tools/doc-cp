@@ -41,4 +41,4 @@ dest="$( sstrip "$2" )"
   && ( test -d "$dest" || mkdir -p "$dest" ) \
   && dest="$dest/index.html"
 
-cp "$1" "$dest"
+cp -v "$1" "$dest"
