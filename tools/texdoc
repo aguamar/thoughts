@@ -1,0 +1,39 @@
+#!/bin/bash
+#
+# Generates HTML page for a paper written with TeX
+#
+#  Copyright (C) 2013  Mike Gerwitz
+#
+#  This program is free software: you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation, either version 3 of the License, or
+#  (at your option) any later version.
+#
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+##
+
+path="${1%/}"
+abstract="$path/abstract.tex"
+main="$path/${path##*/}.tex"
+base="$( basename "$path" )"
+
+# grab the title from the first line of the main source file
+head -n1 "$main" | sed '1s/^% //;1a\\'
+(
+  tr '\n' ' ' \
+    | sed 's/\\[^ ]\+\({[^}]\+}\)\?//g;$a\\'
+
+  # all articles should provide PDF and DVI
+  cat <<EOF
+**Download:** [PDF][0] or [DVI][1]
+
+[0] $url_root/${path#*/}/$base.pdf
+[1] $url_root/${path#*/}/$base.dvi
+EOF
+) < "$abstract"

@@ -19,9 +19,11 @@
 pages := $(patsubst %.pg, %.html, \
 	$(shell find docs/ -name '*.pg'))
 articles := $(patsubst %.txt, %.html, \
-	$(shell find docs/ -name '*.txt'))
+	$(shell find docs/ -maxdepth 2 -name '*.txt'))
+# articles in TeX with an inappropriate var name
+texticles=$(patsubst %/, %.html, $(dir $(shell find docs/ -name 'Makefile')))
 www_root := www-root/
-url_root := http://mikegerwitz.com/
+url_root := http://mikegerwitz.com
 repo_url := https://gitorious.org/mtg-personal/thoughts
 repo_commit_url := '$(repo_url)/commit/%s'
 
@@ -37,7 +39,7 @@ repo2html := repo2html \
 		-U '$(repo_commit_url)' \
 		-E
 
-.PHONY: default clean pages articles thoughts
+.PHONY: default clean pages articles thoughts docs
 
 default: www-root
 
@@ -58,18 +60,27 @@ thoughts:
 		$<
 	./tools/mgify "$@"
 
+# "pages"
 %.html: %.pg docs/papers/.list
 	$(repo2html) -icontent -ftools/extfmt <$< >$@
+
+# TeX papers are expected to have their own makefiles as well as an abstract.tex
+%.html: coope/%.tex
+	$(MAKE) -C '$(dir $<)' pdf dvi
+	url_root='$(url_root)' ./tools/texdoc '$(dir $<)' | $(repo2html) -icontent -ftools/extfmt >$@
 
 docs/papers/.list: thoughts $(articles)
 	echo "$(articles)" | tr ' ' '\n' | tools/doclist >$@
 
 pages: $(pages)
-articles: $(articles)
+articles: $(articles) $(texticles)
 docs: pages articles
 www-root: docs thoughts
 	mkdir -p www-root/papers
-	( cd docs/ && find . -name '*.html' -exec ../tools/doc-cp {} ../www-root/{} \; )
+	( cd docs/ \
+		&& find . -maxdepth 2 -name '*.html' -exec ../tools/doc-cp {} ../www-root/{} \; \
+		&& find . -maxdepth 3 -name '*.pdf' -o -name '*.dvi' -exec cp {} ../www-root/{} \; \
+	)
 	cp -r images/ www-root/
 	cp style.css www-root/
 	ln -sf ../images www-root/papers/images
