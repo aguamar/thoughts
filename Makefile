@@ -79,7 +79,7 @@ www-root: docs thoughts
 	mkdir -p www-root/papers
 	( cd docs/ \
 		&& find . -maxdepth 2 -name '*.html' -exec ../tools/doc-cp {} ../www-root/{} \; \
-		&& find . -maxdepth 3 -name '*.pdf' -o -name '*.dvi' -exec cp {} ../www-root/{} \; \
+		&& find . -maxdepth 3 \( -name '*.pdf' -o -name '*.dvi' \) -exec cp {} ../www-root/{} \; \
 	)
 	cp -r images/ www-root/
 	cp style.css www-root/
