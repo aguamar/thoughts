@@ -69,8 +69,8 @@ thoughts:
 	$(MAKE) -C '$(dir $<)' pdf dvi
 	url_root='$(url_root)' ./tools/texdoc '$(dir $<)' | $(repo2html) -icontent -ftools/extfmt >$@
 
-docs/papers/.list: thoughts $(articles)
-	echo "$(articles)" | tr ' ' '\n' | tools/doclist >$@
+docs/papers/.list: thoughts articles
+	echo "$(articles) $(texticles)" | tr ' ' '\n' | tools/doclist >$@
 
 pages: $(pages)
 articles: $(articles) $(texticles)
