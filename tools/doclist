@@ -27,13 +27,18 @@ echo '<ol class="docs">'
 while read f; do
   [ -f "$f" ] || continue
 
+  fn="${f%.*}"
+  base="$( basename "$fn" )"
+  src=$fn.@(txt|pg|tex)
+  [ -f $src ] || src="$fn/$base".@(txt|pg|tex)
+
   # the docs/papers prefix will be stripped from the link and the link title
   # will be taken from the first line of the source file; the source file is
   # guessed by simply stripping the html suffix off of the filename and
   # globbing for any non-html suffix
   printf '<li><a href="%s">%s</a></li>\n' \
-    "${f#docs/papers/}" \
-    "$( head -n1 "${f%.html}".!(html) )"
+    "${fn#docs/papers/}" \
+    "$( head -n1 $src | sed 's/^% //' )"
 done
 
 echo '</ol>'
