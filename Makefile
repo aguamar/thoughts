@@ -86,4 +86,5 @@ www-root: docs thoughts
 	ln -sf ../images www-root/papers/images
 
 clean:
-	rm -rf [0-9]*/ www-root/
+	rm -rf www-root/
+	rm -f $(pages) $(articles) $(texticles)
