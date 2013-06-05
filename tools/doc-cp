@@ -38,7 +38,8 @@ dest="$( sstrip "$2" )"
 # the problem of naming conflicts and maintains the illusion of url rewriting
 # using only the filesystem
 [ -d "$( sstrip "$1" )" ] \
-  && ( test -d "$dest" || mkdir -p "$dest" ) \
   && dest="$dest/index.html"
 
-cp -v "$1" "$dest"
+dir="${dest%/*}"
+( test -d "$dir" || mkdir -p "$dir" ) \
+  && cp -v "$1" "$dest"
