@@ -1,4 +1,5 @@
 *.html
+rss.xml
 www-root
 docs/papers/.list
 
