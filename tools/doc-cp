@@ -1,7 +1,6 @@
 #!/bin/bash
 #
-# Copies a html file without its sorting prefix and extension, placing it in its
-# own directory and naming it as an index file if necessary
+# Copies a html file without its sorting prefix
 #
 #  Copyright (C) 2013  Mike Gerwitz
 #
@@ -22,8 +21,7 @@
 sstrip()
 {
   base="$( basename "$1" )"
-  a="${base#??-}"
-  echo "${1%/*}/${a%.*}"
+  echo "${1%/*}/${base#??-}"
 }
 
 [ -n "$2" ] || {
@@ -31,15 +29,8 @@ sstrip()
   exit 64
 }
 
+# ensure that parent directory exists
+mkdir -p "${dest%/*}"
+
 dest="$( sstrip "$2" )"
-
-# if there is a src directory matching the stripped src name, then we shall
-# place the destination file in a subdirectory of that name; this both solves
-# the problem of naming conflicts and maintains the illusion of url rewriting
-# using only the filesystem
-[ -d "$( sstrip "$1" )" ] \
-  && dest="$dest/index.html"
-
-dir="${dest%/*}"
-( test -d "$dir" || mkdir -p "$dir" ) \
-  && cp -v "$1" "$dest"
+cp -v "$1" "$dest"
