@@ -1,5 +1,5 @@
 <a href="http://mikegerwitz.com/about/inside/" id="gnuinside">
-  <img src="images/gnulinuxinside.png" alt="GNU/Linux Inside!" />
+  <img src="/images/gnu-inside.png" alt="GNU/Linux Inside!" />
 </a>
 
 <div id="copyright">

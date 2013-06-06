@@ -83,7 +83,6 @@ www-root: docs thoughts
 	)
 	cp -r images/ www-root/
 	cp style.css www-root/
-	ln -sf ../images www-root/papers/images
 
 clean:
 	rm -rf www-root/
