@@ -37,7 +37,7 @@ repo2html := repo2html \
 		-T '$(PWD)/tpl' \
 		-u '$(repo_url)' \
 		-U '$(repo_commit_url)' \
-		-E
+		-E ''
 
 .PHONY: default clean pages articles thoughts docs
 
