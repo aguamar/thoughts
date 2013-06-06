@@ -1,0 +1,58 @@
+#!/bin/bash
+#
+# Generates HTML fragment for document list
+#
+#  Copyright (C) 2013  Mike Gerwitz
+#
+#  This program is free software: you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation, either version 3 of the License, or
+#  (at your option) any later version.
+#
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+##
+
+# ensure extglob is on for !() syntax
+shopt -s extglob || exit $?
+
+echo '<ol class="docs">'
+
+# paths are expected to be on their own line
+while read f; do
+  [ -f "$f" ] || continue
+
+  fn="${f%.*}"
+  base="$( basename "$fn" )"
+  src=$fn.@(txt|pg|tex)
+  [ -f $src ] || src="$fn/$base".@(txt|pg|tex)
+
+  # the docs/papers prefix will be stripped from the link and the link title
+  # will be taken from the first line of the source file; the source file is
+  # guessed by simply stripping the html suffix off of the filename and
+  # globbing for any non-html suffix
+  printf '<li><a href="%s">%s</a></li>\n' \
+    "${fn#docs/papers/}" \
+    "$( head -n1 $src | sed 's/^% //' )"
+done
+
+echo '</ol>'
+
+# finally, include highlighted thoughts
+echo '<h3>Thoughts</h3>'
+echo '<ol class="docs">'
+
+# TODO: use hashcache abstraction via repo2html...file format could change
+# TODO: would be useful to sort on subject
+for c in docs/papers/thoughts/*; do
+  grep "^${c##*/}" .hashcache \
+    | head -n1 \
+    | { read h u t && printf '<li><a href="/%s">%s</a></li>\n' "$u" "$t"; }
+done
+
+echo '</ol>'

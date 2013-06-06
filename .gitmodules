@@ -1,0 +1,3 @@
+[submodule "docs/papers/coope"]
+	path = docs/papers/coope
+	url = git@gitorious.org:easejs/coope.git

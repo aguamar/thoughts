@@ -1,2 +1,10 @@
-index.html
+*.html
 rss.xml
+www-root
+docs/papers/.list
+
+# repo2html
+.clist
+.cref-bad
+.cref-errlog
+.hashcache

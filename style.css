@@ -1,0 +1,253 @@
+body {
+  margin: 1em 5em;
+  text-align: justify;
+  font-family: 'Liberation Sans', sans-serif;
+}
+
+body.index {
+  margin: 2em 10em 1em 10em;
+  padding-right: 300px;
+}
+
+a { color: #0066cc; }
+a:visited { color: #6666cc; }
+
+/* hanging; ids for asciidoc styling */
+header, footer,
+#header, #footer, .article #copyright {
+  margin: 0em -3em;
+  text-align: left;
+}
+
+body.index footer {
+  margin: 0em -10em;
+}
+
+h1, h2, h3, #menu,
+body.index ul.index li .day,
+strong {
+  font-family: 'URW Gothic L', 'Avant Garde', sans-serif;
+  font-weight: normal;
+}
+
+h1 { font-size: 1.8em; }
+h2 { font-size: 1.4em; }
+
+h2.date {
+  font-size: 1.1em;
+  color: #666f63;
+
+  margin-top:   -1em;
+  margin-bottom: 1.5em;
+}
+
+h1 a, h1 a:visited {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* latter for asciidoc-generated output */
+h1.title,
+#header h1 {
+  font-size: 2em;
+  margin-bottom: 0.1em;
+}
+
+h2.desc {
+  font-size: 0.8em;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: normal;
+  color: #666f63;
+
+  margin-top: 0px;
+  margin-bottom: 2em;
+}
+
+#menu {
+  text-align: center;
+  padding: 0;
+  margin: 0px -300px 4em 0px;
+}
+#menu li {
+  display: inline;
+  font-size: 1.3em;
+  letter-spacing: 0.05em;
+}
+#menu li a {
+  color: #666f63;
+  text-decoration: none;
+  border-left: 1px solid #868f83;
+  padding: 0.15em 1em;
+}
+#menu li:first-child a {
+  border-left: none;
+}
+
+#headline {
+  position: absolute;
+  text-align: center;
+  right: 10em;
+}
+#headline a {
+  display: block;
+  margin-top: 2em;
+  clear: left;
+}
+#headline a:first-child {
+  margin-top: 0;
+}
+#headline img {
+  margin-left: 2em;
+}
+
+body.index .content {
+  /* this is not ideal, but works since the sidebar content is (currently) all
+     images */
+  min-height: 750px;
+  padding-right: 1.5em;
+}
+
+body.index h3.index {
+  margin-bottom: 0.5em;
+}
+body.index ul.index {
+  text-align: left;
+  list-style: none;
+  margin: 0px;
+  padding-left: 1.5em;
+}
+body.index ul.index li {
+  margin: 0.5em 0px;
+}
+body.index ul.index li .day {
+  float: left;
+  margin-right: 0.5em;
+}
+
+p#ref-0 {
+  margin-top: 2em;
+}
+p.ref {
+  font-size: 0.9em;
+  margin: 0.25em 0em;
+}
+sup {
+  font-size: 0.6em;
+}
+p.ref:target {
+  background-color: #fce94f;
+}
+
+pre {
+  white-space: pre-wrap;
+}
+
+dt {
+  letter-spacing: 0.1em;
+}
+
+tt {
+  background-color: #eeeeec;
+  color: #000055;
+}
+
+.inline-img {
+  text-align: center;
+}
+
+.listingblock {
+  background-color: #eeeeec;
+  background-image: url('images/cross_scratches.png');
+  padding: 0.5em;
+  border: 1px solid #babdb6;
+  border-radius: 0.25em
+}
+
+.exampleblock {
+  margin-left: 2em;
+  padding-left: 1em;
+  border-left: 5px solid #eeeeec;
+}
+
+#gnuinside {
+  position: absolute;
+  display:  block;
+
+  top:    0px;
+  right:  0px;
+  width:  50px;
+  height: 50px;
+}
+
+footer, #footer, .article #copyright {
+  font-size: 0.9em;
+  margin-top: 2em;
+  clear: both;
+}
+
+footer .commit-id {
+  font-family: monospace;
+}
+
+/* to account for headline (sidebar) */
+body.index footer .bimgs,
+body.index footer hr {
+  margin-right: -300px;
+}
+
+#selflinks {
+  position: absolute;
+  top: 60px;
+  right: 0px;
+  width: 42px;
+  padding: 6px;
+}
+
+.bimgs {
+  float: right;
+  margin-left: 1em;
+}
+
+.bimgs img {
+  margin-left: 0.1em;
+}
+.bimgs img:first-child {
+  margin-left: 0em;
+}
+
+body.content .abstract {
+  font-size: 0.9em;
+}
+body.content .abstract .start {
+  font-weight: bold;
+}
+
+
+/** exclusively asciidoc-generated content styling **/
+body.article h2 {
+  position: relative;
+
+  border-bottom: 2px solid #babdb6;
+  left: -2em;
+
+  margin-right: -2em;
+}
+
+body.article h3 {
+  border-bottom: 1px solid #babdb6;
+}
+
+#author {
+  font-size: 1.1em;
+  letter-spacing: 0.1em;
+}
+
+#footer {
+  border-top: 2px solid #babdb6;
+  padding-top: 0.5em;
+}
+
+.article #copyright {
+  margin-top: 0;
+}
