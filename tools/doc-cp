@@ -30,7 +30,8 @@ sstrip()
 }
 
 # ensure that parent directory exists
-mkdir -p "${dest%/*}"
+dir="${2%/*}"
+[ -z "$dir" ] || mkdir -p "$dir"
 
 dest="$( sstrip "$2" )"
 cp -v "$1" "$dest"
