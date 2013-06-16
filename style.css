@@ -91,6 +91,7 @@ h2.desc {
 }
 #headline a {
   display: block;
+  text-decoration: none;
   margin-top: 2em;
   clear: left;
 }
@@ -131,6 +132,7 @@ p#ref-0 {
 p.ref {
   font-size: 0.9em;
   margin: 0.25em 0em;
+  text-align: left;
 }
 sup {
   font-size: 0.6em;
@@ -203,6 +205,9 @@ body.index footer hr {
   width: 42px;
   padding: 6px;
 }
+#selflinks a {
+  text-decoration: none;
+}
 
 .bimgs {
   float: right;
@@ -250,4 +255,99 @@ body.article h3 {
 
 .article #copyright {
   margin-top: 0;
+}
+
+@media screen and (max-width: 1024px) {
+  body {
+    margin: 2em !important;
+  }
+
+  #headline {
+    right: 2em;
+  }
+
+  header, footer,
+  #header, #footer, .article #copyright {
+    margin-left: 0px;
+  }
+
+  body.index footer {
+    margin: 0em;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  body {
+    margin: 1em !important;
+    padding-right: 0 !important;
+  }
+  body.index .content {
+    min-height: 0px;
+    padding-right: 0px;
+  }
+
+  header {
+    margin-right: 0px;
+  }
+
+  #menu {
+    margin-right: 0px;
+    margin-bottom: 2em;
+  }
+
+  #headline {
+    position: initial;
+  }
+
+  #headline a {
+    display: inline;
+    margin: 0.5em;
+  }
+  #headline img {
+    max-width: 100px;
+    max-height: 100px;
+    margin-left: 0;
+  }
+
+  #selflinks {
+    position: absolute;
+    top: 0px;
+    right: 50px;
+    width: auto;
+    height: 42px;
+    padding: 6px;
+  }
+
+  header, footer,
+  body.index footer .bimgs,
+  body.index footer hr,
+  #header, #footer, .article #copyright {
+    margin-right: 0px;
+  }
+
+  .bimgs {
+    float: none;
+    margin-left: 0px;
+  }
+
+  /* we're pretty low on real estate at this point */
+  blockquote {
+    margin: 1em 0px 1em 2em;
+  }
+
+  ul, ul.index {
+    padding-left: 1em !important;
+  }
+}
+
+/* when things start getting odd from 640px */
+@media screen and (max-width: 400px) {
+  #menu {
+    font-size: 0.8em;
+  }
+
+  #selflinks img {
+    max-width: 21px;
+    max-height: 21px;
+  }
 }
