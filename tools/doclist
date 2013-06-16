@@ -36,7 +36,7 @@ while read f; do
   # will be taken from the first line of the source file; the source file is
   # guessed by simply stripping the html suffix off of the filename and
   # globbing for any non-html suffix
-  printf '<li><a href="%s">%s</a></li>\n' \
+  printf '<li><a href="/papers/%s">%s</a></li>\n' \
     "${fn#docs/papers/}" \
     "$( head -n1 $src | sed 's/^% //' )"
 done
