@@ -32,7 +32,7 @@ repo2html := repo2html \
 		-t 'Mike Gerwitz' \
 		-d 'Free Software Hacker' \
 		-c 'Mike Gerwitz' \
-		-l 'Verbatim redistribution of this document in its entirety is permitted provided that this copyright notice is preserved.' \
+		-l 'This content is licensed under the Creative Commons Attribution-ShareAlike 3.0 Unported License.' \
 		-C '/style.css' \
 		-T '$(PWD)/tpl' \
 		-u '$(repo_url)' \

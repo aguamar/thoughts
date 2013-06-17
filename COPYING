@@ -1,6 +1,18 @@
-Verbatim distribution of any content, in its entirety, is permitted so long as
-its copyright notice is preserved. The license of any specific content
-supersedes this notice.
+Creative content, such as thoughts and writings, are licensed under the
+Creative Commons Attribution-ShareAlike license (CC BY-SA); a copy of this
+license is contained within the file COPYING.CCBYSA. Scripts and other
+software are licensed under the GNU General Public License version 3 or, at
+your option, any later version; a copy of this license is located within the
+file COPYING.GPLv3.
 
-If the content is distributed in its source form (which does not contain the
-copyright notice), this notice must accompany it.
+The license on any document supersedes this notice. Furthermore, the
+existence of a COPYING file in any directory shall supersede this notice for
+any documents within that directory and all subdirectories.
+
+The license for the commit messages---also known in this repository as
+``thoughts''---shall be considered, for the purposes of licensing, creative
+content; the license may be found under the COPYING tag, which may be viewed
+with the following command, so long as you have acquired the repository
+itself (as opposed to an archive of the source tree):
+
+  $ git cat-file blob COPYING
