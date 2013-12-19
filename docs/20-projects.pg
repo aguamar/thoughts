@@ -31,6 +31,10 @@ papers) are released under licenses that permit free distribution and, in
 certain cases, modification. Direct links to various commits may be found via
 the commit hashes within the footer of most pages.
 
+I am also working with Amadeusz Sławiński to help bring the development of [GNU
+screen][6] back to life by cleaning up the code, bringing it up to date, dumping
+some cruft, and adding exciting new features.
+
 
 [0] http://gitorious.org/~mikegerwitz
 [1] http://github.com/mikegerwitz
@@ -39,3 +43,4 @@ the commit hashes within the footer of most pages.
 [4] https://gitorious.org/git-supp or https://github.com/mikegerwitz/git-supp
 [5] https://gitorious.org/mtg-personal/thoughts or
 https://github.com/mikegerwitz/thoughts
+[6] https://github.com/amade/screen/tree/devel
