@@ -22,14 +22,16 @@ unless you take the necessary precautions.
 [img:gnu-inside.png:GNU/Linux Inside!]
 
 Feel free to [download the source file (GIMP)][3], released under the [Creative
-Commons Attribution-ShareAlike 3.0 Unported License][4]. Below is the code with
-which you may embed this on your own website.
+Commons Attribution-ShareAlike 2.0 Unported License][4]. It incorporates [``A
+Bold GNU Head''][5] by Aurelio A. Heckert, which appears at the top of this
+page. Below is the code with which you may embed this on your own website.
 
 [src:docs/about/gnu-inside-ex:html]
 
 
-[0] http://www.gnu.org/philosophy/
-[1] http://www.gnu.org/
+[0] https://www.gnu.org/philosophy/
+[1] https://www.gnu.org/
 [2] http://www.gnu.org/gnu/linux-and-gnu.html
-[3] http://mikegerwitz.com/images/gnu-inside.xcf
-[4] http://creativecommons.org/licenses/by-sa/3.0/
+[3] https://www.gnu.org/graphics/gnu-inside.html
+[4] https://creativecommons.org/licenses/by-sa/2.0/
+[5] https://www.gnu.org/graphics/heckert_gnu.html
