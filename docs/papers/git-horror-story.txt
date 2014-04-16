@@ -26,9 +26,9 @@ password. You rub your eyes and pull the changes.
 
 Still squinting, you glance at the flood of changes presented to you. Your
 child is screaming in the background, not amused by your partner's feeble
-attempts to console him/her. `git log --pretty=short`...everything looks good
---- just a bunch of commits from you and your colleague that were merged in. You
-run the test suite --- everything passes. Looks like you're ready to go. `git
+attempts to console him/her. `git log --pretty=short`...everything looks
+good---just a bunch of commits from you and your colleague that were merged in.
+You run the test suite---everything passes. Looks like you're ready to go. `git
 tag -s 1.2.3 -m 'Various bugfixes, including critical CVE-123' && git push
 --tags`. After struggling to enter the password to your private key, slowly
 standing up from your chair as you type, you run off to help with the baby
@@ -42,17 +42,17 @@ angry call from your colleague. It seems that one of your most prominent users
 has had a massive security breach. After researching the problem, your colleague
 found that, according to the history, _the breach exploited a back door that you
 created!_ What? You would never do such a thing. To make matters worse, +1.2.3+
-was signed off by you, using your GPG key --- you affirmed that this tag was
+was signed off by you, using your GPG key---you affirmed that this tag was
 good and ready to go. ``3-b-c-4-2-b, asshole'', scorns your colleague. ``Thanks
 a lot.''
 
-No --- that doesn't make sense. You quickly check the history. `git log --patch
+No---that doesn't make sense. You quickly check the history. `git log --patch
 3bc42b`. ``Added missing docblocks for X, Y and Z.'' You form a puzzled
 expression, raising your hands from the keyboard slightly before tapping the
 space bar a few times with few expectations. Sure enough, in with a few minor
 docblock changes, there was one very inconspicuous line change that added the
 back door to the authentication system. The commit message is fairly clear and
-does not raise any red flags --- why would you check it?  Furthermore, the
+does not raise any red flags---why would you check it?  Furthermore, the
 author of the commit _was indeed you!_
 
 Thoughts race through your mind. How could this have happened? That commit has
@@ -69,7 +69,7 @@ the one being blamed.
 [[trust]]
 Who Do You Trust?
 -----------------
-Theorize all you want --- it's possible that you may never fully understand what
+Theorize all you want---it's possible that you may never fully understand what
 resulted in the compromise of your repository. The above story is purely
 hypothetical, but entirely within the realm of possibility. How can you rest
 assured that your repository is safe for not only those who would reference or
@@ -88,19 +88,19 @@ because someone else hands you a repository for your project doesn't mean that
 you should actually use it.
 
 The question is not ``Who _can_ you trust?''; the question is ``Who _do_ you
-trust?'', or rather --- who _are_ you trusting with your repository, right now,
+trust?'', or rather---who _are_ you trusting with your repository, right now,
 even if you do not realize it? For most projects, including the story above,
 there are a number of individuals or organizations that you may have
 inadvertently placed your trust in without fully considering the ramifications
 of such a decision:
 
 [[trust-host]] Git Host::
-    Git hosting providers are probably the most easily overlooked trustees ---
-    providers like Gitorious, GitHub, Bitbucket, SourceForge, Google Code, etc.
-    Each provides hosting for your repository and ``secures'' it by allowing only
-    you, or other authorized users, to push to it, often with the use of SSH
-    keys tied to an account. By using a host as the primary holder of your
-    repository --- the repository from which most clone and push to --- you are
+    Git hosting providers are probably the most easily overlooked
+    trustees---providers like Gitorious, GitHub, Bitbucket, SourceForge, Google
+    Code, etc.  Each provides hosting for your repository and ``secures'' it by
+    allowing only you, or other authorized users, to push to it, often with the
+    use of SSH keys tied to an account. By using a host as the primary holder of
+    your repository---the repository from which most clone and push to---you are
     entrusting them with the entirety of your project; you are stating, ``Yes, I
     trust that my source code is safe with you and will not be tampered with''.
     This is a dangerous assumption. Do you trust that your host properly secures
@@ -144,20 +144,20 @@ Your Own Repository::
     http://www.youtube.com/watch?v=4XpnKHJAok8[keeps a secured repository on his
     personal computer, inaccessible by any external means] to ensure that he has
     a repository he can fully trust. Most developers simply keep a local copy on
-    whatever PC they happen to be hacking on and pay no mind to security ---
-    their repository is likely hosted elsewhere as well, after all; Git is
+    whatever PC they happen to be hacking on and pay no mind to security---their
+    repository is likely hosted elsewhere as well, after all; Git is
     distributed. This is, however, a very serious matter. +
     +
     You likely use your PC for more than just hacking. Most notably, you likely
     use your PC to browse the Internet and download software. Software is buggy.
     Buggy software has exploits and exploits tend to get, well, exploited. Not
     every developer has a strong understanding of the best security practices
-    for their operating system (if you do, great!). And no --- simply using
+    for their operating system (if you do, great!). And no---simply using
     GNU/Linux or any other *NIX variant does not make you immune from every
     potential threat.
 
 To dive into each of these a bit more deeply, let us consider one of the world's
-largest free software projects --- the kernel Linux --- and how its original
+largest free software projects---the kernel Linux---and how its original
 creator Linus Torvalds handles issues of trust. During
 http://www.youtube.com/watch?v=4XpnKHJAok8[a talk he presented at Google in
 2007], he describes a network of trust he created between himself and a number
@@ -195,10 +195,10 @@ given commit, as pointed to by the given tag, is trusted.
 Well, that is helpful, but that doesn't help to verify any commits made _after_
 the tag (until the next tag comes around that includes that commit as an
 ancestor of the new tag). Nor does it necessarily guarantee the integrity of all
-past commits --- it only states that, _to the best of Linus' knowledge_, this
+past commits---it only states that, _to the best of Linus' knowledge_, this
 tree is trusted. Notice how the hypothetical you in our hypothetical story also
 signed the tag with his/her private key. Unfortunately, he/she fell prey to
-something that is all too common --- human error. He/she trusted that his/her
+something that is all too common---human error. He/she trusted that his/her
 ``trusted'' colleague could actually be fully trusted. Wouldn't it be nice if we
 could remove some of that human error from the equation?
 
@@ -221,7 +221,7 @@ frequently accepts patches and merge requests from many users?
 
 Previously, only tags could be signed using GPG. Fortunately,
 http://git.kernel.org/?p=git/git.git;a=blob_plain;f=Documentation/RelNotes/1.7.9.txt;hb=HEAD[
-Git v1.7.9 introduced the ability to GPG-sign individual commits] --- a feature
+Git v1.7.9 introduced the ability to GPG-sign individual commits]---a feature
 I have been long awaiting. Consider what may have happened to the story at the
 beginning of this article if you signed each of your commits like so:
 
@@ -233,7 +233,7 @@ $ git commit -S -m 'Fixed security vulnerability CVE-123'
 
 Notice the `-S` flag above, instructing Git to sign the commit using your
 GPG key (please note the difference between `-s` and `-S`). If you followed this
-practice for each of your commits --- with no exceptions --- then you (or anyone
+practice for each of your commits---with no exceptions---then you (or anyone
 else, for that matter) could say with relative certainty that the commit was
 indeed authored by yourself. In the case of our story, you could then defend
 yourself, stating that if the backdoor commit truly were yours, it would have
@@ -308,10 +308,10 @@ Date:   Fri Apr 20 23:59:01 2012 -0400
     Test commit of foo
 ----
 
-There is an important distinction to be made here --- the commit author and the
+There is an important distinction to be made here---the commit author and the
 signature attached to the commit _may represent two different people_. In other
 words: the commit signature is similar in concept to the `-s` option, which adds
-a +Signed-off+ line to the commit --- it verifies that you have signed off on
+a +Signed-off+ line to the commit---it verifies that you have signed off on
 the commit, but does not necessarily imply that you authored it. To demonstrate
 this, consider that we have received a patch from ``John Doe'' that we wish to
 apply. The policy for our repository is that every commit must be signed by a
@@ -342,9 +342,9 @@ Date:   Sat Apr 21 00:14:38 2012 -0400
 # [...]
 ----
 
-This then begs the questions --- what is to be done about those who decide to
+This then begs the questions---what is to be done about those who decide to
 sign their commit with their own GPG key? There are a couple options here.
-First, consider the issue from a maintainer's perspective --- do we necessary
+First, consider the issue from a maintainer's perspective---do we necessary
 care about the identity of a 3rd party contributor, so long as the provided code
 is acceptable? That depends. From a legal standpoint, we may, but not every user
 has a GPG key. Given that, someone creating a key for the sole purpose of
@@ -424,7 +424,7 @@ such a case, we have a few options:
    before performing the merge (without signing each individual commit) would
    prevent this problem.
 ** This also does not fully prevent the situation mentioned in the hypothetical
-   story at the beginning of this article --- others can still commit with you
+   story at the beginning of this article---others can still commit with you
    as the author, but the commit would not have been signed.
 ** Preserves the SHA-1 hashes of each individual commit.
 
@@ -523,7 +523,7 @@ Date:   Sat Apr 21 17:35:20 2012 -0400
 ----
 
 Notice how the merge commit contains the signature, but the two commits involved
-in the merge (`031f6ee` and `ce77088`) do not. Herein lies the problem --- what
+in the merge (`031f6ee` and `ce77088`) do not. Herein lies the problem---what
 if commit `031f6ee` contained the backdoor mentioned in the story at the
 beginning of the article? This commit is supposedly authored by you, but because
 it lacks a signature, it could actually be authored by anyone.  Furthermore, if
@@ -578,7 +578,7 @@ $ git rebase -i master
 #             ^ interactive rebase (alternatively: long option --interactive)
 ----
 
-First, we create a new branch off of +bar+ --- +bar-audit+ --- to perform the
+First, we create a new branch off of +bar+---+bar-audit+---to perform the
 rebase on (see +bar+ branch created in demonstration of xref:merge-2[option
 #2]). Then, in order to step through each commit that would be merged into
 +master+, we perform a rebase using +master+ as the upstream branch. This will
@@ -687,7 +687,7 @@ subject to human error, peer scrutiny (``just let it through!'') and is
 unnecessarily time-consuming.  Fortunately, this is one of those things that you
 can script, sit back and enjoy.
 
-Let us first focus on the simpler of automation tasks --- checking to ensure
+Let us first focus on the simpler of automation tasks---checking to ensure
 that _every_ commit is both signed and trusted (within our web of trust).  Such
 an implementation would also satisfy xref:merge-3[option #3] in regards to
 merging. Well, perhaps not every commit will be considered. Chances are, you
@@ -701,7 +701,7 @@ Commit History In a Nutshell
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 The SHA-1 hashes of each commit in Git are created using the delta _and_ header
 information for each commit. This header information includes the commit's
-_parent_, whose header contains its parent --- so on and so fourth. In addition,
+_parent_, whose header contains its parent---so on and so fourth. In addition,
 Git depends on the entire history of the repository leading up to a given commit
 to construct the requested revision. Consequently, this means that the history
 cannot be altered without someone noticing (well, this is not entirely true;
@@ -733,7 +733,7 @@ We now have a problem; when Git encounters commit +B+ (remember, Git must build
 notice that it no longer matches the hash of its parent. The attacker is unable
 to change the expected hash in commit +B+, because the header is used to
 generate the SHA-1 hash for the commit, meaning +B+ would then have a different
-SHA-1 hash (technically speaking, it would not longer be +B+ --- it would be an
+SHA-1 hash (technically speaking, it would not longer be +B+---it would be an
 entirely different commit; we retain the identifier here only for demonstration
 purposes). That would then invalidate any children of +B+, so on and so fourth.
 Therefore, in order to rewrite the history for a single commit, _the entire
@@ -742,7 +742,7 @@ Should that be done, the SHA-1 hash of +H+ would also need to change. Otherwise,
 +H+'s history would be invalid and Git would immediately throw an error upon
 attempting a checkout.
 
-This has a very important consequence --- given any commit, we can rest
+This has a very important consequence---given any commit, we can rest
 assured that, if it exists in the repository, Git will _always_ reconstruct that
 commit exactly as it was created (including all the history leading up to that
 commit _when_ it was created), or it will not do so at all. Indeed, as Linus
@@ -759,7 +759,7 @@ for a given author wouldn't catch such a thing anyway.
 
 That said, it is important to understand that the integrity of your repository
 guaranteed only if a https://en.wikipedia.org/wiki/Hash_collision[hash
-collision] cannot be created --- that is, if an attacker were able to create the
+collision] cannot be created---that is, if an attacker were able to create the
 same SHA-1 hash with _different_ data, then the child commit(s) would still be
 valid and the repository would have been successfully compromised.
 http://www.schneier.com/blog/archives/2005/02/cryptanalysis_o.html[Vulnerabilities
@@ -802,7 +802,7 @@ for us; this reduces our implementation to a simple shell script. However, the
 output we've been dealing with is not the most convenient to parse. It would be
 nice if we could get commit and signature information on a single line per
 commit. This can be accomplished with `--pretty`, but we have an additional
-problem --- at the time of writing (in Git v1.7.10), the GPG `--pretty` options
+problem---at the time of writing (in Git v1.7.10), the GPG `--pretty` options
 are undocumented.
 
 A quick look at
@@ -810,12 +810,12 @@ https://github.com/gitster/git/blob/f9d995d5dd39c942c06829e45f195eeaa99936e1/pre
 +format_commit_one()+ in +pretty.c+] yields a +'G'+ placeholder that has three
 different formats:
 
-- *+%GG+* --- GPG output (what we see in `git log --show-signature`)
-- *+%G?+* --- Outputs "G" for a good
+- *+%GG+*---GPG output (what we see in `git log --show-signature`)
+- *+%G?+*---Outputs "G" for a good
   signature and "B" for a bad signature; otherwise, an empty string
   (https://github.com/gitster/git/blob/f9d995d5dd39c942c06829e45f195eeaa99936e1/pretty.c#L808[see
   mapping in +signature_check+ struct])
-- *+%GS+* --- The name of the signer
+- *+%GS+*---The name of the signer
 
 We are interested in using the most concise and minimal representation ---
 +%G?+. Because this placeholder simply matches text on the GPG output, and the
@@ -905,7 +905,7 @@ https://github.com/gitster/git/blob/f9d995d5dd39c942c06829e45f195eeaa99936e1/pre
 +struct signature_check+, will blissfully ignore the warning and match only
 +``Good signature from''+, yielding ``G''. A patch to provide a separate token
 for untrusted keys is simple, but for the time being, we will explore two
-separate implementations --- one that will parse the simple one-line output that
+separate implementations---one that will parse the simple one-line output that
 is ignorant of trust and a mention of a less elegant implementation that parses
 the GPG output.  footnote:[Should the patch be accepted, this article will be updated to
 use the new token.]
@@ -917,7 +917,7 @@ Signature Check Script, Disregarding Trust
 As mentioned above, due to limitations of the current +%G?+ implementation, we
 cannot determine from the single-line output whether or not the given signature
 is actually trusted.  This isn't necessarily a problem. Consider what will
-likely be a common use case for this script --- to be run by a continuous
+likely be a common use case for this script---to be run by a continuous
 integration (CI) system.  In order to let the CI system know what signatures
 should be trusted, you will likely provide it with a set of keys for known
 committers, which eliminates the need for a web of trust (the act of placing the
@@ -970,7 +970,7 @@ days ago}''+).  Using the `--pretty` option to `git log`, we output the GPG
 signature result with +%G?+, in addition to some useful information we will want
 to see about any commits that do not pass the test.  We can then filter out all
 commits that have been signed with a known key by removing all lines that end in
-``G'' --- the output from +%G?+ indicating a good signature.
+``G''---the output from +%G?+ indicating a good signature.
 
 Let's see it in action (assuming the script has been saved as `signchk`):
 
@@ -1001,7 +1001,7 @@ $ echo $?
 ----
 
 Be careful when running this script directly from the repository, especially
-with CI systems --- you must either place a copy of the script outside of the
+with CI systems---you must either place a copy of the script outside of the
 repository or run the script from a trusted point in history.  For example, if
 your CI system were to simply pull from the repository and then run the script,
 an attacker need only modify the script to circumvent this check entirely.
@@ -1018,10 +1018,10 @@ the public keys directly trusted by the CI system, you could then automatically
 determine whether or not a commit can be trusted even if the key was not
 explicitly placed on the server.
 
-To accomplish this task, we will split the script up into two distinct portions
---- retrieving/updating all keys within the given range, followed by the actual
-signature verification.  Let's start with the key gathering portion, which is
-actually a trivial task:
+To accomplish this task, we will split the script up into two distinct
+portions---retrieving/updating all keys within the given range, followed by the
+actual signature verification.  Let's start with the key gathering portion,
+which is actually a trivial task:
 
 [source,shell]
 ----
@@ -1036,8 +1036,8 @@ $ git log --show-signature \
 The above string of commands simply uses `grep` to pull the key ids out of `git
 log` output (using `--show-signature` to produce GPG output), and then requests
 only the unique keys from the given keyserver. In the case of the repository
-we've been using throughout this article, there is only a single signature ---
-my own.  In a larger repository, all unique keys will be listed.  Note that the
+we've been using throughout this article, there is only a single signature---my
+own.  In a larger repository, all unique keys will be listed.  Note that the
 above example does not specify any range of commits; you are free to integrate
 it into the +signchk+ script to use the same range, but it isn't strictly
 necessary (it may provide a slight performance benefit, depending on the number
@@ -1082,7 +1082,7 @@ _preceeds_ the commit line itself. Let's consider our objective:
   otherwise untrusted.
 
 Our xref:script-notrust[previous script] performs #1 just fine, so we need only
-augment it to support #2. In essence --- we wish to convert lines ending in
+augment it to support #2. In essence---we wish to convert lines ending in
 ``G'' to something else if the GPG output _preceeding_ that line indicates that
 the signature is untrusted.
 
@@ -1157,7 +1157,7 @@ verify the signature of +c+. This assertion is denoted by the function `\(g\)`
 
 The only difference between this script and the script that checks for a
 signature on each individual commit is that *this script will only check for
-commits on a particular branch* (e.g. +master+).  This is important --- if we
+commits on a particular branch* (e.g. +master+).  This is important---if we
 commit directly onto master, we want to ensure that the commit is signed (since
 there will be no merge).  If we merge _into_ master, a merge commit will be
 created, which we may sign and ignore all commits introduced by the merge.  If
@@ -1226,7 +1226,7 @@ $ git log --oneline --graph
 
 From the above graph, we can see that we are interested in signatures on only
 two of the commits: +3cbc6d2+, which was created directly on +master+, and
-+9307dc5+ --- the merge commit.  The other two commits (+996cf32+ and +cfe7389+)
++9307dc5+---the merge commit.  The other two commits (+996cf32+ and +cfe7389+)
 need not be signed because the signing of the merge commit asserts their
 validity (assuming that the author of the merge was vigilant).  But how do we
 ignore those commits?
