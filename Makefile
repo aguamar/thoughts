@@ -34,6 +34,7 @@ repo2html := repo2html \
 		-c 'Mike Gerwitz' \
 		-l 'This content is licensed under the Creative Commons Attribution-ShareAlike 3.0 Unported License.' \
 		-C '/style.css' \
+		-f 'tools/thoughts-fmt' \
 		-T '$(PWD)/tpl' \
 		-u '$(repo_url)' \
 		-U '$(repo_commit_url)' \

@@ -1,0 +1,54 @@
+#!/bin/bash
+# Formatter for `thoughts'
+#
+#  Copyright (C) 2014  Mike Gerwitz
+#
+#  This program is free software: you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation, either version 3 of the License, or
+#  (at your option) any later version.
+#
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+# This will process commits after a cut-off date differently than older
+# commits.
+##
+
+fmt-old()
+{
+  exec "$msgfmt_default" "$@"
+}
+
+
+while getopts nP opt; do
+  case "$opt" in
+    n) ;;
+    P) ;;
+  esac
+done
+
+shift "$((OPTIND - 1))"
+
+
+# cutoff date for switch to markdown syntax
+declare -ir md_cutoff=1417367389
+
+declare -r commit="$1"
+
+# we don't have a way (yet) to determine if this is new
+test -n "$commit" -a -n "$timestamp" \
+  || fmt-old
+
+# if we haven't yet hit our cut-off, use old system
+test "$timestamp" -gt "$md_cutoff" \
+  || fmt-old
+
+# it's just that simple.
+exec pandoc -fmarkdown -thtml
+
