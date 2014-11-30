@@ -22,9 +22,10 @@
 
 fmt-old()
 {
-  exec "$msgfmt_default" "$@"
+  exec "$msgfmt_default" "${all_args[@]}"
 }
 
+declare -a all_args="$@"
 
 while getopts nP opt; do
   case "$opt" in
