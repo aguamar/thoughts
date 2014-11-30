@@ -22,9 +22,10 @@
 
 fmt-old()
 {
-  exec "$msgfmt_default" "$@"
+  exec "$msgfmt_default" "${all_args[@]}"
 }
 
+declare -a all_args="$@"
 
 while getopts nP opt; do
   case "$opt" in
@@ -50,5 +51,5 @@ test "$timestamp" -gt "$md_cutoff" \
   || fmt-old
 
 # it's just that simple.
-exec pandoc -fmarkdown -thtml
+exec pandoc -S -fmarkdown -thtml5
 
