@@ -342,7 +342,7 @@ Date:   Sat Apr 21 00:14:38 2012 -0400
 # [...]
 ----
 
-This then begs the questions---what is to be done about those who decide to
+This then raises the question---what is to be done about those who decide to
 sign their commit with their own GPG key? There are a couple options here.
 First, consider the issue from a maintainer's perspective---do we necessary
 care about the identity of a 3rd party contributor, so long as the provided code
