@@ -1,4 +1,4 @@
-About
+### About
 
 Mike Gerwitz is a [free (as in freedom) software][0] [hacker][1] and activist
 with an insatiable lust for the command line of a [GNU][2] operating system.
