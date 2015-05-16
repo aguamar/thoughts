@@ -8,6 +8,8 @@ and various other fields. He also closely follows the work of the [Free Software
 Foundation][0], [Electronic Frontier Foundation][3] and other entities devoted
 to free information and free society.
 
+Mike is the maintainer of [GNU ease.js][easejs].
+
 Outside of his field, Mike enjoys time with his family---including his fiancé
 and son---whom keep him busy and probably contribute to the retention of his
 sanity. Mike also has a fascination with a wide range of sciences that he
@@ -35,3 +37,4 @@ distribution and, in some cases, modification.)
 [1] http://www.gnu.org/philosophy/words-to-avoid.html#Hacker
 [2] http://gnu.org/
 [3] http://eff.org/
+[easejs]: https://gnu.org/software/easejs
