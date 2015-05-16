@@ -1,9 +1,8 @@
 ### Free Software Projects
 
-Listed below are my notable public projects. I have various other scripts and
-personal playthings that may be found on both [Gitorious][0] and [GitHub][1]
-that are not worth listing here, but may be of interest to certain
-readers/hackers.
+Listed below are my notable public projects. I have various other scripts
+and personal playthings that may be found on [GitLab][0] that are not worth
+listing here, but may be of interest to certain readers/hackers.
 
 While writings are certainly projects in their own right, they are listed
 separately in the ``Papers'' section of this website.
@@ -36,11 +35,9 @@ screen][6] back to life by cleaning up the code, bringing it up to date, dumping
 some cruft, and adding exciting new features.
 
 
-[0] http://gitorious.org/~mikegerwitz
-[1] http://github.com/mikegerwitz
-[2] http://www.gnu.org/software/easejs
-[3] https://gitorious.org/repo2html or https://github.com/mikegerwitz/repo2html
-[4] https://gitorious.org/git-supp or https://github.com/mikegerwitz/git-supp
-[5] https://gitorious.org/mtg-personal/thoughts or
-https://github.com/mikegerwitz/thoughts
+[0] https://gitlab.com/u/mikegerwitz/
+[2] https://www.gnu.org/software/easejs
+[3] https://gitorious.org/repo2html
+[4] https://gitlab.com/mikegerwitz/git-supp
+[5] https://gitlab.com/mikegerwitz/thoughts
 [6] https://github.com/amade/screen/tree/devel
