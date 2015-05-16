@@ -51,5 +51,4 @@ test "$timestamp" -gt "$md_cutoff" \
   || fmt-old
 
 # it's just that simple.
-exec pandoc -S -fmarkdown -thtml5
-
+exec "$(dirname "$0" )"/mdfmt
