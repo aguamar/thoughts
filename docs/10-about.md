@@ -1,4 +1,4 @@
-About
+### About
 
 Mike Gerwitz is a [free (as in freedom) software][0] [hacker][1] and activist
 with an insatiable lust for the command line of a [GNU][2] operating system.
@@ -7,6 +7,8 @@ free time is now spent researching machine architectures, compilers, mathematics
 and various other fields. He also closely follows the work of the [Free Software
 Foundation][0], [Electronic Frontier Foundation][3] and other entities devoted
 to free information and free society.
+
+Mike is the maintainer of [GNU ease.js][easejs].
 
 Outside of his field, Mike enjoys time with his family---including his fiancé
 and son---whom keep him busy and probably contribute to the retention of his
@@ -31,7 +33,8 @@ hash links in the footer of various pages and the content is licensed for free
 distribution and, in some cases, modification.)
 
 
-[0] http://www.gnu.org/philosophy/
-[1] http://www.gnu.org/philosophy/words-to-avoid.html#Hacker
-[2] http://gnu.org/
-[3] http://eff.org/
+[0]: http://www.gnu.org/philosophy/
+[1]: http://www.gnu.org/philosophy/words-to-avoid.html#Hacker
+[2]: http://gnu.org/
+[3]: http://eff.org/
+[easejs]: https://gnu.org/software/easejs

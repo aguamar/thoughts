@@ -1,7 +1,7 @@
 #!/bin/bash
 # Formatter for `thoughts'
 #
-#  Copyright (C) 2014  Mike Gerwitz
+#  Copyright (C) 2014, 2015  Mike Gerwitz
 #
 #  This program is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -51,5 +51,4 @@ test "$timestamp" -gt "$md_cutoff" \
   || fmt-old
 
 # it's just that simple.
-exec pandoc -S -fmarkdown -thtml5
-
+exec "$(dirname "$0" )"/mdfmt

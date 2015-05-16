@@ -17,7 +17,9 @@
 # #
 
 pages := $(patsubst %.pg, %.html, \
-	$(shell find docs/ -name '*.pg'))
+         $(shell find docs/ -name '*.pg'))
+pages_md := $(patsubst %.md, %.html, \
+            $(shell find docs/ -name '*.md'))
 articles := $(patsubst %.txt, %.html, \
 	$(shell find docs/ -maxdepth 2 -name '*.txt'))
 # articles in TeX with an inappropriate var name
@@ -64,6 +66,8 @@ thoughts:
 # "pages"
 %.html: %.pg docs/papers/.list
 	$(repo2html) -icontent -ftools/extfmt <$< >$@
+%.html: %.md
+	$(repo2html) -icontent -ftools/mdfmt <$< >$@
 
 # TeX papers are expected to have their own makefiles as well as an abstract.tex
 %.html: coope/%.tex
@@ -73,7 +77,7 @@ thoughts:
 docs/papers/.list: thoughts articles
 	echo "$(articles) $(texticles)" | tr ' ' '\n' | tools/doclist >$@
 
-pages: $(pages)
+pages: $(pages) $(pages_md)
 articles: $(articles) $(texticles)
 docs: pages articles
 www-root: docs thoughts
@@ -82,8 +86,10 @@ www-root: docs thoughts
 		&& find . -maxdepth 2 -name '*.html' -exec ../tools/doc-cp {} ../www-root/{} \; \
 		&& find . -maxdepth 3 \( -name '*.pdf' -o -name '*.dvi' \) -exec cp {} ../www-root/{} \; \
 	)
-	cp -r images/ www-root/
-	cp style.css www-root/
+	cp -rv images/ www-root/
+	cp -v style.css www-root/
+	mkdir -p www-root/docs
+	cp -rv docs/gh/ www-root/docs/
 
 clean:
 	rm -rf www-root/
