@@ -35,9 +35,9 @@ screen][6] back to life by cleaning up the code, bringing it up to date, dumping
 some cruft, and adding exciting new features.
 
 
-[0] https://gitlab.com/u/mikegerwitz/
-[2] https://www.gnu.org/software/easejs
-[3] https://gitorious.org/repo2html
-[4] https://gitlab.com/mikegerwitz/git-supp
-[5] https://gitlab.com/mikegerwitz/thoughts
-[6] https://github.com/amade/screen/tree/devel
+[0]: https://gitlab.com/u/mikegerwitz/
+[2]: https://www.gnu.org/software/easejs
+[3]: https://gitorious.org/repo2html
+[4]: https://gitlab.com/mikegerwitz/git-supp
+[5]: https://gitlab.com/mikegerwitz/thoughts
+[6]: https://github.com/amade/screen/tree/devel

@@ -33,8 +33,8 @@ hash links in the footer of various pages and the content is licensed for free
 distribution and, in some cases, modification.)
 
 
-[0] http://www.gnu.org/philosophy/
-[1] http://www.gnu.org/philosophy/words-to-avoid.html#Hacker
-[2] http://gnu.org/
-[3] http://eff.org/
+[0]: http://www.gnu.org/philosophy/
+[1]: http://www.gnu.org/philosophy/words-to-avoid.html#Hacker
+[2]: http://gnu.org/
+[3]: http://eff.org/
 [easejs]: https://gnu.org/software/easejs
