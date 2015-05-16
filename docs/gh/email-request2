@@ -1,0 +1,61 @@
+Date: Thu, 3 Apr 2014 20:47:00 -0400
+From: Mike Gerwitz <mikegerwitz@gnu.org>
+To: "[Name Removed] (GitHub Staff)" <support@github.com>
+Subject: Re: Free GitHub's JavaScript
+
+Hey [Name Removed]; thank you for your reply.
+
+On Thu, Apr 03, 2014 at 04:45:02PM -0700, [Name Removed] (GitHub Staff) wrote:
+> Thanks for getting in touch with us here. Some of our internal projects
+> are specific to running GitHub, and as such will probably remain closed.
+
+Unfortunately, the code that I am referring to---the code that is served to
+the client---is not internal; it runs on the user's web browser, just as any
+other software. By visiting GitHub's website, users' web browsers download
+and execute proprietary JavaScript.
+
+And much of this JavaScript performs fairly trivial tasks---tasks that could
+conventionally be done without JavaScript:
+
+  * Updating account/profile data;
+  * Sending pull requests;
+  * Forking, staring, and watching repositories;
+  * Changing repository/organization settings;
+  - Creating wiki pages;
+  - The issue tracking system; and more.
+
+I would consider the starred ones above to be the most essential features of
+the website---it may be lacking, since I use GitHub with JavaScript
+disabled---that users should be permitted to do without being required to
+surrender their freedoms, especially on a website that should understand at
+a deep level the fundamental need for those freedoms (even if GitHub's
+philosophy does not coincide).
+
+
+So my question is this: would GitHub consider:
+
+  (a) Permitting those functions to work without JavaScript enabled; and
+  (b) Releasing the JavaScript---including any libraries used to perform
+      those tasks---under a free software license of GitHub's choice?
+
+These features would be a great start.
+
+> We do make an effort to open source projects that we create that we think
+> would be beneficial to the community, some of which is JavaScript.
+
+And while I and many others do certainly appreciate that---some good free
+software projects have come out of GitHub---these are things that are
+*essential* to the community. Using GitHub's website with JavaScript enabled
+is no different than using any other proprietary software and is therefore
+very difficult for free software users to take full advantage of.
+
+The free software community and myself would appreciate a strong
+consideration on this topic.
+
+Thank you,
+
+-- 
+Mike Gerwitz
+Free Software Hacker | GNU Maintainer
+http://mikegerwitz.com
+FSF Member #5804 | GPG Key ID: 0x8EE30EAB

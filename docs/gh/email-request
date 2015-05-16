@@ -1,0 +1,57 @@
+Date: Wed, 2 Apr 2014 12:30:09 -0400
+From: Mike Gerwitz <mikegerwitz@gnu.org>
+To: tom@github.com, chris@github.com, pj@github.com
+Cc: support@github.com
+Subject: Free GitHub's JavaScript
+
+Hello everyone,
+
+I'm part of the FSF's Free JavaScript Campaign[1], but I would like to be
+clear that I'm contacting you personally, not on their behalf. While the
+current focus of the campaign is reddit (for which I'm completing an audit),
+I would be pleased if we could work with GitHub as well in the future.
+
+GitHub is an extremely popular platform for free software developers and
+harbors a strong community that is very beneficial for free software
+collaboration and development. While GitHub does provide a flexible API, it
+is unfortunate that GitHub's website serves proprietary JavaScript, and many
+features do not work unless JavaScript is enabled.
+
+GitHub's competitive advantage is their service. Liberating the JavaScript
+served to the client will not impact that service---indeed, it would make it
+more available to free software users and it would demonstrate the power of
+and commitment to free software on GitHub's part; it would set an excellent
+example. If GitHub made that JavaScript available in a repository on GitHub,
+it would also open the door for contributors to improve upon the website;
+I'm sure they have many great ideas.
+
+Tom, you posted this back in 2011:[2]
+
+  Ok, then what shouldn't I open source? That's easy. Don't open source
+  anything that represents core business value.
+
+Much of what the JavaScript code does can be done via the API, or is simple
+DOM manipulation; if any of it represents a core business value, it can be
+moved to the server and the client-side JS can make an XHR.
+
+I would love to discuss this with you further; I look forward to a response
+that facilitates that discussion. I would be willing to aid in this process
+however I can. If you would prefer to talk to the campaigns team at the FSF
+instead of myself, I work closely with Zak, who can be reached at
+zak@fsf.org.
+
+  [J]ust flip that switch on your GitHub repository from private to
+  public and tell the world about your software.[2]
+
+Thanks for your time.
+
+[1]: https://fsf.org/campaigns/freejs
+[2]: http://tom.preston-werner.com/2011/11/22/open-source-everything.html
+
+Best regards,
+
+-- 
+Mike Gerwitz
+Free Software Hacker | GNU Maintainer
+http://mikegerwitz.com
+FSF Member #5804 | GPG Key ID: 0x8EE30EAB

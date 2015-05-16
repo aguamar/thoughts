@@ -1,0 +1,11 @@
+From: Chris Wanstrath <chris@github.com>
+Date: Wed, 16 Apr 2014 15:24:28 -0700
+Subject: Re: [mikegerwitz@gnu.org: Re: Free GitHub's JavaScript]
+To: Mike Gerwitz <mikegerwitz@gnu.org>
+Cc: Tom Preston-Werner <tom@github.com>, PJ Hyett <pj@github.com>
+
+Hey Mike,
+
+We have no plans to release github.com's JavaScript as free software at
+this time, nor do we have plans to remove the site's dependence on
+JavaScript. Thanks for the interest.
