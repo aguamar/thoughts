@@ -3,7 +3,7 @@
 </a>
 
 <div id="copyright">
-  Copyright &copy; 2012 <a href="/">Mike Gerwitz</a>.
+  Copyright &copy; 2012, 2013, 2014, 2015 <a href="/">Mike Gerwitz</a>.
   Verbatim distribution of this document in its entirety is permitted provided
   that this copyright notice is preserved.
 </div>
