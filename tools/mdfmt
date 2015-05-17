@@ -19,4 +19,12 @@
 # This processes works written in Markdown.
 ##
 
-exec pandoc -S -fmarkdown -thtml5
+declare to=html5
+
+while getopts nP opt; do
+  case "$opt" in
+    n|P) to=plain;;
+  esac
+done
+
+exec pandoc -S -fmarkdown -t"$to"

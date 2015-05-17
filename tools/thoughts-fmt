@@ -51,4 +51,4 @@ test "$timestamp" -gt "$md_cutoff" \
   || fmt-old
 
 # it's just that simple.
-exec "$(dirname "$0" )"/mdfmt
+exec "$(dirname "$0" )"/mdfmt "${all_args[@]}"
