@@ -21,7 +21,7 @@ should we compromise when websites serve proprietary JavaScript
 you visit a website that serves JavaScript to the client, your web browser
 is automatically [downloading and executing (often without your permission)
 untrusted software][jstrap].  If that JavaScript is not
-[freely licensed][ilibrejs], then the software running in your web browser
+[freely licensed][librejs], then the software running in your web browser
 is proprietary.
 
 **When you visit `github.com`, you download over 200kB of obfuscated code,
