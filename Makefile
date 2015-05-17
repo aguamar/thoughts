@@ -93,4 +93,4 @@ www-root: docs thoughts
 
 clean:
 	rm -rf www-root/
-	rm -f $(pages) $(articles) $(texticles)
+	rm -f $(pages) $(pages_md) $(articles) $(texticles)
