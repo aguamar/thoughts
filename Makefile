@@ -26,7 +26,7 @@ articles := $(patsubst %.txt, %.html, \
 texticles=$(patsubst %/, %.html, $(dir $(shell find docs/ -name 'Makefile')))
 www_root := www-root/
 url_root := http://mikegerwitz.com
-repo_url := https://gitorious.org/mtg-personal/thoughts
+repo_url := https://gitlab.com/mikegerwitz/thoughts
 repo_commit_url := '$(repo_url)/commit/%s'
 
 # configured repo2html command
@@ -86,7 +86,7 @@ www-root: docs thoughts
 		&& find . -maxdepth 2 -name '*.html' -exec ../tools/doc-cp {} ../www-root/{} \; \
 		&& find . -maxdepth 3 \( -name '*.pdf' -o -name '*.dvi' \) -exec cp {} ../www-root/{} \; \
 	)
-	cp -rv images/ www-root/
+	cp -rv images/ fonts/ www-root/
 	cp -v style.css www-root/
 	mkdir -p www-root/docs
 	cp -rv docs/gh/ www-root/docs/
