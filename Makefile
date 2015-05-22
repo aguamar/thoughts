@@ -26,7 +26,7 @@ articles := $(patsubst %.txt, %.html, \
 texticles=$(patsubst %/, %.html, $(dir $(shell find docs/ -name 'Makefile')))
 www_root := www-root/
 url_root := http://mikegerwitz.com
-repo_url := https://gitorious.org/mtg-personal/thoughts
+repo_url := https://gitlab.com/mikegerwitz/thoughts
 repo_commit_url := '$(repo_url)/commit/%s'
 
 # configured repo2html command
