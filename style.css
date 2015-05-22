@@ -28,6 +28,18 @@ body.index footer {
   margin: 0em -10em;
 }
 
+/* typesetting standards for ~50 chars per line */
+body article .content,
+body.article #content {
+  margin: auto;
+  max-width: 50em;
+}
+body article header,
+body.article #header {
+  margin: auto;
+  max-width: 56em;
+}
+
 h1, h2, h3, #menu,
 body.index ul.index li .day,
 strong {
