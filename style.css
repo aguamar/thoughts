@@ -1,7 +1,12 @@
+@font-face {
+  font-family: Open Sans;
+  src: url('/fonts/OpenSans-Regular.woff');
+}
+
 body {
   margin: 1em 5em;
   text-align: justify;
-  font-family: 'Liberation Sans', sans-serif;
+  font-family: 'Open Sans', 'Liberation Sans', sans-serif;
 }
 
 body.index {
