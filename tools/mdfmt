@@ -20,11 +20,13 @@
 ##
 
 declare to=html5
+declare -i hlevel=1
 
-while getopts nP opt; do
+while getopts nPh: opt; do
   case "$opt" in
     n|P) to=plain;;
+    h) hlevel="$OPTARG";;
   esac
 done
 
-exec pandoc -S -fmarkdown -t"$to"
+exec pandoc -S -fmarkdown -t"$to" --base-header-level=$hlevel
