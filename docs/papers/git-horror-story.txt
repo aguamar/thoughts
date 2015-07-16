@@ -1,6 +1,6 @@
 A Git Horror Story: Repository Integrity With Signed Commits
 ============================================================
-Mike Gerwitz <mike@mikegerwitz.com>
+Mike Gerwitz <mtg@gnu.org>
 
 
 It's 2:00 AM. The house is quiet, the kid is in bed and your significant other
