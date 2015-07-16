@@ -4,8 +4,8 @@
 
 <div id="copyright">
   Copyright &copy; 2012, 2013, 2014, 2015 <a href="/">Mike Gerwitz</a>.
-  Verbatim distribution of this document in its entirety is permitted provided
-  that this copyright notice is preserved.
+  This content is licensed under the Creative Commons Attribution-ShareAlike
+  3.0 Unported License.
 </div>
 
 <script type="text/javascript"
