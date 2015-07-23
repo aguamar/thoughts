@@ -10,10 +10,10 @@ to free information and free society.
 
 Mike is the maintainer of [GNU ease.js][easejs].
 
-Outside of his field, Mike enjoys time with his family---including his fiancé
-and son---whom keep him busy and probably contribute to the retention of his
-sanity. Mike also has a fascination with a wide range of sciences that he
-wishes he had the time to devote to researching.
+Outside of his field, Mike enjoys time with his family---including his
+fiancé and two sons---whom keep him busy and probably contribute to the
+retention of his sanity. Mike also has a fascination with a wide range of
+sciences that he wishes he had the time to devote to researching.
 
 A great deal of information regarding Mike's opinions on various topics can be
 found throughout this website. Much of the site is devoted to his thoughts and
