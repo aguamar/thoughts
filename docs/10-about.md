@@ -32,9 +32,12 @@ member of.
 hash links in the footer of various pages and the content is licensed for free
 distribution and, in some cases, modification.)
 
+[View my résumé.][resume]
+
 
 [0]: http://www.gnu.org/philosophy/
 [1]: http://www.gnu.org/philosophy/words-to-avoid.html#Hacker
 [2]: http://gnu.org/
 [3]: http://eff.org/
 [easejs]: https://gnu.org/software/easejs
+[resume]: about/resume

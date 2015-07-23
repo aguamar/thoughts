@@ -90,6 +90,7 @@ www-root: docs thoughts
 	cp -v style.css www-root/
 	mkdir -p www-root/docs
 	cp -rv docs/gh/ www-root/docs/
+	cp -rv docs/about/resume www-root/about/
 
 clean:
 	rm -rf www-root/
