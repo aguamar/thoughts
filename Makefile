@@ -34,7 +34,7 @@ repo2html := repo2html \
 		-t 'Mike Gerwitz' \
 		-d 'Free Software Hacker' \
 		-c 'Mike Gerwitz' \
-		-l 'This content is licensed under the Creative Commons Attribution-ShareAlike 3.0 Unported License.' \
+		-l 'This content is licensed under the Creative Commons Attribution-ShareAlike 4.0 International License.' \
 		-C '/style.css' \
 		-f 'tools/thoughts-fmt' \
 		-T '$(PWD)/tpl' \

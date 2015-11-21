@@ -5,7 +5,7 @@
 <div id="copyright">
   Copyright &copy; 2012, 2013, 2014, 2015 <a href="/">Mike Gerwitz</a>.
   This content is licensed under the Creative Commons Attribution-ShareAlike
-  3.0 Unported License.
+  4.0 Unported License.
 </div>
 
 <script type="text/javascript"
