@@ -13,9 +13,9 @@ Mike is the maintainer of [GNU ease.js][easejs] and a member of the
 [GNU evaluation team][gnueval].
 
 Outside of his field, Mike enjoys time with his family---including his
-fiancé and two sons---whom keep him busy and probably contribute to the
-retention of his sanity. Mike also has a fascination with a wide range of
-sciences that he wishes he had the time to devote to researching.
+fiancé and two sons---whom keep him busy and help to keep him sane.  Mike
+also has a fascination with a wide range of sciences that he wishes he had
+the time to devote to researching.
 
 A great deal of information regarding Mike's opinions on various topics can be
 found throughout this website. Much of the site is devoted to his thoughts and
@@ -25,10 +25,9 @@ Papers are styled such that they focus on the topic at hand and void themselves
 of most of the political and author-specific content found on this website.
 Formal papers contain no such influence without rationale and references.
 
-Mike may be contacted by sending any e-mail to this domain, though he
-conventionally prefers the user `mike'; he does not make use of ``social media''
-websites, though he may (or may not) respond to queries on websites that he is a
-member of.
+Mike may be contacted at mtg at gnu dot org; he does not make use of "social
+media" websites, though he may (or may not) respond to queries on websites
+that he is a member of.
 
 (Note: This website itself is free---the source code is available via the commit
 hash links in the footer of various pages and the content is licensed for free
