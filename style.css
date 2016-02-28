@@ -274,6 +274,10 @@ dl > dd > p:last-child {
   margin: 0em;
 }
 
+#index-headline {
+  margin-bottom: 2em;
+}
+
 
 /** exclusively asciidoc-generated content styling **/
 body.article h2 {
