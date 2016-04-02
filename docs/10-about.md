@@ -31,7 +31,7 @@ that he is a member of.
 
 (Note: This website itself is free---the source code is available via the commit
 hash links in the footer of various pages and the content is licensed for free
-distribution and, in some cases, modification.)
+distribution and, in most cases, modification.)
 
 [View my résumé.][resume]
 
