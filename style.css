@@ -188,6 +188,26 @@ tt {
   text-align: center;
 }
 
+.avatar {
+  display: block;
+
+  border-radius: 5px;
+  box-shadow: 1px 1px 3px #666f63;
+
+  margin: auto;
+}
+
+.attribution {
+  display: block;
+
+  font-size: 0.75em;
+  text-decoration: italic;
+  text-align: right;
+
+  width: 66%;
+  margin-left: auto;
+}
+
 .listingblock {
   background-color: #eeeeec;
   background-image: url('images/cross_scratches.png');

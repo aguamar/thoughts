@@ -1,5 +1,10 @@
 ### About
 
+<img src="/images/me-libreplanet-2016.png"
+     alt="Photo of Mike"
+     title="LibrePlanet 2016 Talk 'Restore Online Freedom!'"
+     class="inline-img avatar" />
+
 Mike Gerwitz is a [free (as in freedom) software][0] [hacker][1] and activist
 with an insatiable lust for the command line of a [GNU][2] operating system.
 While much of his earlier experience focused on web development, much of his
@@ -35,6 +40,10 @@ distribution and, in most cases, modification.)
 
 [View my résumé.][resume]
 
+<span class="attribution">[LibrePlanet 2016 Photo][photo]
+Copyright&nbsp;&copy;&nbsp;2016 Kori&nbsp;Feener, [CC BY 4.0][ccby]; used
+with permission.</span>
+
 
 [0]: http://www.gnu.org/philosophy/
 [1]: http://www.gnu.org/philosophy/words-to-avoid.html#Hacker
@@ -43,4 +52,6 @@ distribution and, in most cases, modification.)
 [easejs]: https://gnu.org/software/easejs
 [resume]: about/resume
 [gnueval]: https://www.gnu.org/help/evaluation.html
+[photo]: https://media.libreplanet.org/u/libreplanet/m/session-03-c-ms-png-libreplanet-2016-sessions-ec00/
+[ccby]: https://creativecommons.org/licenses/by/4.0/
 
