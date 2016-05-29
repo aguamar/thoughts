@@ -704,7 +704,7 @@ Commit History In a Nutshell
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 The SHA-1 hashes of each commit in Git are created using the delta _and_ header
 information for each commit. This header information includes the commit's
-_parent_, whose header contains its parent---so on and so fourth. In addition,
+_parent_, whose header contains its parent---so on and so forth. In addition,
 Git depends on the entire history of the repository leading up to a given commit
 to construct the requested revision. Consequently, this means that the history
 cannot be altered without someone noticing (well, this is not entirely true;
@@ -738,7 +738,7 @@ to change the expected hash in commit +B+, because the header is used to
 generate the SHA-1 hash for the commit, meaning +B+ would then have a different
 SHA-1 hash (technically speaking, it would not longer be +B+---it would be an
 entirely different commit; we retain the identifier here only for demonstration
-purposes). That would then invalidate any children of +B+, so on and so fourth.
+purposes). That would then invalidate any children of +B+, so on and so forth.
 Therefore, in order to rewrite the history for a single commit, _the entire
 history after that commit must also be rewritten_ (as is done by `git rebase`).
 Should that be done, the SHA-1 hash of +H+ would also need to change. Otherwise,
@@ -1140,7 +1140,7 @@ server or whatever user is being used to perform the signature checks.
 Automating Merge Signature Checks
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 The aforementioned scripts are excellent if you wish to check the validity of
-each individual commit, but not everyone will wish to put fourth that amount of
+each individual commit, but not everyone will wish to put forth that amount of
 effort.  Instead, maintainers may opt for a workflow that requires the signing
 of only the merge commit (xref:merge-2[option #2 above]), rather than each
 commit that is introduced by the merge.  Let us consider the appropach we would
