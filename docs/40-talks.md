@@ -5,6 +5,7 @@
 #### Restore Online Freedom! (LibrePlanet 2016)
 
 [Video][rof] • [Slides][slides-pdf] • [Slides Source Code][slides-src]
+• [LibrePlanet Collection][collection]
 
 Imagine a world where surveillance is the default and users must opt-in to
 privacy.  Imagine that your every action is logged and analyzed to learn how
@@ -27,6 +28,7 @@ how it's being done, and what can (or can't) be done to stop it.
 [rof]: https://media.libreplanet.org/u/libreplanet/m/restore-online-freedom/
 [slides-pdf]: https://media.libreplanet.org/u/libreplanet/m/restore-online-freedom-14bf/
 [slides-src]: https://gitlab.com/mikegerwitz/online-freedom
+[collection]: https://media.libreplanet.org/u/libreplanet/collection/restore-online-freedom/
 
 [lp2016]: https://www.libreplanet.org/2016/
 [lp2016-logo]: https://libreplanet.org/w/images/1/1f/Banner_no_year.png
