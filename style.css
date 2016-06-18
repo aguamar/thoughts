@@ -298,6 +298,10 @@ dl > dd > p:last-child {
   margin-bottom: 2em;
 }
 
+#index-headline img {
+  border-radius: 0.25em;
+}
+
 
 /** exclusively asciidoc-generated content styling **/
 body.article h2 {
