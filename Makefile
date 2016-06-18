@@ -32,7 +32,7 @@ repo_commit_url := '$(repo_url)/commit/%s'
 # configured repo2html command
 repo2html := repo2html \
 		-t 'Mike Gerwitz' \
-		-d 'Free Software Hacker' \
+		-d 'Free Software Hacker &amp; Activist' \
 		-c 'Mike Gerwitz' \
 		-l 'This content is licensed under the Creative Commons Attribution-ShareAlike 4.0 International License.' \
 		-C '/style.css' \
