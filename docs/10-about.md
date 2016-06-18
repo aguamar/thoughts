@@ -18,7 +18,7 @@ Mike is the maintainer of [GNU ease.js][easejs]; and a member of the
 [GNU evaluation][gnueval] and maintainers teams.
 
 Outside of his field, Mike enjoys time with his family---including his
-fiancé and two sons---whom keep him busy and help to keep him sane.  Mike
+wife and two sons---whom keep him busy and help to keep him sane.  Mike
 also has a fascination with a wide range of sciences that he wishes he had
 the time to devote to researching.
 
