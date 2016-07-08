@@ -6,16 +6,17 @@
      class="inline-img avatar" />
 
 Mike Gerwitz is a [free (as in freedom) software][0] [hacker] and activist
-with an insatiable lust for the command line of a [GNU][2] operating system.
+with a focus on user privacy and security.
 While much of his earlier experience focused on web development, most of his
-free time is now spent researching machine architectures; compilers;
-mathematics; cryptography; security and privacy; and various other
-fields.  He also closely follows the work of the
-[Free Software Foundation][0], [Electronic Frontier Foundation][3], and
-other entities devoted to free information and free society.
+free time is now spent researching cryptography; compilers; mathematics;
+security and privacy; and various other fields.  He also closely follows the
+work of the [Free Software Foundation][0],
+[Electronic Frontier Foundation][3], and other entities devoted to free
+information and free society.
 
-Mike is the author of [GNU ease.js][easejs], and a member of the
-[GNU evaluation][gnueval] and maintainers teams.
+Mike is the author of [GNU ease.js][easejs]; a member of the
+[GNU evaluation][gnueval] team; and a volunteer for various other aspects of
+the [GNU Project] and the [Free Software Foundation].
 
 Mike is a [hacker], not a [cracker]---the latter breaks the security of
 systems, while the former expresses playful creativity in their work.
@@ -50,7 +51,8 @@ with permission.</span>
 [0]: http://www.gnu.org/philosophy/
 [hacker]: https://stallman.org/articles/on-hacking.html
 [cracker]: https://stallman.org/articles/on-hacking.html
-[2]: http://gnu.org/
+[GNU Project]: https://gnu.org/
+[Free Software Foundation]: https://fsf.org/
 [3]: http://eff.org/
 [easejs]: https://gnu.org/software/easejs
 [resume]: about/resume
