@@ -21,6 +21,11 @@ typing `c` instead of `git commit`), a colorful PS1, and a state hook for
 displaying and automatically augmenting commit messages with branch-specific
 state strings.
 
+[hoxsl][] (pronounced like "voxel") is a library for XSLT 2.0, written in
+pure XSLT, that introduces various types of higher-order logic, including
+higher-order functions; functional abstractions for common operations; and
+XSLT templates that take XSLT as input and produce XSLT as output.
+
 [thoughts][] is this website; readers and hackers are welcome to use the
 repository for offline browsing, learning, distributing, mirroring, compiling in
 alternate formats or whatever else the content licenses permit. Code is released
@@ -46,6 +51,7 @@ support.
 [GitLab]: https://gitlab.com/u/mikegerwitz/
 [easejs]: https://gnu.org/s/easejs
 [git-supp]: https://gitlab.com/mikegerwitz/git-supp
+[hoxsl]: /hoxsl/
 [repo2html]: https://gitlab.com/mikegerwitz/repo2html
 [thoughts]: https://gitlab.com/mikegerwitz/thoughts
 [screen]: https://gnu.org/s/screen
