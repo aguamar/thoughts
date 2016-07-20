@@ -15,8 +15,9 @@ work of the [Free Software Foundation][0],
 information and free society.
 
 Mike is the author of [GNU ease.js][easejs]; a member of the
-[GNU evaluation][gnueval] team; and a volunteer for various other aspects of
-the [GNU Project] and the [Free Software Foundation].
+[GNU evaluation][gnueval] team; holds an administrative role in GNU; and is
+a volunteer for various other aspects of the [GNU Project] and the
+[Free Software Foundation].
 
 Mike is a [hacker], not a [cracker]---the latter breaks the security of
 systems, while the former expresses playful creativity in their work.
