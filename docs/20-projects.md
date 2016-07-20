@@ -30,9 +30,12 @@ papers) are released under licenses that permit free distribution and, in
 certain cases, modification. Direct links to various commits may be found via
 the commit hashes within the footer of most pages.
 
-I am also working with Amadeusz Sławiński to help bring the development of [GNU
-screen][6] back to life by cleaning up the code, bringing it up to date, dumping
-some cruft, and adding exciting new features.
+I was working in the past with Amadeusz Sławiński to help bring the
+development of [GNU screen][screen] back to life by cleaning up the code,
+bringing it up to date, dumping some cruft, and adding exciting new
+features.  Unfortunately, time has been tight; I hope to return to
+development in the future to, among other things, add [GNU Guile][guile]
+support.
 
 
 [0]: https://gitlab.com/u/mikegerwitz/
@@ -40,4 +43,5 @@ some cruft, and adding exciting new features.
 [3]: https://gitorious.org/repo2html
 [4]: https://gitlab.com/mikegerwitz/git-supp
 [5]: https://gitlab.com/mikegerwitz/thoughts
-[6]: https://github.com/amade/screen/tree/devel
+[screen]: https://gnu.org/s/screen
+[guile]: https://gnu.org/s/guile
