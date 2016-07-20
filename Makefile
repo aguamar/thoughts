@@ -91,6 +91,7 @@ www-root: docs thoughts
 	mkdir -p www-root/docs
 	cp -rv docs/gh/ www-root/docs/
 	cp -rv docs/about/resume www-root/about/
+	cp -rv docs/hoxsl www-root/hoxsl
 
 clean:
 	rm -rf www-root/
