@@ -17,5 +17,5 @@ option) any later version.
 
 [literate]: http://www.literateprogramming.com/
 [manual]: manual/
-[src]: https://git.savannah.gnu.org/cgit/hoxsl.git
+[src]: http://git.savannah.gnu.org/cgit/hoxsl.git
 [gpl]: https://www.gnu.org/licenses/gpl.html
