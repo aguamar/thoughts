@@ -21,6 +21,12 @@ typing `c` instead of `git commit`), a colorful PS1, and a state hook for
 displaying and automatically augmenting commit messages with branch-specific
 state strings.
 
+[TAME][] is The Adaptive Metalanguage, a programming language and system of
+tools designed to aid in the development, understanding, and maintenance of
+systems performing numerous calculations on a complex graph of dependencies,
+conditions, and a large number of inputs.  This project is developed for my
+employer.
+
 [hoxsl][] (pronounced like "voxel") is a library for XSLT 2.0, written in
 pure XSLT, that introduces various types of higher-order logic, including
 higher-order functions; functional abstractions for common operations; and
@@ -51,6 +57,7 @@ support.
 [GitLab]: https://gitlab.com/u/mikegerwitz/
 [easejs]: https://gnu.org/s/easejs
 [git-supp]: https://gitlab.com/mikegerwitz/git-supp
+[TAME]: https://github.com/lovullo/tame
 [hoxsl]: /hoxsl/
 [repo2html]: https://gitlab.com/mikegerwitz/repo2html
 [thoughts]: https://gitlab.com/mikegerwitz/thoughts
