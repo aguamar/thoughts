@@ -301,11 +301,13 @@ dl > dd > p:last-child {
 }
 
 #index-headline {
-  margin-bottom: 2em;
+  display: block;
+  margin: 0em auto 2em auto;
 }
 
 #index-headline img {
   border-radius: 0.25em;
+  max-width: 90%;
 }
 
 
@@ -377,6 +379,7 @@ body.article h3 {
 
   #headline {
     position: initial;
+    float: right;
   }
 
   #headline a {
@@ -384,9 +387,11 @@ body.article h3 {
     margin: 0.5em;
   }
   #headline img {
-    max-width: 100px;
-    max-height: 100px;
+    max-height: 75px;
     margin-left: 0;
+  }
+  #index-headline img {
+    max-height: 5em;
   }
 
   #selflinks {
