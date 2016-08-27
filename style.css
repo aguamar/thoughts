@@ -344,6 +344,14 @@ body.article h3 {
     margin: 2em !important;
   }
 
+  /* account for upper-right page fold using the full
+     image width---this will be guaranteed to work
+     regardless of the user's font size; kinda ruins
+     the illusion if text is atop of it ;) */
+  h1.subject {
+    margin-right: 50px;
+  }
+
   #headline {
     right: 2em;
   }
