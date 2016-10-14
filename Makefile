@@ -87,6 +87,7 @@ www-root: docs thoughts
 		&& find . -maxdepth 3 \( -name '*.pdf' -o -name '*.dvi' \) -exec cp {} ../www-root/{} \; \
 	)
 	cp -rv images/ fonts/ www-root/
+	cp -rv _raw/* www-root/
 	cp -v style.css www-root/
 	mkdir -p www-root/docs
 	cp -rv docs/gh/ www-root/docs/

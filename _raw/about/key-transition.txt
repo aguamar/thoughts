@@ -1,0 +1,54 @@
+Key Transition Statement
+========================
+
+New Fingerprint: D6E9 B930 028A 6C38 F43B  2388 FEF6 3574 5E6F 6D05
+  2016-10-13
+
+Old Fingerprint: 2217 5B02 E626 BC98 D7C0  C2E5 F22B B815 8EE3 0EAB
+  2011-06-16
+
+
+I have transitioned away from my old GPG key 0x0EAB to 0x6D05; the new
+key will be used exclusively from this point forward.  Please
+discontinue use of 0x0EAB.
+
+The new key has been signed with the old to assert my identity and
+introduce it into the web of trust.  This message has been signed with
+both keys; two detached signatures are available:
+
+  gpg --verify key-transition.txt.new.asc key-transition.txt
+  gpg --verify key-transition.txt.new.asc key-transition.txt
+
+The old 0x0EAB key will be allowed to expire on 2017-04-19, at which
+time it will be revoked and marked as superseded.  This expiry will
+allow the new key to remain in the web of trust until I can have my
+new key signed at the LibrePlanet 2017 conference in March.  There is
+little use in changing the expiration to an earlier date when many may
+not update my public key until it has expired anyway.
+
+
+Background
+----------
+My security practices have changed considerably since
+the old 0x0EAB key was created back in 2011---I have no way to
+guarantee that the secret key has not been compromised in some way in
+past years, though I'm fairly confident that it hasn't.  The secret
+key is also stored on the same box as the subkeys.
+
+The new secret key is stored offline on encrypted storage and will
+only be accessed using an airgapped system running a trusted,
+hardened, ephemeral operating system (e.g. Tails).  The keys were
+generated in that same environment.
+
+The subkeys are placed on a tamper-proof smartcard (Nitrokey Pro, at
+present).  The card will be locked after three invalid PIN attempts,
+and bricked after three invalid Admin PIN attempts.  If the card is
+ever misplaced or cardnapped, I will still revoke the subkeys for good
+measure.
+
+-- 
+Mike Gerwitz
+Free Software Hacker+Activist | GNU Maintainer & Volunteer
+GPG: 575B 4A21 12A4 BB38 4B7E  3681 2E8F D41C 5322 6D05
+Old: 2217 5B02 E626 BC98 D7C0  C2E5 F22B B815 8EE3 0EAB
+https://mikegerwitz.com

@@ -5,6 +5,8 @@
      title="LibrePlanet 2016 Talk 'Restore Online Freedom!'"
      class="inline-img avatar" />
 
+GPG Fingerprint: `D6E9 B930 028A 6C38 F43B  2388 FEF6 3574 5E6F 6D05` [\[?\]][gpg]
+
 Mike Gerwitz is a [free (as in freedom) software][0] [hacker] and activist
 with a focus on user privacy and security.
 While much of his earlier experience focused on web development, most of his
@@ -44,6 +46,9 @@ licensed for free distribution and, in most cases, modification.)
 
 [View my résumé.][resume]
 
+I recently changed GPG keys; see my [key transition statement][keytrans],
+signed with both my [new][keytrans-new] and [old][keytrans-old] keys.
+
 <span class="attribution">[LibrePlanet 2016 Photo][photo]
 Copyright&nbsp;&copy;&nbsp;2016 Kori&nbsp;Feener, [CC BY 4.0][ccby]; used
 with permission.</span>
@@ -61,4 +66,9 @@ with permission.</span>
 [photo]: https://media.libreplanet.org/u/libreplanet/m/session-03-c-ms-png-libreplanet-2016-sessions-ec00/
 [ccby]: https://creativecommons.org/licenses/by/4.0/
 [social]: https://social.mikegerwitz.com/
+
+[gpg]: https://emailselfdefense.fsf.org/
+[keytrans]: /about/key-transition.txt
+[keytrans-old]: /about/key-transition.txt.old.asc
+[keytrans-new]: /about/key-transition.txt.new.asc
 
