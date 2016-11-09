@@ -37,6 +37,7 @@ repo2html := repo2html \
 		-l 'This content is licensed under the Creative Commons Attribution-ShareAlike 4.0 International License.' \
 		-C '/style.css' \
 		-f 'tools/thoughts-fmt' \
+		-F .listfilter \
 		-T '$(PWD)/tpl' \
 		-u '$(repo_url)' \
 		-U '$(repo_commit_url)' \
