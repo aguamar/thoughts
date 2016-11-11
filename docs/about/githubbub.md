@@ -12,6 +12,10 @@ is antithetical to the message you are trying to send to your
 readers/visitors, or whether it deserves clarification.  There's a little
 bit of both here.
 
+If you're looking for a host friendly toward free software, take a look at
+the [GNU ethical repository criteria][gnu-repo], which sets standards for
+acceptable hosts of parts of the [GNU operating system][gnu].
+
 
 #### Non-Free JavaScript
 [Free software][freesw] guarantees your freedom to study, modify, and share
@@ -91,6 +95,8 @@ The original correspondence is provided here:
    dependence on JavaScript".
 
 
+[gnu-repo]: https://www.gnu.org/software/repo-criteria.html
+[gnu]: https://www.gnu.org/gnu/gnu.html
 [freesw]: https://www.gnu.org/philosophy/free-sw.html
 [whyfreejs]: https://www.gnu.org/software/easejs/whyfreejs.html
 [jstrap]: https://www.gnu.org/philosophy/javascript-trap.html
