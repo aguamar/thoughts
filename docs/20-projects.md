@@ -32,6 +32,9 @@ pure XSLT, that introduces various types of higher-order logic, including
 higher-order functions; functional abstractions for common operations; and
 XSLT templates that take XSLT as input and produce XSLT as output.
 
+[literate-xsl][] "weaves" documentation for XSLT written in a literate
+style.  Documentation is generated as Texinfo.
+
 [thoughts][] is this website; readers and hackers are welcome to use the
 repository for offline browsing, learning, distributing, mirroring, compiling in
 alternate formats or whatever else the content licenses permit. Code is released
@@ -60,6 +63,7 @@ support.
 [TAME]: https://github.com/lovullo/tame
 [hoxsl]: /hoxsl/
 [repo2html]: https://gitlab.com/mikegerwitz/repo2html
+[literate-xsl]: https://github.com/lovullo/literate-xsl
 [thoughts]: https://gitlab.com/mikegerwitz/thoughts
 [screen]: https://gnu.org/s/screen
 [guile]: https://gnu.org/s/guile
