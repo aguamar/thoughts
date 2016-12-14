@@ -65,9 +65,9 @@ thoughts:
 	./tools/mgify "$@"
 
 # "pages"
-%.html: %.pg docs/papers/.list
+%.html: %.pg docs/papers/.list tpl/.config
 	$(repo2html) -icontent -ftools/extfmt <$< >$@
-%.html: %.md
+%.html: %.md tpl/.config
 	$(repo2html) -icontent -ftools/mdfmt <$< >$@
 
 # TeX papers are expected to have their own makefiles as well as an abstract.tex
