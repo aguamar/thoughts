@@ -941,6 +941,8 @@ information, delimited by tabs.
 ----
 #!/bin/sh
 #
+# Licensed under the CC0 1.0 Universal license (public domain).
+#
 # Validate signatures on each and every commit within the given range
 ##
 
