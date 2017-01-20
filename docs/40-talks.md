@@ -1,6 +1,36 @@
 ### Talks
 
-[![LibrePlanet 2016][lp2016-logo]][lp2016]
+[![LibrePlanet 2017][lp2017-logo]][lp2017]
+
+#### The Surreptitious Assault on Privacy, Security, and Freedom (LibrePlanet 2017)
+
+*[Join us][lp2017] on March 25--26 at MIT in Cambridge, MA*
+
+Privacy, security, and personal freedom: one cannot be had without the
+others.  Each of these essential rights are being surreptitiously
+assaulted; only the most technical among us even know what to look for, let
+alone how to defend ourselves.  Governments, corporations, and groups of
+ill-minded individuals are spying and preying upon both users and bystanders
+with unprecedented frequency and breadth.  For those of us who do understand
+these issues, it would be irresponsible not to fight for the rights of
+others and continue to bring these assaults to light.
+
+This talk will survey the most pressing issues of today, including topics of
+government surveillance and espionage; advertisers and data analytics; the
+Internet of Things; corporate negligence; public policy and the crypto
+wars; dangers of a non-free Web and untrusted, ephemeral software; pervasive
+monitoring; remote servers, services, and "the cloud"; modern vehicles;
+draconian DMCA threats; the fight against decentralization and free
+software; societal pressures and complacency with the status quo; and more.
+
+Attendees will walk away with a broad understanding of these topics; an
+overview of mitigations; and dozens of resources for further research and
+discussion with others.  No prior knowledge of security or cryptography are
+necessary.
+
+-----
+
+[![LibrePlanet 2017][lp2017-logo]][lp2017]
 
 #### Restore Online Freedom! (LibrePlanet 2016)
 
@@ -32,3 +62,6 @@ how it's being done, and what can (or can't) be done to stop it.
 
 [lp2016]: https://www.libreplanet.org/2016/
 [lp2016-logo]: https://libreplanet.org/w/images/1/1f/Banner_no_year.png
+
+[lp2017]: https://www.libreplanet.org/2017/
+[lp2017-logo]: https://libreplanet.org/w/images/1/1f/Banner_no_year.png
