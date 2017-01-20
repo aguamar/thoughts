@@ -61,7 +61,7 @@ how it's being done, and what can (or can't) be done to stop it.
 [collection]: https://media.libreplanet.org/u/libreplanet/collection/restore-online-freedom/
 
 [lp2016]: https://www.libreplanet.org/2016/
-[lp2016-logo]: https://libreplanet.org/w/images/1/1f/Banner_no_year.png
+[lp2016-logo]: /images/lp-no-year.png
 
 [lp2017]: https://www.libreplanet.org/2017/
-[lp2017-logo]: https://libreplanet.org/w/images/1/1f/Banner_no_year.png
+[lp2017-logo]: /images/lp-no-year.png
