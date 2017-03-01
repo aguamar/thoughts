@@ -1122,13 +1122,13 @@ Here, we find that if we filter out those lines ending in ``G'' as we did
 before, we would be left with the untrusted commits in addition to the commits
 that are bad (``B'') or unsigned (blank), as indicated by +%G?+. To accomplish
 this, we first add the GPG output to the log with the `--show-signature` option
-and, to make filtering easier, prefix all commit lines with a carrot (^) which
-we will later strip. We then filter all lines but those beginning with a carrot,
+and, to make filtering easier, prefix all commit lines with a caret (^) which
+we will later strip. We then filter all lines but those beginning with a caret,
 or lines that contain the string ``not certified'', which is part of the GPG
 output. This results in lines of commits with a single +``gpg:''+ line before
 them if they are untrusted. We can then pipe this to awk, which will remove all
 +``gpg:''+-prefixed lines and append +``U''+ to the next line (the commit line).
-Finally, we strip off the leading carrot that was added during the beginning of
+Finally, we strip off the leading caret that was added during the beginning of
 this process to produce the final output.
 
 Please keep in mind that there is a huge difference between the conventional use
