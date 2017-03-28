@@ -4,7 +4,9 @@
 
 #### The Surreptitious Assault on Privacy, Security, and Freedom (LibrePlanet 2017)
 
-*[Join us][lp2017] on March 25--26 at MIT in Cambridge, MA*
+[Slides][sapsf-slides-pdf]
+
+_Video will be linked here once available on LibrePlanet.org._
 
 Privacy, security, and personal freedom: one cannot be had without the
 others.  Each of these essential rights are being surreptitiously
@@ -62,6 +64,8 @@ how it's being done, and what can (or can't) be done to stop it.
 
 [lp2016]: https://www.libreplanet.org/2016/
 [lp2016-logo]: /images/lp-no-year.png
+
+[sapsf-slides-pdf]: /talks/sapsf
 
 [lp2017]: https://www.libreplanet.org/2017/
 [lp2017-logo]: /images/lp-no-year.png
