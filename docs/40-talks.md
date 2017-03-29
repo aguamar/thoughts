@@ -21,8 +21,8 @@ government surveillance and espionage; advertisers and data analytics; the
 Internet of Things; corporate negligence; public policy and the crypto
 wars; dangers of a non-free Web and untrusted, ephemeral software; pervasive
 monitoring; remote servers, services, and "the cloud"; modern vehicles;
-draconian DMCA threats; the fight against decentralization and free
-software; societal pressures and complacency with the status quo; and more.
+the fight against decentralization and free software; societal pressures and
+complacency with the status quo; and more.
 
 Attendees will walk away with a broad understanding of these topics; an
 overview of mitigations; and dozens of resources for further research and
