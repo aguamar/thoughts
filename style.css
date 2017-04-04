@@ -9,10 +9,24 @@ body {
   font-family: 'Open Sans', 'Liberation Sans', sans-serif;
 }
 
-body.index {
+body.index,
+.body-index {
   margin: 2em 10em 1em 10em;
   padding-right: 300px;
 }
+
+/* override above, since we'll have to compound
+ * with the original body (only use this when
+ * body.index cannot possibly be used!) */
+.body-index {
+  margin: 2em 5em 1em 5em;
+}
+
+body.index.no-sidebar,
+.body-index.no-sidebar {
+  padding-right: 0px;
+}
+
 
 a { color: #0066cc; }
 a:visited { color: #6666cc; }
@@ -24,7 +38,8 @@ header, footer,
   text-align: left;
 }
 
-body.index footer {
+body.index footer,
+.body-index footer {
   margin: 0em -10em;
 }
 
@@ -99,6 +114,10 @@ h2.desc {
   padding: 0;
   margin: 0px -300px 3.5em 0px;
 }
+.no-sidebar #menu {
+  /* cancels out #menu padding above */
+  margin-right: 0px;
+}
 #menu li {
   display: inline-block;
   font-size: 1.3em;
@@ -138,11 +157,16 @@ h2.desc {
   margin-left: 2em;
 }
 
-body.index .content {
+body.index .content,
+.body-index .content {
   /* this is not ideal, but works since the sidebar content is (currently) all
      images */
   min-height: 750px;
   padding-right: 1.5em;
+}
+body.index.no-sidebar .content,
+.body-index.no-sidebar .content {
+  min-height: inherit;
 }
 
 body.index h3.index {
@@ -250,8 +274,15 @@ footer .commit-id {
 
 /* to account for headline (sidebar) */
 body.index footer .bimgs,
-body.index footer hr {
+.body-index footer.bimgs,
+body.index footer hr,
+.body-index footer hr {
   margin-right: -300px;
+}
+
+.no-sidebar footer .bimgs,
+.no-sidebar footer hr {
+  margin-right: 0px;
 }
 
 #selflinks {
@@ -361,7 +392,8 @@ body.article h3 {
     margin-left: 0px;
   }
 
-  body.index footer {
+  body.index footer,
+  .body-index footer {
     margin: 0em;
   }
 }
@@ -371,7 +403,8 @@ body.article h3 {
     margin: 1em !important;
     padding-right: 0 !important;
   }
-  body.index .content {
+  body.index .content,
+  .body-index .content {
     min-height: 0px;
     padding-right: 0px;
   }
@@ -413,7 +446,9 @@ body.article h3 {
 
   header, footer,
   body.index footer .bimgs,
+  .body-index footer .bimgs,
   body.index footer hr,
+  .body-index footer hr,
   #header, #footer, .article #copyright {
     margin-right: 0px;
   }
@@ -515,6 +550,71 @@ body.article h3 {
 #table-of-contents .done {
   display: none;
 }
+
+
+/** cgit customization **/
+
+div#cgit div.content {
+  padding: 2em 0em;  /* remove left/right margin */
+}
+
+/* repo name and desc, above tabs */
+div#cgit table#header td.main {
+  font-size: 1.4em;  /* h2 font size (see above) */
+}
+div#cgit table#header td.sub {
+  border-top: 0px;
+}
+
+div#cgit #header {
+  margin: inherit;  /* undo previous conflicting style */
+}
+
+/* reduce tab page separator height */
+div#cgit table.tabs {
+  border-bottom-width: 1px;
+}
+div#cgit table.tabs td a {
+  padding: 0.25ex 0.75em 0ex;
+}
+div#cgit table.tabs td a.active {
+  background-color: inherit;
+  border-bottom: 3px solid #ccc;
+}
+
+div#cgit div.content {
+  border-bottom: inherit;  /* we have our own footer */
+}
+
+/* we have limited width, so wrap and compensate */
+div#cgit table.list.nowrap td {
+  white-space: inherit;
+  text-align: left;
+}
+div#cgit table.list.nowrap td.sublevel-repo,
+div#cgit table.list.nowrap td .age-months {
+  white-space: nowrap;
+}
+div#cgit table.list.nowrap tr {
+  vertical-align: top;
+}
+
+div#cgit table.list tr:not(.nohover) td {
+  padding-top: 0.5ex;
+  padding-bottom: 0.5ex;
+}
+
+/* getting creative...separate sections */
+div#cgit table.list tr:not(.nohover) + tr.nohover td {
+  padding-top: 1ex;
+}
+
+/* reduce headings relative to surrounding page */
+div#cgit h1 { font-size: 1.4em; }
+div#cgit h2 { font-size: 1.2em; }
+div#cgit h3 { font-size: 1.1em; }
+div#cgit h4 { font-size: 1.0em; }
+
 
 /*** https://github.com/jgm/highlighting-kate/blob/master/css/hk-tango.css * ***/
 /* Loosely based on pygment's tango colors */
