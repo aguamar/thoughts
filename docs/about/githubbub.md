@@ -106,8 +106,8 @@ The original correspondence is provided here:
 [chris]: https://github.com/defunkt
 [pj]: https://github.com/pjhyett
 
-[gh-request]: /docs/gh/email-request
-[gh-request-reply]: /docs/gh/email-request-reply
-[gh-request2]: /docs/gh/email-request2
-[gh-request3]: /docs/gh/email-request3
-[gh-request3-reply]: /docs/gh/email-request3-reply
+[gh-request]: /docs/gh/email-request.txt
+[gh-request-reply]: /docs/gh/email-request-reply.txt
+[gh-request2]: /docs/gh/email-request2.txt
+[gh-request3]: /docs/gh/email-request3.txt
+[gh-request3-reply]: /docs/gh/email-request3-reply.txt

@@ -21,7 +21,7 @@ pages := $(patsubst %.pg, %.html, \
 pages_md := $(patsubst %.md, %.html, \
             $(shell find docs/ -name '*.md'))
 articles := $(patsubst %.txt, %.html, \
-	$(shell find docs/ -maxdepth 2 -name '*.txt'))
+	$(shell find docs/ -maxdepth 2 -name '*.txt' | grep -Fv /gh/))
 # articles in TeX with an inappropriate var name
 texticles=$(patsubst %/, %.html, $(dir $(shell find docs/ -name 'Makefile')))
 www_root := www-root/
