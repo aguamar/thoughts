@@ -64,10 +64,10 @@ how it's being done, and what can (or can't) be done to stop it.
 [lp2016]: https://www.libreplanet.org/2016/
 [lp2016-logo]: /images/lp-no-year.png
 
-[sapsf-slides-pdf]: /talks/sapsf
+[sapsf-slides-pdf]: /talks/sapsf.pdf
 [sapsf-video]: https://media.libreplanet.org/u/libreplanet/m/the-surreptitious-assault-on-privacy-security-and-freedom/
-[sapsf-src]: https://mikegerwitz.com/projects/sapsf/
-[sapsf-bib]: https://mikegerwitz.com/projects/sapsf/plain/sapsf.bib
+[sapsf-src]: /projects/sapsf/
+[sapsf-bib]: /projects/sapsf/plain/sapsf.bib
 
 [lp2017]: https://www.libreplanet.org/2017/
 [lp2017-logo]: /images/lp-no-year.png
