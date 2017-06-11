@@ -296,6 +296,32 @@ body.index footer hr,
   text-decoration: none;
 }
 
+.hn-icon {
+    display: block;
+
+    /* note that border won't be visible on default
+       white page background */
+    background-color: #ff6600;
+    border: 1px solid white;
+
+    /* 1px border = 42x42 */
+    width: 40px;
+    height: 40px;
+
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 40px;
+}
+
+.hn-icon,
+a.hn-icon:visited,
+a.hn-icon:active,
+a.hn-icon:hover {
+    color: white;
+    text-decoration: none;
+}
+
 .bimgs {
   float: right;
   margin-left: 1em;
