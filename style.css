@@ -299,19 +299,15 @@ body.index footer hr,
 .hn-icon {
     display: block;
 
-    /* note that border won't be visible on default
-       white page background */
     background-color: #ff6600;
-    border: 1px solid white;
 
-    /* 1px border = 42x42 */
-    width: 40px;
-    height: 40px;
+    width: 42px;
+    height: 42px;
 
     font-size: 16px;
     font-weight: bold;
     text-align: center;
-    line-height: 40px;
+    line-height: 42px;
 }
 
 .hn-icon,
@@ -470,6 +466,11 @@ body.article h3 {
     padding: 6px;
   }
 
+  .hn-icon {
+    float: right;
+    margin-left: 2px;
+  }
+
   header, footer,
   body.index footer .bimgs,
   .body-index footer .bimgs,
@@ -500,6 +501,15 @@ body.article h3 {
     max-width: 32px;
     max-height: 32px;
   }
+
+
+  .hn-icon {
+    max-width: 32px;
+    max-height: 32px;
+
+    font-size: 12px;
+    line-height: 32px;
+  }
 }
 
 /* when things start getting odd from 640px */
@@ -511,6 +521,14 @@ body.article h3 {
   #selflinks img {
     max-width: 21px;
     max-height: 21px;
+  }
+
+  .hn-icon {
+    max-width: 21px;
+    max-height: 21px;
+
+    font-size: 9px;
+    line-height: 21px;
   }
 
   footer {
