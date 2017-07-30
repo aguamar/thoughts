@@ -443,6 +443,7 @@ body.article h3 {
   #headline {
     position: initial;
     float: right;
+    width: 75px;
   }
 
   #headline a {
