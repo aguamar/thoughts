@@ -71,82 +71,82 @@ h1 { font-size: 2.2em; }
 }
 
 #content p,
-#content > dl > dd.desc {
+#content dl > dd.desc {
   text-align: justify;
   line-height: 1.5;
 }
 
-#content > dl > dt {
+#content dl > dt {
   font-weight: bold;
   font-size:   1em;
   float:       left;
   clear:       left;
 }
 
-#content > dl > dt a {
+#content dl > dt a {
   color: inherit;
 }
 
-#content > dl > dd.type {
+#content dl > dd.type {
   font-weight: bold;
   margin:      0em 0.5em;
   padding:     0em;
   float:       right;
 }
-#content > dl > dd.type::after {
+#content dl > dd.type::after {
   content: ',';
 }
 
-#content > dl > dd.period {
+#content dl > dd.period {
   font-weight: bold;
   margin:      0em;
   float:       right;
 }
-#content > dl > dd.desc {
+#content dl > dd.desc {
   clear:  both;
   margin: 0em 0em 1em 1em;
 }
-#content > dl > dd.desc blockquote {
+#content dl > dd.desc blockquote {
   margin: 0.5em 1em;
 }
 
-#content > dl > dd.desc > ul.detail-list,
-#content > dl > dd.desc > ul.detail-list ul {
+#content dl > dd.desc > ul.detail-list,
+#content dl > dd.desc > ul.detail-list ul {
   display:    inline;
   list-style: none;
   margin:     0px;
   padding:    0px;
 }
-#content > dl > dd.desc > ul.detail-list ul,
-#content > dl > dd.desc > ul.lang {
+#content dl > dd.desc > ul.detail-list ul,
+#content dl > dd.desc > ul.lang {
   font-size:  0.9em;
 }
-#content > dl > dd.desc > ul.lang::before {
+#content dl > dd.desc > ul.lang::before {
   display: inline;
   font-weight: bold;
   content: 'Languages/Tools: ';
 }
 
 /* using li nodes rather than ul itself rids extra whitespace */
-#content > dl > dd.desc > ul.detail-list ul > li:first-child::before {
+#content dl > dd.desc > ul.detail-list ul > li:first-child::before {
   content: '(';
 }
-#content > dl > dd.desc > ul.detail-list ul > li:last-child::after {
+#content dl > dd.desc > ul.detail-list ul > li:last-child::after {
   content: ')';
 }
 
-#content > dl > dd.desc > ul.detail-list li {
+#content dl > dd.desc > ul.detail-list li {
   display: inline;
   padding: 0px;
 }
 
-#content > dl > dd.desc > ul.detail-list > li:not(:last-child)::after {
+#content dl > dd.desc > ul.detail-list > li:not(:last-child)::after {
   display: inline;
   content: '; ';
   word-spacing: 0.25em; /* instead of padding; strips whitespace from */
                         /* beginning and end of line */
 }
-#content > dl > dd.desc > ul.detail-list ul > li:not(:last-child)::after {
+#content dl > dd.desc > ul.detail-list ul > li:not(:last-child)::after {
   display: inline;
   content: ', ';
 }
@@ -286,4 +286,130 @@ h1 { font-size: 2.2em; }
 }
 .phone::after {
   content: '-7118';
+}
+
+
+/* right icons start to overlap with page margins */
+@media screen and (max-width: 970px) {
+  html {
+    background-color: white;
+  }
+
+  /* page completely white, full width, side icons */
+  body {
+    border: none;
+
+    width:   auto;
+    padding: 0px 2em 0px 3em;
+    margin:  0px 50px 0px 0px;
+  }
+}
+
+
+@media screen and (max-width: 800px) {
+  /* entering what I consider to be a mobile view
+     (or ancient screen resolution, or old person)*/
+  #footer::before {
+    display: block;
+
+    margin: 0px 3em;
+
+    font-size: 0.8em;
+    content:
+    '(This is a mobile/low-res view; please increase your screen resolution to view the resume as originally intended.)';
+  }
+
+  /* right-hand margin removed */
+  body {
+    padding: 0px 2em;
+    margin: 0px;
+  }
+
+  #header {
+    padding-top: 2em;
+  }
+
+  /* move side icons under name */
+  #header ul.links {
+    position: inherit;
+    float: left;
+    padding: 0px;
+    width: auto;
+  }
+
+  #header ul.links li:not(:first-child) {
+    margin-left: 1em;
+  }
+
+  /* make room for page fold */
+  #header #infobox address {
+    margin-right: 50px;
+  }
+}
+
+
+/* infobox about to collide with name */
+@media screen and (max-width: 640px) {
+  body {
+    padding: 0px 1em;
+  }
+
+  #header {
+    padding-top: 1em;
+  }
+
+  /* infobox still on right, ... */
+  #header #infobox {
+    display: inline-block;
+
+    width: auto;
+    clear: left;
+  }
+
+  /* ... but forced below header */
+  #header div.leftcol {
+    display: block;
+  }
+
+  #header #infobox address {
+    margin-right: 0px;
+  }
+}
+
+
+/* infobox about to collide with icons below name */
+@media screen and (max-width: 540px) {
+  #header ul.links {
+    display: block;
+
+    width:  auto;
+    margin: 0px auto;
+
+    float: right;
+    clear: both;
+  }
+
+  /* in case we ever get too close to page fold */
+  #header div.leftcol {
+    padding-right: 50px;
+  }
+}
+
+
+/* 320 is the lowest resolution that should really be entertained */
+@media screen and (max-width: 310px) {
+  #objective > p:first-of-type::after {
+    content: 'Seeking potential employers with higher screen resolutions that will render my resume sanely.';
+  }
+
+  #summary > p:first-of-type::before {
+    display:       block;
+    margin-bottom: 1em;
+
+    content: 'I love talking about myself, but you really haven\'t given me much space to do so!  How about increasing that resolution of yours?  I mean, don\'t get me wrong; it\'s still legible.  Torture your eyeballs if you wish.';
+  }
+
+  #footer::before {
+    content: '(This is rendered at a ridiculously low resolution.  Snarky remarks added.  Please increase your resolution.)';
+  }
 }
