@@ -296,6 +296,50 @@ body.index footer hr,
   text-decoration: none;
 }
 
+#selflinks img {
+  transition: transform 0.25s;
+}
+#selflinks img[src*=octoright]:hover {
+  transform: rotate(-20deg);
+}
+
+.octoflop {
+  /* make upright again (image is rotated 270deg) */
+  transform: rotate(90deg);
+
+  animation-duration: 2s;
+  animation-delay: 2s;
+  animation-name: octoflop;
+  animation-fill-mode: forwards;
+}
+
+@keyframes octoflop {
+  30% {
+    transform: rotate(-35deg);
+  }
+  50% {
+    transform: rotate(25deg);
+  }
+  65% {
+    transform: rotate(-17deg);
+  }
+  75% {
+    transform: rotate(10deg);
+  }
+  85% {
+    transform: rotate(-5deg);
+  }
+  90% {
+    transform: rotate(3deg);
+  }
+  95% {
+    transform: rotate(-2deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
 .hn-icon {
     display: block;
 

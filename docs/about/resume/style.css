@@ -216,6 +216,12 @@ h1 { font-size: 2.2em; }
 #header ul.links a {
   border:  none;
 }
+#header ul.links img {
+  transition: transform 0.25s;
+}
+#header ul.links img[src*=octoright]:hover {
+  transform: rotate(-20deg);
+}
 
 #header #infobox {
   float:      right;

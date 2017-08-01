@@ -1,6 +1,6 @@
 ### GitHubbub!  GitHub Does Not Value Software Freedom.
 
-<div class="inline-img">![GitHub](/images/github-mark-large.png "GitHubbub!")</div>
+<div class="inline-img octoflop">![GitHub](/images/octoright-large.png "GitHubbub!")</div>
 
 If you hit this page expecting to have been taken to my GitHub profile, then
 this is probably not what you were looking for.  But let me tell you why
