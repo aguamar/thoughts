@@ -78,16 +78,23 @@ thoughts:
 docs/papers/.list: thoughts articles
 	echo "$(articles) $(texticles)" | tr ' ' '\n' | tools/doclist >$@
 
+images: images/tp/Makefile
+	$(MAKE) -C '$(dir $<)' all check
+images/tp/Makefile: images/tp/gen-makefile
+	( cd images/tp/ && ./gen-makefile ) >$@
+
 pages: $(pages) $(pages_md)
 articles: $(articles) $(texticles)
 docs: pages articles
-www-root: docs thoughts
+www-root: docs thoughts images
 	mkdir -p www-root/papers
 	( cd docs/ \
 		&& find . -maxdepth 2 -name '*.html' -exec ../tools/doc-cp {} ../www-root/{} \; \
 		&& find . -maxdepth 3 \( -name '*.pdf' -o -name '*.dvi' \) -exec cp {} ../www-root/{} \; \
 	)
-	cp -rv images/ fonts/ www-root/
+	mkdir -p www-root/images/
+	cp -v images/*.* images/tp/*.png www-root/images/
+	cp -rv fonts/ www-root/
 	cp -rv _raw/* www-root/
 	cp -v style.css www-root/
 	mkdir -p www-root/docs
