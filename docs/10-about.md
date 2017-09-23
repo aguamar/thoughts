@@ -50,7 +50,7 @@ I recently changed GPG keys; see my [key transition statement][keytrans],
 signed with both my [new][keytrans-new] and [old][keytrans-old] keys.
 
 <span class="attribution">[LibrePlanet 2016 Photo][photo]
-Copyright&nbsp;&copy;&nbsp;2016 Kori&nbsp;Feener, [CC BY 4.0][ccby]; used
+Copyright&nbsp;&copy;&nbsp;2016 Kori&nbsp;Feener, [CC BY 4.0][ccby]; used
 with permission.</span>
 
 
