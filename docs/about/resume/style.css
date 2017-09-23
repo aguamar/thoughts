@@ -318,6 +318,13 @@ a.hn-icon {
   border: none;
 }
 
+/* we don't want the icons to be too distracting/jarring---the
+   focus should be on the resume itself */
+#header ul.links:not(:hover) {
+  filter:     saturate(25%);
+  transition: filter 3s;  /* slow fade */
+}
+
 
 /* right icons start to overlap with page margins */
 @media screen and (max-width: 970px) {
@@ -332,14 +339,6 @@ a.hn-icon {
     width:   auto;
     padding: 0px 2em 0px 3em;
     margin:  0px 50px 0px 0px;
-  }
-
-  /* now that icons are a part of the main content,
-     make them blend better (otherwise the vibrant color
-     is too jarring/distracting) */
-  #header ul.links:not(:hover) {
-    filter:     saturate(25%);
-    transition: filter 3s;  /* slow fade */
   }
 }
 
