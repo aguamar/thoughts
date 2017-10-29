@@ -163,6 +163,13 @@ body.index .content,
      images */
   min-height: 750px;
   padding-right: 1.5em;
+
+  /* don't let text get too wide */
+  max-width: 40em;
+  margin: auto;
+}
+#cgit .content {
+  max-width: none;
 }
 body.index.no-sidebar .content,
 .body-index.no-sidebar .content {
