@@ -15,7 +15,7 @@ consequences.
 Software and technology pervade not only through these fields, but through
 virtually every aspect of our lives. Yet, when compared to other fields, our
 community leaders and educators have produced an ethics void. Last year, I
-introduced numerous topics concerning #privacy, #security, and #freedom that
+introduced numerous topics concerning privacy, security, and freedom that
 raise serious ethical concerns. Join me this year as we consider some of
 those examples and others in an attempt to derive a code of ethics that
 compares to each of these other fields, and to consider how leaders and
