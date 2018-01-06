@@ -31,7 +31,7 @@ necessary.
 
 -----
 
-[![LibrePlanet 2017][lp2017-logo]][lp2017]
+[![LibrePlanet 2016][lp2017-logo]][lp2017]
 
 #### Restore Online Freedom! (LibrePlanet 2016)
 
