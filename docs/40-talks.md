@@ -1,6 +1,6 @@
 ### Talks
 
-<span class="talk-logo">[![LibrePlanet 2018][lp2018-logo]][lp2017]</span>
+<span class="talk-logo">[![LibrePlanet 2018][lp2018-logo]][lp2018]</span>
 
 #### The Ethics Void (2018)
 
