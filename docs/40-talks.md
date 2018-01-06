@@ -54,7 +54,7 @@ necessary.
 
 
 
-<span class="talk-logo">[![LibrePlanet 2016][lp2017-logo]][lp2017]</span>
+<span class="talk-logo">[![LibrePlanet 2016][lp2016-logo]][lp2016]</span>
 
 #### Restore Online Freedom! (2016)
 
