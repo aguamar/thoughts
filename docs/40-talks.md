@@ -21,11 +21,11 @@ those examples and others in an attempt to derive a code of ethics that
 compares to each of these other fields, and to consider how leaders and
 educators should approach ethics within education and guidance.
 
------
 
-[![LibrePlanet 2017][lp2017-logo]][lp2017]
 
-#### The Surreptitious Assault on Privacy, Security, and Freedom (LibrePlanet 2017)
+<span class="talk-logo">[![LibrePlanet 2017][lp2017-logo]][lp2017]</span>
+
+#### The Surreptitious Assault on Privacy, Security, and Freedom (2017)
 
 [Video][sapsf-video] • [Slides][sapsf-slides-pdf]
 • [Slides Source Code][sapsf-src] • [Bibliography][sapsf-bib]
@@ -52,11 +52,11 @@ overview of mitigations; and dozens of resources for further research and
 discussion with others.  No prior knowledge of security or cryptography are
 necessary.
 
------
 
-[![LibrePlanet 2016][lp2017-logo]][lp2017]
 
-#### Restore Online Freedom! (LibrePlanet 2016)
+<span class="talk-logo">[![LibrePlanet 2016][lp2017-logo]][lp2017]</span>
+
+#### Restore Online Freedom! (2016)
 
 [Video][rof] • [Slides][slides-pdf] • [Slides Source Code][slides-src]
 • [LibrePlanet Collection][collection]
@@ -85,7 +85,7 @@ how it's being done, and what can (or can't) be done to stop it.
 [collection]: https://media.libreplanet.org/u/libreplanet/collection/restore-online-freedom/
 
 [lp2016]: https://www.libreplanet.org/2016/
-[lp2016-logo]: /images/lp-no-year.png
+[lp2016-logo]: /images/lp-2016.png
 
 [sapsf-slides-pdf]: /talks/sapsf.pdf
 [sapsf-video]: https://media.libreplanet.org/u/libreplanet/m/the-surreptitious-assault-on-privacy-security-and-freedom/
@@ -93,7 +93,7 @@ how it's being done, and what can (or can't) be done to stop it.
 [sapsf-bib]: /projects/sapsf/plain/sapsf.bib
 
 [lp2017]: https://www.libreplanet.org/2017/
-[lp2017-logo]: /images/lp-no-year.png
+[lp2017-logo]: /images/lp-2017.png
 
 [lp2018]: https://www.libreplanet.org/2018/
 [lp2018-logo]: /images/lp-2018.png

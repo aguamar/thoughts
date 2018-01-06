@@ -325,6 +325,10 @@ body.index footer hr,
   text-align: center;
 }
 
+p ~ p .talk-logo {
+  margin-top: 5ex;
+}
+
 @keyframes octoflop {
   30% {
     transform: rotate(-35deg);
