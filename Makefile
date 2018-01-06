@@ -25,9 +25,9 @@ articles := $(patsubst %.txt, %.html, \
 # articles in TeX with an inappropriate var name
 texticles=$(patsubst %/, %.html, $(dir $(shell find docs/ -name 'Makefile')))
 www_root := www-root/
-url_root := http://mikegerwitz.com
-repo_url := https://gitlab.com/mikegerwitz/thoughts
-repo_commit_url := '$(repo_url)/commit/%s'
+url_root := https://mikegerwitz.com
+repo_url := https://mikegerwitz.com/projects/thoughts
+repo_commit_url := '$(repo_url)/commit/?id=%s'
 
 # configured repo2html command
 repo2html := repo2html \
