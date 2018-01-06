@@ -1,5 +1,28 @@
 ### Talks
 
+<span class="talk-logo">[![LibrePlanet 2018][lp2018-logo]][lp2017]</span>
+
+#### The Ethics Void (2018)
+
+_(Join Us March 24--25 in Cambridge, MA, USA)_
+
+Medicine, legal, finance, journalism, scientific research—each of these
+fields and many others have widely adopted codes of ethics governing the
+lives of their professionals. Some of these codes may even be enshrined in
+law. And this is for good reason: these are fields that have enormous
+consequences.
+
+Software and technology pervade not only through these fields, but through
+virtually every aspect of our lives. Yet, when compared to other fields, our
+community leaders and educators have produced an ethics void. Last year, I
+introduced numerous topics concerning #privacy, #security, and #freedom that
+raise serious ethical concerns. Join me this year as we consider some of
+those examples and others in an attempt to derive a code of ethics that
+compares to each of these other fields, and to consider how leaders and
+educators should approach ethics within education and guidance.
+
+-----
+
 [![LibrePlanet 2017][lp2017-logo]][lp2017]
 
 #### The Surreptitious Assault on Privacy, Security, and Freedom (LibrePlanet 2017)
@@ -71,3 +94,6 @@ how it's being done, and what can (or can't) be done to stop it.
 
 [lp2017]: https://www.libreplanet.org/2017/
 [lp2017-logo]: /images/lp-no-year.png
+
+[lp2018]: https://www.libreplanet.org/2018/
+[lp2018-logo]: /images/lp-2018.png

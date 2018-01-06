@@ -320,6 +320,11 @@ body.index footer hr,
   animation-fill-mode: forwards;
 }
 
+.talk-logo {
+  display:    block;
+  text-align: center;
+}
+
 @keyframes octoflop {
   30% {
     transform: rotate(-35deg);
