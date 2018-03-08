@@ -6,20 +6,19 @@
 
 _(Join Us March 24--25 in Cambridge, MA, USA)_
 
-Medicine, legal, finance, journalism, scientific research—each of these
-fields and many others have widely adopted codes of ethics governing the
-lives of their professionals. Some of these codes may even be enshrined in
-law. And this is for good reason: these are fields that have enormous
-consequences.
+Many communities have widely adopted codes of ethics governing the moral
+conduct of their members and professionals.  Some of these codes may even be
+enshrined in law, and for good reason—certain conduct can have enormous
+consequences on the lives of others.
 
-Software and technology pervade not only through these fields, but through
-virtually every aspect of our lives. Yet, when compared to other fields, our
-community leaders and educators have produced an ethics void. Last year, I
-introduced numerous topics concerning privacy, security, and freedom that
-raise serious ethical concerns. Join me this year as we consider some of
-those examples and others in an attempt to derive a code of ethics that
-compares to each of these other fields, and to consider how leaders and
-educators should approach ethics within education and guidance.
+Software and technology pervade virtually every aspect of our lives.  Yet,
+when compared to other fields, our community leaders and educators have
+produced an ethics void.  Last year, I introduced numerous topics concerning
+privacy, security, and freedom that raise serious ethical concerns.  Join me
+this year as we consider some of those examples and others in an attempt to
+derive a code of ethics that compares to the moral obligations of other
+fields, and to consider how leaders and educators should approach ethics
+within education and guidance.
 
 
 
