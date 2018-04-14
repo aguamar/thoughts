@@ -4,7 +4,8 @@
 
 #### The Ethics Void (2018)
 
-_(Join Us March 24--25 in Cambridge, MA, USA)_
+[Video][ev-video] • [Slides][ev-slides-pdf]
+• [Slides Source Code][ev-src]
 
 Many communities have widely adopted codes of ethics governing the moral
 conduct of their members and professionals.  Some of these codes may even be
@@ -93,6 +94,10 @@ how it's being done, and what can (or can't) be done to stop it.
 
 [lp2017]: https://www.libreplanet.org/2017/
 [lp2017-logo]: /images/lp-2017.png
+
+[ev-slides-pdf]: /talks/ethics-void.pdf
+[ev-video]: https://media.libreplanet.org/u/libreplanet/m/the-ethics-void/
+[ev-src]: /projects/ethics-void/
 
 [lp2018]: https://www.libreplanet.org/2018/
 [lp2018-logo]: /images/lp-2018.png
