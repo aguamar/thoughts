@@ -43,17 +43,23 @@ body.index footer,
   margin: 0em -10em;
 }
 
-/* typesetting standards for ~50 chars per line */
+/* typesetting standards for ~60 chars per line */
 body article .content,
 body.article #content {
   clear: both;
   margin: auto;
-  max-width: 50em;
+
+  max-width: 38em;  /* fallback for older browsers */
+  max-width: 60ch;
+
+  line-height: 1.8em;
 }
 body article header,
 body.article #header {
   margin: auto;
-  max-width: 56em;
+
+  max-width: 44em;  /* fallback for older browsers */
+  max-width: 70ch;
 }
 
 h1, h2, h3, #menu,
@@ -167,6 +173,8 @@ body.index .content,
   /* don't let text get too wide */
   max-width: 40em;
   margin: auto;
+
+  line-height: 1.8em;
 }
 #cgit .content {
   max-width: none;
@@ -186,7 +194,7 @@ body.index ul.index {
   padding-left: 1.5em;
 }
 body.index ul.index li {
-  margin: 0.5em 0px;
+  margin: 1em 0px;
 }
 body.index ul.index li .day {
   float: left;
